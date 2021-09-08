@@ -28,8 +28,8 @@
           async function change()
   {  
     const accounts = await ethereum.request({ method: 'eth_accounts' });
-    document.getElementById("Wallet").value= accounts[0].substring(0,12) + "...";
-    document.getElementById("liveornot").style = "font-size:8px;color:green";
+    document.getElementById("Wallet").innerHTML= accounts[0].substring(0,12) + "...";
+    
   }
 async function connect() {
   ethereum
@@ -39,8 +39,8 @@ async function connect() {
         // EIP-1193 userRejectedRequest error
         // If this happens, the user rejected the connection request.
         console.log('Please connect to MetaMask.');
-        document.getElementById("Wallet").value=  "Rejected Connection";
-        document.getElementById("liveornot").style = "font-size:8px;color:Orange";
+        document.getElementById("Wallet").innerHTML=  "Rejected Connection";
+        
       } else {
         console.error(err);
       }

@@ -19,24 +19,6 @@ async function AcctInfo() {
 
 
 
-async function connect() {
-    ethereum
-      .request({ method: 'eth_requestAccounts' })
-      .catch((err) => {
-        if (err.code === 4001) {
-          // EIP-1193 userRejectedRequest error
-          // If this happens, the user rejected the connection request.
-          console.log('Please connect to MetaMask.');
-          
-          document.getElementById("Wallet").value=  "Rejected Connection";
-          document.getElementById("liveornot").style = "font-size:8px;color:Yellow";
-        } else {
-          console.error(err);
-        }
-      });
-
-    }
-
   async function disconnect() {
 
   }

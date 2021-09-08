@@ -17,9 +17,13 @@
           async function change()
   {  
     const accounts = await ethereum.request({ method: 'eth_accounts' });
-    document.getElementById("Wallet").innerHTML= accounts[0].substring(0,12) + "...";
-    document.getElementById("liveornot").style = "font-size:8px;color:green";
+    document.getElementById("Wallet").innerHTML = accounts[0].substring(0,12) + "...";
+    document.getElementById("Wallet").value = accounts[0].substring(0,12) + "...";
+    document.getElementById("Wallet").contentWindow.location.reload(true);
+    window.location.reload();
+    
   }
+
 async function connect() {
   ethereum
     .request({ method: 'eth_requestAccounts' })
@@ -29,7 +33,9 @@ async function connect() {
         // If this happens, the user rejected the connection request.
         console.log('Please connect to MetaMask.');
         document.getElementById("Wallet").innerHTML =  "Rejected Connection";
-        document.getElementById("liveornot").style = "font-size:8px;color:Orange";
+        document.getElementById("Wallet").value =  "Rejected Connection";
+        document.getElementById("Wallet").contentWindow.location.reload(true);
+        
       } else {
         console.error(err);
       }
@@ -44,6 +50,7 @@ if (ethereum.request({ method: 'eth_accounts' }) === undefined) {
         
         connect();
         change();
+        console.log(chainId);
 } else {
     change();
 }
@@ -65,7 +72,7 @@ if (ethereum.request({ method: 'eth_accounts' }) === undefined) {
   <div class="card-body">
     <h5 class="card-title text-white"></h5>
     <p class="card-text text-white"></p>
-    <a href="#" class="btn btn-primary bg-green text-white" onclick = "connect(); clickAgain(); change(); anonweb3user();" style="font-family: 'Press Start 2P';font-size: 10px;" id="Wallet" style = "font-family: 'Press Start 2P' ">Connect Wallet</a>
+    <a href="#" class="btn btn-primary bg-green text-white" onclick = "connect(); clickAgain(); change(); anonweb3user();" style="font-family: 'Press Start 2P';font-size: 10px;" value = "Connect Wallet" id="Wallet" style = "font-family: 'Press Start 2P' "> Connect Wallet</a>
   
   </div>
   <div class="card-footer text-muted text-white">

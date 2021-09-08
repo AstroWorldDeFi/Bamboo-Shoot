@@ -18,8 +18,8 @@ async function change()
   {  
     const accounts = await ethereum.request({ method: 'eth_accounts' });
     const balance = await ethereum.request({ method: 'eth_getBalance', params: [accounts[0], 'latest'] })
-    document.getElementById("Wallet").value= accounts[0].substring(0,12) + "...";
-    document.getElementById("liveornot").style = "font-size:8px;color:green";
+    document.getElementById("Wallet").innerHTML= accounts[0].substring(0,12) + "...";
+    
     
   }
 
@@ -32,24 +32,25 @@ async function connect() {
         // If this happens, the user rejected the connection request.
         console.log('Please connect to MetaMask.');
         
-        document.getElementById("Wallet").value=  "Rejected Connection";
-        document.getElementById("liveornot").style = "font-size:8px;color:Yellow";
+        document.getElementById("Wallet").innerHTML=  "Rejected Connection";
+        
       } else {
         console.error(err);
       }
     });
 
   
-
-    
+    var chainIDs = await ethereum.request({method: 'eth_chainId'})
+    console.log(chainIDs)
 }
 
 
 
 function clickAgain() {  
     
-  document.getElementById("Wallet").value= "Show Address";
-  document.getElementById("liveornot").style = "font-size:8px;color:yellow";
+  document.getElementById("Wallet").innerHTML= "Show Address";
+  
+  
   
 }
 
