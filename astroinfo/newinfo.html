@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html class = "text-white">
+<head class = "text-white">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" >
+<meta name="viewport"content="height=device-height, initial-scale=1, shrink-tofit=no">
+<link rel="stylesheet" href="astro.css">
+<link href='https://fonts.googleapis.com/css?family=Press Start 2P' rel='stylesheet'>
+<!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+
+
+        <script type="text/javascript">
+          async function change()
+  {  
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+    document.getElementById("Wallet").innerHTML= accounts[0].substring(0,12) + "...";
+    document.getElementById("liveornot").style = "font-size:8px;color:green";
+  }
+async function connect() {
+  ethereum
+    .request({ method: 'eth_requestAccounts' })
+    .catch((err) => {
+      if (err.code === 4001) {
+        // EIP-1193 userRejectedRequest error
+        // If this happens, the user rejected the connection request.
+        console.log('Please connect to MetaMask.');
+        document.getElementById("Wallet").innerHTML =  "Rejected Connection";
+        document.getElementById("liveornot").style = "font-size:8px;color:Orange";
+      } else {
+        console.error(err);
+      }
+    });
+
+  
+
+    
+}
+
+if (ethereum.request({ method: 'eth_accounts' }) === undefined) {
+        
+        connect();
+        change();
+} else {
+    change();
+}
+
+  
+</script>
+        
+       
+
+ 
+
+
+</head>
+
+<div class="card text-center bg-green" style=" box-shadow: 0 0 10px #9ecaed; border-radius: 12px; margin: 0 auto;position: relative; height: 200px; width: 500px; top: 25px;float: center; border-radius: 30px;">
+  <div class="card-header text-white" style = "font-size: 25px">
+    AstroWorld NFT Marketplace
+  </div>
+  <div class="card-body">
+    <h5 class="card-title text-white"></h5>
+    <p class="card-text text-white"></p>
+    <a href="#" class="btn btn-primary bg-green text-white" onclick = "connect(); clickAgain(); change(); anonweb3user();" style="font-family: 'Press Start 2P';font-size: 10px;" id="Wallet" style = "font-family: 'Press Start 2P' ">Connect Wallet</a>
+  
+  </div>
+  <div class="card-footer text-muted text-white">
+   
+  </div>
+</div>
+
+ <div class="card bg-green" style=" box-shadow: 0 0 10px #9ecaed; border-radius: 12px; margin: 0 auto;position: relative; height: 600px; width: 500px; top: 100px;float: center; border-radius: 30px;">
+  <img class="card-img-top" style = "border-radius: 30px;"id = "nft" src="img/ts.jpg" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title text-white" style = "font-size: 15px; float: center;" id = "name"></h5>
+    <p class="card-text text-white float: center;" id = "description"></p>
+   
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item bg-green text-white " id = "hash">No Transaction Data</li>
+    <li class="list-group-item bg-green text-white" id = "gas">No Transaction Data</li>
+    <li class="list-group-item bg-green text-white" id = "TID">No Transaction Data</li>
+    
+  </ul>
+  <div class="card-body">
+    <a class="card-link text-white" style = "font-family: 'Press Start 2P'; " type="submit" id = "AWPass" name = "TestPass" value = "success" onclick = 'astrosent();'>Purchase</a>
+    <a href="#" class="card-link text-white">OpenSea</a>
+  </div>
+</div>
+<script type="text/javascript">
+    async function nftmint() {
+
+  const accounts = await ethereum.request({ method: 'eth_accounts' });
+  const web3 = new Web3(new Web3.providers.HttpProvider("https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX"))
+  var AstWorld = new web3.eth.Contract(astroworldabi, astroaddress);
+  
+ 
+  var supply = await AstWorld.methods.totalSupply().call({from: accounts[0]});
+  var t = document.getElementById("table"); // This have to be the ID of your table, not the tag
+  var BuyPrice = document.getElementsByTagName("td")[0];
+  var Minted = document.getElementsByTagName("td")[1];
+  var TotalSupply = document.getElementsByTagName("td")[2];
+  Minted.innerHTML = String(supply) + ' ASTRO';
+  TotalSupply.innerHTML = String(supply) + ' ASTRO';
+  
+}
+
+async function ipfsviewer() {
+
+  const accounts = await ethereum.request({ method: 'eth_accounts' });
+  const web3 = new Web3(new Web3.providers.HttpProvider("https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX"))
+  var AstWorld = new web3.eth.Contract(astroworldabi, astroaddress);
+  var supply = await AstWorld.methods.tokenURI('1').call({from: "0x000000000000000000000000000000000000dead"});
+  const hashipfs = supply.split("ipfs://")[1]
+  const ipfslink = "https://ipfs.io/ipfs/"
+  console.log(supply.split("ipfs://")[1])
+
+   $.getJSON(ipfslink.concat(hashipfs), function(data) {
+        
+        var imagedata = data.image
+        var newdata = imagedata.split("ipfs://")[1]
+        var nftdata = ipfslink.concat(newdata)
+        console.log(nftdata)          
+        
+        document.getElementById("nft").src = nftdata;
+        document.getElementById("name").innerHTML = data.name;
+        document.getElementById("description").innerHTML = data.description;
+       
+        
+    });
+
+     $.getJSON(`https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=ZY8WD5ZBI5MATRZ8U99J4QN6W7X1CJQ294`, function (data) {   
+     
+    var results = data.result[0]
+    var text = results.hash
+    console.log(text);
+    
+       const x = data.result.length;
+       
+       var results = data.result[parseInt(x-1)];
+       var hash = results.hash;
+       var gas = (parseInt(results.cumulativeGasUsed))/1000000000;
+       var tid = results.tokenID;
+       document.getElementById("hash").innerHTML = "TX HASH: " + hash;
+       document.getElementById("gas").innerHTML = "PRICE: " + gas;
+       document.getElementById("TID").innerHTML = "TOKEN ID: " + tid;
+            
+    });
+
+}
+
+
+
+ipfsviewer(); 
+
+</script>
+
+<script type="text/javascript">
+   
+
+nftmint()
+  
+</script>
+
+<style>
+.bg-black {
+  background-color: #000000 !important;
+}
+
+a.bg-black:hover, a.bg-black:focus,
+button.bg-black:hover,
+button.bg-black:focus {
+  background-color: black !important;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+
+.masthead {
+  position: relative;
+  width: 110%;
+  height: ;
+  min-height: 35rem;
+  padding: 15rem 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000000 100%), url("../astroimg/AstroworldUpdated.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+@media only screen and (max-width : 900px) {
+
+
+#div1 {
+  position: relative;
+   margin: 0 auto;
+  top: 10%;
+  right: 0px;
+  width: 400px;
+  height: 500px;
+  
+  box-shadow: 0 0 10px #9ecaed;
+  border-radius: 12px;
+  padding:10px;
+}
+
+#div2 {
+  position: relative;
+   margin: 0 auto;
+  top: 50px;
+  right: 40px;
+  width: 400px;
+  height: 400px;
+  
+  box-shadow: 0 0 10px ;
+  border-radius: 12px;
+  padding:10px;
+  float: right
+}
+
+#div3 {
+  position: relative;
+   margin: 0 auto;
+  top: 700px;
+  right: 100px;
+  width: 400px;
+  height: 200px;
+  
+  box-shadow: 0 0 10px ;
+  border-radius: 12px;
+  padding:10px;
+  
+  text-align: center;
+  left: 0px;
+  padding: 0px;
+}
+
+#div4 {
+  position: relative;
+   margin: 0 auto;
+  top: 800px;
+  right: 0px;
+  width: 400px;
+  height: 200px;
+  
+  box-shadow: 0 0 10px ;
+  border-radius: 12px;
+  padding:10px;
+  
+  text-align: center;
+  left: 0px;
+  padding: 0px;
+}
+
+canvas {
+  
+  position:absolute;
+  top: 17%;
+  left: 0px;
+  width: 380px;
+  height: 1000px;
+  
+  padding:10px;
+}
+
+a {
+    left: 90px;
+    top: 0px;   
+    position: relative;
+}
+
+table {
+  font-family: 'Press Start 2P';font-size: 5px;
+  border-collapse: collapse;
+  
+}
+
+#nft {
+
+  height: 250px;
+  width: 250px;
+  position: relative;
+  text-align: center;
+  left: 40px;
+
+  padding: 8px;
+
+}
+
+#AWPass {
+
+  
+  right: 800px;
+
+ 
+
+}
+
+td, th {
+  position: relative;
+  text-align: center;
+  left: 0px;
+  padding: 8px;
+  font-size: 10px;
+  word-break: break-all;
+}
+
+}
+
+
+@media only screen and (min-width : 901px) {
+#card-deck {
+  position: relative;
+   margin: 0 auto;
+  top: 10%;
+  left: 100px;
+  width: 600px;
+  height: 600px;
+ 
+  box-shadow: 0 0 10px #9ecaed;
+  border-radius: 12px;
+  padding:10px;
+  float: left
+}
+#nav1 {
+  position:relative;
+  
+  left:40px;
+}
+
+#div2 {
+  position: relative;
+   margin: 0 auto;
+  top: 10%;
+  
+  width: 500px;
+  height: 400px;
+  
+  box-shadow: 0 0 10px ;
+  border-radius: 12px;
+  padding:10px;
+  float: center;
+}
+
+#div3 {
+  position: relative;
+   margin: 0 auto;
+  top: 100px;
+  right: 0px;
+  width: 1150px;
+  height: 200px;
+  
+  box-shadow: 0 0 10px ;
+  border-radius: 12px;
+  padding:10px;
+  
+  text-align: center;
+  float:center;
+  padding: 8px;
+}
+
+#div4 {
+  position: relative;
+   margin: 0 auto;
+  top: 200px;
+  right: 0px;
+  width: 1150px;
+  height: 200px;
+  
+  box-shadow: 0 0 10px ;
+  border-radius: 12px;
+  padding:10px;
+  
+  text-align: center;
+  float: center;
+  padding: 8px;
+}
+
+
+canvas {
+  position: relative;
+   margin: 0 auto;
+  top: 10%;
+  right: 0px;
+  width: 580px;
+  height: 700px;
+  border-radius: 10px;
+  padding:10px;
+}
+
+h1 {
+    left: 800px;
+    top: 0px;
+    position: relative;
+}
+
+}
+
+
+
+body {
+    font-family: 'Press Start 2P';font-size: 10px;
+}
+
+
+table {
+  font-family: 'Press Start 2P';font-size: 10px;
+  border-collapse: collapse;
+  
+}
+
+td, th {
+  position: relative;
+  text-align: center;
+  left: 10px;
+  padding: 8px;
+  word-break: break-all;
+}
+
+
+</style>
+
+<script type="module">
+           import { web3 } from "https://cdn.jsdelivr.net/gh/ethereum/web3.js@latest/dist/web3.min.js";
+      </script>
+        <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+       
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@metamask/detect-provider@1.2.0/dist/index.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@latest/dist/web3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script type="text/javascript" src="info.js"></script>
+<script type="text/javascript" src="js-main/utils.js"></script>
+<script type="text/javascript" src="js-main/metaAcct.js"></script>
+<script type="text/javascript" src="js-main/astroworld.js"></script>
+<script type="text/javascript" src="js-main/AstroWorldPass.js"></script>
+</html>
