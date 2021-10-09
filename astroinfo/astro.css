@@ -6311,6 +6311,10 @@ button.bg-dark:focus {
   background-color: #2E8B57 !important;
 }
 
+.bg-fgreen {
+  background-color: #38ec86 !important;
+}
+
 a.bg-black:hover, a.bg-black:focus,
 button.bg-black:hover,
 button.bg-black:focus {
@@ -9941,6 +9945,10 @@ button.bg-black:focus {
 
 .text-white {
   color: #fff !important;
+}
+
+.text-green {
+  color: rgb(255, 255, 255) !important;
 }
 
 .text-primary {

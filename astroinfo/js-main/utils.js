@@ -1,70 +1,107 @@
+// const { default: Web3 } = require("web3");
 
-/*********************************************/
-/* Access the user's accounts (per EIP-1102) */
-/*********************************************/
-
-// You should only attempt to request the user's accounts in response to user
-// interaction, such as a button click.
-// Otherwise, you popup-spam the user like it's 1999.
-// If you fail to retrieve the user's account(s), you should encourage the user
-// to initiate the attempt.
-
-
-// While you are awaiting the call to eth_requestAccounts, you should disable
-// any buttons the user can click to initiate the request.
-// MetaMask will reject any additional requests while the first is still
-// pending.
-async function change()
+         async function change()
   {  
+    
+    
+    
+    ethereum.on('chainChanged', (_chainId) => window.location.reload());
+   
     const accounts = await ethereum.request({ method: 'eth_accounts' });
-    const balance = await ethereum.request({ method: 'eth_getBalance', params: [accounts[0], 'latest'] })
-    document.getElementById("Wallet").innerHTML= accounts[0].substring(0,12) + "...";
     
+    var chainIDs = await ethereum.request({method: 'eth_chainId'});
+    var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'};
+  
     
-  }
+    console.log(accounts.length)
+    console.log(numchain[chainIDs])
+    if (accounts.length > 0 && numchain[chainIDs] != undefined) {
+    
+    document.getElementById("chainSwitch").innerHTML = numchain[chainIDs];
+    document.getElementById("Wallet").innerHTML= "Connected";
+    document.getElementById("chainSwitch").disabled = false;
+    document.getElementById("AWPass").disabled = false;
+   
+ } else if(accounts.length > 0 && numchain[chainIDs] == undefined) {
+  document.getElementById("chainSwitch").innerHTML = "Unsupported Chain";
+  document.getElementById("Wallet").innerHTML= "Unsupported";
+  document.getElementById("AWPass").disabled = true;
+  document.getElementById("AWPass").innerHTML = "Change Chain";
+}
+
+    else if(accounts.length < 0 && numchain[chainIDs] == undefined) {
+        
+      document.getElementById("chainSwitch").innerHTML = "Choose Network";
+    
+      document.getElementById("Wallet").innerHTML= "Connect Wallet";
+
+      }
+   
+      
+      
+    }  
+    
+    async function check() {
+      // Then get the currently selected radio button's value
+      
+      console.log(window.ethereum)
+
+      if (window.ethereum !== undefined) {
+  // From now on, this should always be true:
+  // provider === window.ethereum
+          console.log(window.ethereum); // initialize your app
+          
+                                        } else {
+
+          
+           $("#nowebModal").modal('show');
+  
+                                        }
+
+      // Check the value to make sure you want to show the modal
+     
+    }
+ 
 
 async function connect() {
-  ethereum
-    .request({ method: 'eth_requestAccounts' })
-    .catch((err) => {
-      if (err.code === 4001) {
-        // EIP-1193 userRejectedRequest error
-        // If this happens, the user rejected the connection request.
-        console.log('Please connect to MetaMask.');
-        
-        document.getElementById("Wallet").innerHTML=  "Rejected Connection";
-        
-      } else {
-        console.error(err);
-      }
-    });
-
-  
-    var chainIDs = await ethereum.request({method: 'eth_chainId'})
-    console.log(chainIDs)
-}
 
 
+ethereum
+  .request({ method: 'eth_requestAccounts' })
+  .then(change)
+  .catch((err) => {
+    if (err.code === 4001) {
+      // EIP-1193 userRejectedRequest error
+      // If this happens, the user rejected the connection request.
+      console.log('Please connect to MetaMask.');
+      document.getElementById("Wallet").innerHTML =  "Rejected Connection";
+      document.getElementById("Wallet").value =  "Rejected Connection";
+      
+      document.getElementById("Wallet").contentWindow.location.reload(true);
+      
+    } else {
+      console.error(err);
+    }
+  }).then((result) => { window.location.reload()});
 
-function clickAgain() {  
+ 
+
     
-  document.getElementById("Wallet").innerHTML= "Show Address";
+ 
   
-  
+
   
 }
 
-  
 
 
-  const getContract = async (web3) => {
-    const data = await $.getJSON("bin/src/Inventory.json");
-  
-    const netId = await web3.eth.net.getId();
-    const deployedNetwork = data.networks[netId];
-    const inventory = new web3.eth.Contract(
-      data.abi,
-      deployedNetwork && deployedNetwork.address
-    );
-    return inventory;
-  };
+// async function checkchain () {
+// const accounts = await ethereum.request({ method: 'eth_accounts' });
+
+// if ( accounts === undefined) {
+
+//   document.getElementById("Wallet").value = "Connect" // accounts[0].substring(0,12) + "...";
+//   document.getElementById("chainSwitch").innerHTML = " No Chain ";
+// }
+// }
+

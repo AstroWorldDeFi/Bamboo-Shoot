@@ -11,22 +11,130 @@
         <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
+<!--const accounts = await ethereum.request({ method: 'eth_accounts' });
+    var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'}
+    var chainIDs = await ethereum.request({method: 'eth_chainId'})
+  
+    document.getElementById("Wallet").innerHTML = "Connected" //accounts[0].substring(0,12) + "...";
+    document.getElementById("Wallet").value = "Connected" // accounts[0].substring(0,12) + "...";
+    document.getElementById("chainSwitch").innerHTML = numchain[chainIDs]; -->
 
+      
+        
+  <!-- async function checkchain () {
+  const accounts = await ethereum.request({ method: 'eth_accounts' });
 
-        <script type="text/javascript">
-          async function change()
-  {  
-    const accounts = await ethereum.request({ method: 'eth_accounts' });
-    document.getElementById("Wallet").innerHTML = accounts[0].substring(0,12) + "...";
-    document.getElementById("Wallet").value = accounts[0].substring(0,12) + "...";
-    document.getElementById("Wallet").contentWindow.location.reload(true);
-    window.location.reload();
-    
+  if ( accounts === undefined) {
+
+    document.getElementById("Wallet").value = "Connect" // accounts[0].substring(0,12) + "...";
+    document.getElementById("chainSwitch").innerHTML = " No Chain ";
   }
+}   --> 
+
+ <!-- Button trigger modal -->
+<!--button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button-->
+
+<!-- Modal -->
+<div class="modal fade" id="nowebModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered " style = "position: relative; right: 8px;">
+    <div class="modal-content bg-green">
+     
+      <div class="modal-body bg-green">
+        You don't have a Web 3.0 wallet installed.<br>
+        Please Install A Web 3.0 Wallet<br>
+        Try Installing <a class = "text-white " href="https://metamask.io/">MetaMask.<img style = "  width: 30px; right: 10px;" src="img/meta.png"></a><br>
+         
+
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="DeniedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered ">
+    
+      <div class="modal-body bg-green">
+       Denied
+
+      </div>
+    
+   
+  </div>
+</div>
+<script>
+  // Add this in to target the button and bind to the click event
+  
+
+</script>
+<script type="text/javascript">
+async function check() {
+      // Then get the currently selected radio button's value
+      console.log(window.ethereum)
+
+      if (window.ethereum !== undefined) {
+  // From now on, this should always be true:
+  // provider === window.ethereum
+          console.log(window.ethereum); // initialize your app
+         
+                                        } else {
+
+           
+           ("#nowebModal").modal('show');
+  
+                        }
+
+      // Check the value to make sure you want to show the modal
+     
+    }
+ 
+  
+        async function change()
+  {  
+    
+    
+    
+    ethereum.on('chainChanged', (_chainId) => window.location.reload());
+   
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+    var chainIDs = await ethereum.request({method: 'eth_chainId'});
+    var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'};
+  
+
+    
+    console.log(accounts.length)
+    if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
+
+    document.getElementById("chainSwitch").innerHTML = numchain[chainIDs];
+    document.getElementById("Wallet").innerHTML= "Connected";
+   
+    } else if(accounts.length > 0 && numchain[chainIDs] == undefined) {
+
+       document.getElementById("chainSwitch").innerHTML = "Unsupported Chain";
+       document.getElementById("Wallet").innerHTML= "Unsupported";
+       
+       document.getElementById("AWPass").innerHTML = "Change Chain";
+
+    }  else if(accounts.length < 0 && numchain[chainIDs] == undefined) {
+        
+          document.getElementById("chainSwitch").innerHTML = "Choose Network";
+         
+          document.getElementById("AWPass").disabled = false;
+          document.getElementById("Wallet").innerHTML= "Connect Wallet";
+  
+      }
+  }
+   
+  
 
 async function connect() {
+
+  
   ethereum
     .request({ method: 'eth_requestAccounts' })
+    .then(change)
     .catch((err) => {
       if (err.code === 4001) {
         // EIP-1193 userRejectedRequest error
@@ -34,97 +142,288 @@ async function connect() {
         console.log('Please connect to MetaMask.');
         document.getElementById("Wallet").innerHTML =  "Rejected Connection";
         document.getElementById("Wallet").value =  "Rejected Connection";
+        console.log(ethereum.isConnected())
         document.getElementById("Wallet").contentWindow.location.reload(true);
         
       } else {
         console.error(err);
+        document.getElementById("Wallet").innerHTML =  "Connect";
+        document.getElementById("chainSwitch").innerHTML = "Choose Network";
       }
-    });
+    })
+    .then((result) => { window.location.reload()});
 
-  
-
+ 
     
 }
 
-if (ethereum.request({ method: 'eth_accounts' }) === undefined) {
-        
-        connect();
-        change();
-        console.log(chainId);
-} else {
-    change();
-}
+
+
+
+
+
+
+
+
 
   
 </script>
-        
-       
-
- 
-
-
 </head>
 
-<div class="card text-center bg-green" style=" box-shadow: 0 0 10px #9ecaed; border-radius: 12px; margin: 0 auto;position: relative; height: 200px; width: 500px; top: 25px;float: center; border-radius: 30px;">
-  <div class="card-header text-white" style = "font-size: 25px">
-    AstroWorld NFT Marketplace
-  </div>
-  <div class="card-body">
-    <h5 class="card-title text-white"></h5>
-    <p class="card-text text-white"></p>
-    <a href="#" class="btn btn-primary bg-green text-white" onclick = "connect(); clickAgain(); change(); anonweb3user();" style="font-family: 'Press Start 2P';font-size: 10px;" value = "Connect Wallet" id="Wallet" style = "font-family: 'Press Start 2P' "> Connect Wallet</a>
-  
-  </div>
-  <div class="card-footer text-muted text-white">
-   
-  </div>
-</div>
 
- <div class="card bg-green" style=" box-shadow: 0 0 10px #9ecaed; border-radius: 12px; margin: 0 auto;position: relative; height: 600px; width: 500px; top: 100px;float: center; border-radius: 30px;">
-  <img class="card-img-top" style = "border-radius: 30px;"id = "nft" src="img/ts.jpg" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title text-white" style = "font-size: 15px; float: center;" id = "name"></h5>
-    <p class="card-text text-white float: center;" id = "description"></p>
+
+ <div class="card bg-green" style=" box-shadow: 0 0 10px #008000; border-radius: 12px; margin: 0 auto;position: relative; height: 720px; width: 500px; top: 50px;float: center; border-radius: 30px">
+  <div class="card-header text-center text-white" style = "font-size: 25px; font-family: 'Press Start 2P'; ">
+  
+    Lifetime Pass
+     
+  </div>
+  
+  <h5 class="card-title text-white" style = " font-family: 'Press Start 2P';  font-size: 15px; left: 15px; position: relative; top:20px; opacity: 1; " id = "name"></h5>
+  
+  <img class="card-img-top" onload = "change();" style = "box-shadow: 0 0 15px #9ecaed; border-radius: 30px; position: relative; top: 30px; width: 501px; right: 1px;"id = "nft" src="img/ts.jpg" alt="Card image cap">
+  
+  <div class="card-body">   
+  
+    <p class="card-text text-white " style = "font-family: 'Press Start 2P'; left: 70px; position: relative; top: 40px " id = "description"></p>
    
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item bg-green text-white " id = "hash">No Transaction Data</li>
-    <li class="list-group-item bg-green text-white" id = "gas">No Transaction Data</li>
-    <li class="list-group-item bg-green text-white" id = "TID">No Transaction Data</li>
+ <ul class="list-group list-group-flush" style = "font-family: 'Press Start 2P'; font-size:20px; left: 0px; position: relative;top: 20px; ">
+    <li class="list-group-item bg-transparent text-white " id = "">Price: </li>
+    <!--li class="list-group-item bg-green text-white" id = "gas">Price: </li>
+    <li class="list-group-item bg-green text-white" id = "TID">Token ID: </li-->
     
   </ul>
-  <div class="card-body">
-    <a class="card-link text-white" style = "font-family: 'Press Start 2P'; " type="submit" id = "AWPass" name = "TestPass" value = "success" onclick = 'astrosent();'>Purchase</a>
-    <a href="#" class="card-link text-white">OpenSea</a>
+ 
+  <div class="card-body text-center" style = "position: relative;top: 25px;">
+    <button class = " btn bg-fgreen card-link text-green" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 100px #000000; border-radius: 12px; font-size: 27px; position:relative;" type="submit" id = "AWPass" name = "TestPass" value = "success" onclick = 'check(); connect(); astrosent();'>BUY NOW</button>
+    <!--a href="#" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn bg-green card-link text-white" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 10px #9ecaed; border-radius: 12px; font-size: 27px;  ">OpenSea</a-->
+  </div>
+
+  <div class="dropdown text-center" onload = "change();" style = "font-family: 'Press Start 2P'; font-size:15px; position: relative;top: 5px; ">
+  
+  <button class="btn dropdown-toggle bg-transparent text-white" id = "chainSwitch" style = "font-family: 'Press Start 2P'; border-radius: 12px; font-size:15px; right: 0px; position: relative; " type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+   
+   Choose Network
+
+  </button>
+  <ul class="dropdown-menu dropdown-menu bg-green text-white" style = "font-family: 'Press Start 2P'; " aria-labelledby="dropdownMenuButton2">
+    <li><a class="dropdown-item active bg-green text-white" onclick = "switchChain('Ethereum'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" href="#">Ethereum</a></li>
+    <li><a class="dropdown-item active bg-green text-white" onclick = "switchChain('Polygon'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" href="#">Polygon</a></li>
+    <li><a class="dropdown-item active bg-green text-white" onclick = "switchChain('Binance'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" href="#">Binance</a></li>
+    <li><a class="dropdown-item active bg-green text-white" onclick = "switchChain('Ropsten'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" href="#">Ropsten</a></li>
+    
+    <!--li><hr class="dropdown-divider bg-green text-white"></li>
+    <li><a class="dropdown-item text-white" href="#">Separated link</a></li-->
+  </ul>
+  
+</div>
+
+
+
+<div class="card-body text-center"  style = "position: relative;top: 10px;">
+   <button type = "button" class="btn btn-link bg-transparent text-white" onclick = "connect(); check(); checkAstro(); change();" style="font-family: 'Press Start 2P';font-size: 15px; border-radius: 12px; position: relative;" value = "Connect Wallet" id="Wallet"> Connect Wallet</button>
+    <!--a href="#" class="btn bg-green card-link text-white" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 10px #9ecaed; border-radius: 12px; font-size: 27px;  ">OpenSea</a-->
   </div>
 </div>
-<script type="text/javascript">
-    async function nftmint() {
 
-  const accounts = await ethereum.request({ method: 'eth_accounts' });
-  const web3 = new Web3(new Web3.providers.HttpProvider("https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX"))
-  var AstWorld = new web3.eth.Contract(astroworldabi, astroaddress);
+
+  <script type="text/javascript">
+async function check() {
+      // Then get the currently selected radio button's value
+      console.log(window.ethereum)
+
+      if (window.ethereum !== undefined) {
+  // From now on, this should always be true:
+  // provider === window.ethereum
+          console.log(window.ethereum); // initialize your app
+         
+                                        } else {
+
+           
+           ("#nowebModal").modal('show');
   
+                        }
+
+      // Check the value to make sure you want to show the modal
+     
+    }
  
-  var supply = await AstWorld.methods.totalSupply().call({from: accounts[0]});
-  var t = document.getElementById("table"); // This have to be the ID of your table, not the tag
-  var BuyPrice = document.getElementsByTagName("td")[0];
-  var Minted = document.getElementsByTagName("td")[1];
-  var TotalSupply = document.getElementsByTagName("td")[2];
-  Minted.innerHTML = String(supply) + ' ASTRO';
-  TotalSupply.innerHTML = String(supply) + ' ASTRO';
+ async function checkAstro() {
+      // Then get the currently selected radio button's value
+      console.log(window.ethereum)
+      
+      if (window.ethereum !== undefined || accounts.length > 0) {
+  // From now on, this should always be true:
+  // provider === window.ethereum
+          
+    async function astrosent() {
+
+      const accounts = await ethereum.request({ method: 'eth_accounts' });
+      const web3 = new Web3(new Web3.providers.HttpProvider("https://polygon-mainnet.infura.io/v3/e750763a9cf54016972d72c12e48b2a9"))
+      var AstroWorld = new web3.eth.Contract(astroworldabi, astroaddress);
+    
   
+      async function Astropass() {
+  
+        var AstroTestPass = web3.eth.abi.encodeFunctionSignature('AstroTestPass()')
+  
+        
+  
+  
+       
+      ethereum.request({
+        method: 'eth_sendTransaction',
+        params: [{  
+                   from: accounts[0],
+                   to: astroaddress, 
+                   tag: 'latest', 
+                   chainid: '0x89',
+                   data: AstroTestPass }]
+      })
+      .catch((err) => { if(err.code === 4001 ) 
+        {("#DeniedModal").modal('show'); }
+        }
+      ).then(result => { if(result === undefined) {("#DeniedModal").modal('show');} else{alert("Transaction Hash/Receipt: " + result)}});
+      
+                          };
+
+
+
+      Astropass();
+  
+   
+                        };
+
+
+
+
+
+
+
+
+           
+         
+          console.log(window.ethereum); // initialize your app
+         astrosent();
+                                        } else {
+
+           
+           ("#nowebModal").modal('show');
+  
+                        }
+
+      // Check the value to make sure you want to show the modal
+     
+    }
+  
+        async function change()
+  {  
+    
+    
+    
+    ethereum.on('chainChanged', (_chainId) => window.location.reload());
+   
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+    var chainIDs = await ethereum.request({method: 'eth_chainId'});
+    var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'};
+  
+
+    
+    console.log(accounts.length)
+    if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
+
+    document.getElementById("chainSwitch").innerHTML = numchain[chainIDs];
+    document.getElementById("Wallet").innerHTML= "Connected";
+   
+    } else if(accounts.length > 0 && numchain[chainIDs] == undefined) {
+
+       document.getElementById("chainSwitch").innerHTML = "Unsupported Chain";
+       document.getElementById("Wallet").innerHTML= "Unsupported";
+       
+       document.getElementById("AWPass").innerHTML = "Change Chain";
+
+    }  else if(accounts.length < 0 && numchain[chainIDs] == undefined) {
+        
+          document.getElementById("chainSwitch").innerHTML = "Choose Network";
+         
+          document.getElementById("AWPass").disabled = false;
+          document.getElementById("Wallet").innerHTML= "Connect Wallet";
+  
+      }
+  }
+   
+  
+
+async function connect() {
+
+  
+  ethereum
+    .request({ method: 'eth_requestAccounts' })
+    .then(change)
+    .catch((err) => {
+      if (err.code === 4001) {
+        // EIP-1193 userRejectedRequest error
+        // If this happens, the user rejected the connection request.
+        console.log('Please connect to MetaMask.');
+        document.getElementById("Wallet").innerHTML =  "Rejected Connection";
+        document.getElementById("Wallet").value =  "Rejected Connection";
+        console.log(ethereum.isConnected())
+        document.getElementById("Wallet").contentWindow.location.reload(true);
+        
+      } else {
+        console.error(err);
+        document.getElementById("Wallet").innerHTML =  "Connect";
+        document.getElementById("chainSwitch").innerHTML = "Choose Network";
+      }
+    })
+    .then((result) => { window.location.reload()});
+
+ 
+    
 }
+
+
+
+
+
+
+
+
+
+
+  
+</script>
+
+
+<script type="text/javascript">
+
+    var layer = {"Polygon": "https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX", "Ethereum": "https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG", "Ropsten": "https://eth-ropsten.alchemyapi.io/v2/2NyPkMknaZQdPYgkErIHduif2GV6lfPe", "Binance": "https://apis-sj.ankr.com/0dda88728b204ba69841f77f6dccf0ab/6e1aade2282802189d5e936c4d5f9130/binance/full/main"}
+
+    
+
+    
 
 async function ipfsviewer() {
 
   const accounts = await ethereum.request({ method: 'eth_accounts' });
-  const web3 = new Web3(new Web3.providers.HttpProvider("https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX"))
+  var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'}
+  var chainIDs = await ethereum.request({method: 'eth_chainId'})
+  var layer = {"Polygon": "https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX", 
+            "Ethereum": "https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG", 
+            "Ropsten": "https://eth-ropsten.alchemyapi.io/v2/2NyPkMknaZQdPYgkErIHduif2GV6lfPe", 
+            "Binance": "https://apis-sj.ankr.com/0dda88728b204ba69841f77f6dccf0ab/6e1aade2282802189d5e936c4d5f9130/binance/full/main"
+            }
+
+  var newx = numchain[chainIDs];
+
+  const web3 = new Web3(new Web3.providers.HttpProvider(layer[newx]));
   var AstWorld = new web3.eth.Contract(astroworldabi, astroaddress);
   var supply = await AstWorld.methods.tokenURI('1').call({from: "0x000000000000000000000000000000000000dead"});
   const hashipfs = supply.split("ipfs://")[1]
   const ipfslink = "https://ipfs.io/ipfs/"
   console.log(supply.split("ipfs://")[1])
+  console.log(ethereum.isConnected())
 
    $.getJSON(ipfslink.concat(hashipfs), function(data) {
         
@@ -140,40 +439,150 @@ async function ipfsviewer() {
         
     });
 
-     $.getJSON(`https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=ZY8WD5ZBI5MATRZ8U99J4QN6W7X1CJQ294`, function (data) {   
-     
-    var results = data.result[0]
-    var text = results.hash
-    console.log(text);
+var layer = {"Polygon": "https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX", 
+            "Ethereum": "https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG", 
+            "Ropsten": "https://eth-ropsten.alchemyapi.io/v2/2NyPkMknaZQdPYgkErIHduif2GV6lfPe", 
+            "Binance": "https://apis-sj.ankr.com/0dda88728b204ba69841f77f6dccf0ab/6e1aade2282802189d5e936c4d5f9130/binance/full/main"
+            };
+
+
+
+
     
-       const x = data.result.length;
+  
+  
+  //   $.getJSON(layerapi[newx], function (data) {   
+     
+  //  var results = data.result[0]
+  //  var text = results.hash
+  //  console.log(text);
+    
+    //   const x = data.result.length;
        
-       var results = data.result[parseInt(x-1)];
-       var hash = results.hash;
-       var gas = (parseInt(results.cumulativeGasUsed))/1000000000;
-       var tid = results.tokenID;
-       document.getElementById("hash").innerHTML = "TX HASH: " + hash;
-       document.getElementById("gas").innerHTML = "PRICE: " + gas;
-       document.getElementById("TID").innerHTML = "TOKEN ID: " + tid;
+    //   var results = data.result[parseInt(x-1)];
+    //   console.log(results.hash);
+     //  var hashx = results.hash;
+    //   var gas = (parseInt(results.cumulativeGasUsed))/1000000000;
+    //   var tid = results.tokenID;
+    //   document.getElementById("hash").innerHTML = "TX HASH: " + hashx;
+    //   document.getElementById("gas").innerHTML = "PRICE: " + gas;
+    //   document.getElementById("TID").innerHTML = "TOKEN ID: " + tid;
             
-    });
+  //  });
 
 }
 
+    
+ 
 
+
+
+ async function switchChain(chain) {
+
+   
+    const BSC = [{ chainId: '0x38' }]; // BSC
+    const POLY = [{ chainId: '0x89' }]; // MATIC
+    const ROP = [{ chainId: '0x3' }]; // Ropsten
+    const ETH = [{ chainId: '0x1' }];
+
+    var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'}
+    var chains = { "Binance": BSC, "Polygon": POLY, "Ropsten": ROP, "Ethereum": ETH};
+
+    await ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: chains[chain]
+    })
+
+const accounts = await ethereum.request({ method: 'eth_accounts' });
+ethereum.on('chainChanged', (_chainId) => window.location.reload());
+var layer = {"Polygon": "https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX", 
+            "Ethereum": "https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG", 
+            "Ropsten": "https://eth-ropsten.alchemyapi.io/v2/2NyPkMknaZQdPYgkErIHduif2GV6lfPe", 
+            "Binance": "https://apis-sj.ankr.com/0dda88728b204ba69841f77f6dccf0ab/6e1aade2282802189d5e936c4d5f9130/binance/full/main"
+            }
+
+
+
+
+
+ }
 
 ipfsviewer(); 
 
 </script>
 
-<script type="text/javascript">
-   
+<!--var layerapi = {"Polygon": `https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=ZY8WD5ZBI5MATRZ8U99J4QN6W7X1CJQ294` , 
+                "Binance": `https://api.bscscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=8AU3N2FNVJV9T2NTRQX38476UY1G3SWD9Y`,
+                "Ethereum": `https://api.etherscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=VZAIG2TEJY8QTHVUMYXYAU8F8X89KRWNVR`, 
+                "Ropsten": `https://api.ropsten.etherscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=VZAIG2TEJY8QTHVUMYXYAU8F8X89KRWNVR`
+                }; {% endcomment %}
+ {% comment %} var layerapi = {"Polygon": `https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=ZY8WD5ZBI5MATRZ8U99J4QN6W7X1CJQ294` , 
+                "Binance": `https://api.bscscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=8AU3N2FNVJV9T2NTRQX38476UY1G3SWD9Y`,
+                "Ethereum": `https://api.etherscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=VZAIG2TEJY8QTHVUMYXYAU8F8X89KRWNVR`, 
+                "Ropsten": `https://api.ropsten.etherscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=VZAIG2TEJY8QTHVUMYXYAU8F8X89KRWNVR`
+                };
 
-nftmint()
+ -->
+<div id="demo-modal" class="modal" role="dialog" tabindex="-1">
   
-</script>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+  
+    <div class="modal-content">
+      
+      <div class=" bg-green modal-body" style = "position:relative; left:20px; top:5px;">
+        Coming Soon...
+		<button type="button" style = "position:relative; right: 10px; top:-10px" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+    </div>
+  </div>
+</div>
 
 <style>
+
+ .modal {
+
+ 
+  /* Recede */
+  
+}
+
+
+
+/* Modal Content */
+.modal-content {
+
+  
+  background-color: rgb(61,111,67);
+  
+  border: 0px solid #888;
+
+  font-family: 'Press Start 2P';font-size: 10px; color: white; text-align: center; position: center;
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  
+   
+  font-size: 28px;
+  font-weight: bold;
+  
+  
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
 .bg-black {
   background-color: #000000 !important;
 }
@@ -434,18 +843,15 @@ td, th {
 
 </style>
 
-<script type="module">
-           import { web3 } from "https://cdn.jsdelivr.net/gh/ethereum/web3.js@latest/dist/web3.min.js";
-      </script>
-        <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-       
-        <script type="module" src="https://cdn.jsdelivr.net/npm/@metamask/detect-provider@1.2.0/dist/index.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@latest/dist/web3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-        <!-- Third party plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-<script type="text/javascript" src="info.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@metamask/onboarding@1.0.0/dist/metamask-onboarding.bundle.js" type="application/javascript"></script>
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@metamask/detect-provider@1.2.0/dist/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@latest/dist/web3.min.js"></script>
 <script type="text/javascript" src="js-main/utils.js"></script>
 <script type="text/javascript" src="js-main/metaAcct.js"></script>
 <script type="text/javascript" src="js-main/astroworld.js"></script>

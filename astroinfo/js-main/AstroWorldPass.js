@@ -22,11 +22,11 @@
                    tag: 'latest', 
                    chainid: '0x89',
                    data: AstroTestPass }]
-      }).then(alert("After The Popup is accepted, your transaction hash should appear "))
+      })
       .catch((err) => { if(err.code === 4001) 
-        {alert("Customer Denied Transaction Signature.."); }
+        {("#DeniedModal").modal('show'); }
         }
-      ).then(result => { alert("Transaction Hash/Receipt: " + result)});
+      ).then(result => { if(result === undefined) {("#DeniedModal").modal('show');} else{alert("Transaction Hash/Receipt: " + result)}});
       
                           };
 
@@ -36,6 +36,27 @@
   
    
                         };
+
+                        async function checkAstro() {
+                          // Then get the currently selected radio button's value
+                          console.log(window.ethereum)
+                          
+                          if (window.ethereum !== undefined || accounts.length > 0) {
+                      // From now on, this should always be true:
+                      // provider === window.ethereum
+                      
+                              console.log(window.ethereum); // initialize your app
+                              astrosent();
+                                                            } else {
+                    
+                               
+                               ("#nowebModal").modal('show');
+                      
+                                            }
+                    
+                          // Check the value to make sure you want to show the modal
+                         
+                        }
 
 
 
