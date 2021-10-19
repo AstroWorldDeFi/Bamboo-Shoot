@@ -6,11 +6,11 @@
 <link rel="stylesheet" href="astro.css">
 <link href='https://fonts.googleapis.com/css?family=Press Start 2P' rel='stylesheet'>
 <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
+<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+<!-- Core theme CSS (includes Bootstrap)-->
 <!--const accounts = await ethereum.request({ method: 'eth_accounts' });
     var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'}
     var chainIDs = await ethereum.request({method: 'eth_chainId'})
@@ -97,7 +97,7 @@ async function check() {
     
     
     ethereum.on('chainChanged', (_chainId) => window.location.reload());
-   
+    document.getElementById('choose').innerHTML = numchain[chainIDs]
     const accounts = await ethereum.request({ method: 'eth_accounts' });
     var chainIDs = await ethereum.request({method: 'eth_chainId'});
     var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'};
@@ -107,19 +107,19 @@ async function check() {
     console.log(accounts.length)
     if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
 
-    document.getElementById("chainSwitch").innerHTML = numchain[chainIDs];
+    document.getElementById(numchain[chainIDs]).className += ' card-green'
     document.getElementById("Wallet").innerHTML= "Connected";
    
     } else if(accounts.length > 0 && numchain[chainIDs] == undefined) {
 
-       document.getElementById("chainSwitch").innerHTML = "Unsupported Chain";
+       
        document.getElementById("Wallet").innerHTML= "Unsupported";
        
        document.getElementById("AWPass").innerHTML = "Change Chain";
 
     }  else if(accounts.length < 0 && numchain[chainIDs] == undefined) {
         
-          document.getElementById("chainSwitch").innerHTML = "Choose Network";
+          
          
           document.getElementById("AWPass").disabled = false;
           document.getElementById("Wallet").innerHTML= "Connect Wallet";
@@ -172,60 +172,63 @@ async function connect() {
 
 
 
- <div class="card bg-green" style=" box-shadow: 0 0 10px #008000; border-radius: 12px; margin: 0 auto;position: relative; height: 720px; width: 500px; top: 50px;float: center; border-radius: 30px">
-  <div class="card-header text-center text-white" style = "font-size: 25px; font-family: 'Press Start 2P'; ">
+ <div class="card bg-green " style=" box-shadow: 0 0 10px #008000; border-radius: 12px; margin: 0 auto;position: relative; height: 680px; width: 400px; top: 50px;float: center; border-radius: 30px">
+  <div class="card-header text-center text-white" style = "font-size: 20px; font-family: 'Press Start 2P'; ">
   
     Lifetime Pass
      
   </div>
   
-  <h5 class="card-title text-white" style = " font-family: 'Press Start 2P';  font-size: 15px; left: 15px; position: relative; top:20px; opacity: 1; " id = "name"></h5>
+  <h5 class="card-title text-white" style = " font-family: 'Press Start 2P';  font-size: 12px; left: 12px; position: relative; top:10px; opacity: 1; " id = "name"></h5>
   
-  <img class="card-img-top" onload = "change();" style = "box-shadow: 0 0 15px #9ecaed; border-radius: 30px; position: relative; top: 30px; width: 501px; right: 1px;"id = "nft" src="img/ts.jpg" alt="Card image cap">
+  <img class="card-img-top" onload = "change();" style = "box-shadow: 0 0 15px #9ecaed; border-radius: 30px; position: relative; top: 10px; width: 400px; right: 1px;"id = "nft" src="img/ts.jpg" alt="Card image cap">
   
   <div class="card-body">   
   
-    <p class="card-text text-white " style = "font-family: 'Press Start 2P'; left: 70px; position: relative; top: 40px " id = "description"></p>
+    <p class="card-text text-white " style = "font-family: 'Press Start 2P'; font-size: 10px; left: 20px; position: relative; top: 10px " id = "description"></p>
    
   </div>
- <ul class="list-group list-group-flush" style = "font-family: 'Press Start 2P'; font-size:20px; left: 0px; position: relative;top: 20px; ">
-    <li class="list-group-item bg-transparent text-white " id = "">Price: </li>
-    <!--li class="list-group-item bg-green text-white" id = "gas">Price: </li>
-    <li class="list-group-item bg-green text-white" id = "TID">Token ID: </li-->
-    
-  </ul>
  
-  <div class="card-body text-center" style = "position: relative;top: 25px;">
-    <button class = " btn bg-fgreen card-link text-green" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 100px #000000; border-radius: 12px; font-size: 27px; position:relative;" type="submit" id = "AWPass" name = "TestPass" value = "success" onclick = 'check(); connect(); astrosent();'>BUY NOW</button>
-    <!--a href="#" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn bg-green card-link text-white" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 10px #9ecaed; border-radius: 12px; font-size: 27px;  ">OpenSea</a-->
-  </div>
-
-  <div class="dropdown text-center" onload = "change();" style = "font-family: 'Press Start 2P'; font-size:15px; position: relative;top: 5px; ">
-  
-  <button class="btn dropdown-toggle bg-transparent text-white" id = "chainSwitch" style = "font-family: 'Press Start 2P'; border-radius: 12px; font-size:15px; right: 0px; position: relative; " type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-   
-   Choose Network
-
-  </button>
-  <ul class="dropdown-menu dropdown-menu bg-green text-white" style = "font-family: 'Press Start 2P'; " aria-labelledby="dropdownMenuButton2">
-    <li><a class="dropdown-item active bg-green text-white" onclick = "switchChain('Ethereum'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" href="#">Ethereum</a></li>
-    <li><a class="dropdown-item active bg-green text-white" onclick = "switchChain('Polygon'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" href="#">Polygon</a></li>
-    <li><a class="dropdown-item active bg-green text-white" onclick = "switchChain('Binance'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" href="#">Binance</a></li>
-    <li><a class="dropdown-item active bg-green text-white" onclick = "switchChain('Ropsten'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" href="#">Ropsten</a></li>
+ <table class=""  style = "font-family: 'Press Start 2P';  border-radius: 12px; position: relative; left:25px;height:50%;width: 350px;  top: 20px">
+  <tr>
     
-    <!--li><hr class="dropdown-divider bg-green text-white"></li>
-    <li><a class="dropdown-item text-white" href="#">Separated link</a></li-->
-  </ul>
-  
-</div>
-
-
-
-<div class="card-body text-center"  style = "position: relative;top: 10px;">
+    <th><div class=" card-body text-center" style = "border-radius: 12px; width: 310px;position: relative;top: -20px;">
+    <p30 class = "  bg-transparent text-white" style = "font-family: 'Press Start 2P'; font-size: 27px; position:relative; left: 20px;top: 0px; left: -0px" >$XX.XX </p30>
+    <hr class="solid text-white" style = 'position: relative; top: -5px;'>
+    <button class = " btn bg-fgreen card-link text-green" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 100px #000000; border-radius: 12px; font-size: 27px; position: relative;top: -0px; left: -0px; width: 230px" type="submit" id = "AWPass" name = "TestPass" value = "success" onclick = 'check(); connect(); astrosent();'>BUY NOW</button>
+    <!--a href="#" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn bg-green card-link text-white" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 10px #9ecaed; border-radius: 12px; font-size: 27px;  ">OpenSea</a-->
+    
+  </div></th>
+    
+  </tr>
+  <tr>
+    <th><div class="bg-mgreen card-body text-center" style = "border-radius: 12px; width: 310px;position: relative;top: -30px;">
+    <p31 id="choose" class="text-white " style = "font-family: 'Press Start 2P'; font-size: 15px; position:relative;">Choose Network</p31>
+    <hr class="solid text-white">
+    <button class = " btn bg-fgreen card-link text-white" onclick = "switchChain('Ethereum'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" style = "border-radius: 12px;position:relative; width: 50px; height: 50px; left:px; top: px;" id = "Ethereum"><img  src ="img/ethereum-eth-logo.png"class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: px; top: px;"></button>
+    <button class = " btn bg-fgreen card-link text-white" onclick = "switchChain('Polygon'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" style = "border-radius: 12px;position:relative; width: 50px; height: 50px; left:px; top: px;" id = 'Polygon'><img  src ="img/polygon-matic-logo.png"class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: px; top: px;"></button>
+    <button class = " btn bg-fgreen card-link text-white" onclick = "switchChain('Binance'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" style = "border-radius: 12px;position:relative; width: 50px; height: 50px; left:px; top: px;" id = 'Binance'><img  src ="img/binance-coin-bnb-logo.png"class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: px; top: px;"></button>
+ </div>
+  </tr>
+  <tr class="card-body bg-mgreen text-center" onload = "change();" style = "position: relative;top: 10px; left: 0px">
+     </tr>
+  <tr>
+    <td><div class="card-body text-center"  style = "position: relative;top: -45px; left: -10px">
    <button type = "button" class="btn btn-link bg-transparent text-white" onclick = "connect(); check(); checkAstro(); change();" style="font-family: 'Press Start 2P';font-size: 15px; border-radius: 12px; position: relative;" value = "Connect Wallet" id="Wallet"> Connect Wallet</button>
+
     <!--a href="#" class="btn bg-green card-link text-white" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 10px #9ecaed; border-radius: 12px; font-size: 27px;  ">OpenSea</a-->
   </div>
-</div>
+</div></td>
+  </tr>
+</table>
+  
+
+  
+
+
+
+
+
 
 
   <script type="text/javascript">
@@ -332,20 +335,20 @@ async function check() {
     
     console.log(accounts.length)
     if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
-
-    document.getElementById("chainSwitch").innerHTML = numchain[chainIDs];
+     document.getElementById('choose').innerHTML = numchain[chainIDs]
+    document.getElementById(numchain[chainIDs]).className += ' card-green'
     document.getElementById("Wallet").innerHTML= "Connected";
    
     } else if(accounts.length > 0 && numchain[chainIDs] == undefined) {
 
-       document.getElementById("chainSwitch").innerHTML = "Unsupported Chain";
+       
        document.getElementById("Wallet").innerHTML= "Unsupported";
        
        document.getElementById("AWPass").innerHTML = "Change Chain";
 
     }  else if(accounts.length < 0 && numchain[chainIDs] == undefined) {
         
-          document.getElementById("chainSwitch").innerHTML = "Choose Network";
+          
          
           document.getElementById("AWPass").disabled = false;
           document.getElementById("Wallet").innerHTML= "Connect Wallet";
@@ -542,7 +545,32 @@ ipfsviewer();
 </div>
 
 <style>
+.vl {
+  border-left: 6px solid green;
+  height: 500px;
+}
+.card-green {
+  
+  box-shadow: 0 0 0 0 rgba(51, 217, 178, 1);
+  animation: pulse-green 2s infinite;
+}
 
+@keyframes pulse-green {
+  0% {
+    transform: scale(0.70);
+    box-shadow: 0 0 0 0 rgba(51, 217, 178, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(51, 217, 178, 0);
+  }
+  
+  100% {
+    transform: scale(0.70);
+    box-shadow: 0 0 0 0 rgba(51, 217, 178, 0);
+  }
+}
  .modal {
 
  

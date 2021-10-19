@@ -17,13 +17,14 @@
     console.log(numchain[chainIDs])
     if (accounts.length > 0 && numchain[chainIDs] != undefined) {
     
-    document.getElementById("chainSwitch").innerHTML = numchain[chainIDs];
+    document.getElementById('choose').innerHTML = numchain[chainIDs]
+    document.getElementById(numchain[chainIDs]).className += ' card-green'
     document.getElementById("Wallet").innerHTML= "Connected";
     document.getElementById("chainSwitch").disabled = false;
     document.getElementById("AWPass").disabled = false;
    
  } else if(accounts.length > 0 && numchain[chainIDs] == undefined) {
-  document.getElementById("chainSwitch").innerHTML = "Unsupported Chain";
+  
   document.getElementById("Wallet").innerHTML= "Unsupported";
   document.getElementById("AWPass").disabled = true;
   document.getElementById("AWPass").innerHTML = "Change Chain";
@@ -31,7 +32,7 @@
 
     else if(accounts.length < 0 && numchain[chainIDs] == undefined) {
         
-      document.getElementById("chainSwitch").innerHTML = "Choose Network";
+      
     
       document.getElementById("Wallet").innerHTML= "Connect Wallet";
 
