@@ -20,7 +20,7 @@ body {
 #unity-canvas {
     width: 100%;
     height: 100%;
-    background: #231F20;
+    background-color: #2E8B57 !important;
 }
 #loading-cover {
     position: absolute;
@@ -102,5 +102,16 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.bg-green {
+    background-color: #2E8B57 !important;
+  }
+  
+  .bg-fgreen {
+    background-color: #38ec86 !important;
+  }
+  .bg-mgreen {
+    background-color: #48A14D !important;
+  }
 
 
