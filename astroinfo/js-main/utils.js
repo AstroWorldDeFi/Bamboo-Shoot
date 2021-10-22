@@ -11,13 +11,12 @@
     
     var chainIDs = await ethereum.request({method: 'eth_chainId'});
     var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'};
-  
+    var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png'}
+
     
     console.log(accounts.length)
-    console.log(numchain[chainIDs])
-    if (accounts.length > 0 && numchain[chainIDs] != undefined) {
-    
-    document.getElementById('choose').innerHTML = numchain[chainIDs]
+    if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
+      document.getElementById('specie').src = specie[numchain[chainIDs]]
     document.getElementById(numchain[chainIDs]).className += ' card-green'
     document.getElementById("Wallet").innerHTML= "Connected";
     document.getElementById("chainSwitch").disabled = false;

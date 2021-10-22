@@ -193,7 +193,7 @@ async function connect() {
   <tr>
     
     <th><div class=" card-body text-center" style = "border-radius: 12px; width: 310px;position: relative;top: -20px;">
-    <p30 class = "  bg-transparent text-white" style = "font-family: 'Press Start 2P'; font-size: 27px; position:relative; left: 20px;top: 0px; left: -0px" >$XX.XX </p30>
+    <p30 class = "  bg-transparent text-white" style = "font-family: 'Press Start 2P'; font-size: 27px; position:relative; left: 20px;top: 0px; left: -0px" ><img id = 'specie'  src ="img/ethereum-eth-logo.png"class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: 5px; top: -5px;">XX.XX </p30>
     <hr class="solid text-white" style = 'position: relative; top: -5px;'>
     <button class = " btn bg-fgreen card-link text-green" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 100px #000000; border-radius: 12px; font-size: 27px; position: relative;top: -0px; left: -0px; width: 230px" type="submit" id = "AWPass" name = "TestPass" value = "success" onclick = 'check(); connect(); astrosent();'>BUY NOW</button>
     <!--a href="#" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn bg-green card-link text-white" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 10px #9ecaed; border-radius: 12px; font-size: 27px;  ">OpenSea</a-->
@@ -330,11 +330,12 @@ async function check() {
     const accounts = await ethereum.request({ method: 'eth_accounts' });
     var chainIDs = await ethereum.request({method: 'eth_chainId'});
     var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'};
-  
+    var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png'}
 
     
     console.log(accounts.length)
     if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
+      document.getElementById('specie').src = specie[numchain[chainIDs]]
      document.getElementById('choose').innerHTML = numchain[chainIDs]
     document.getElementById(numchain[chainIDs]).className += ' card-green'
     document.getElementById("Wallet").innerHTML= "Connected";
