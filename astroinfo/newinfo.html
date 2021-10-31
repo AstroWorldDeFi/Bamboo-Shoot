@@ -69,105 +69,7 @@
   
 
 </script>
-<script type="text/javascript">
-async function check() {
-      // Then get the currently selected radio button's value
-      console.log(window.ethereum)
 
-      if (window.ethereum !== undefined) {
-  // From now on, this should always be true:
-  // provider === window.ethereum
-          console.log(window.ethereum); // initialize your app
-         
-                                        } else {
-
-           
-           ("#nowebModal").modal('show');
-  
-                        }
-
-      // Check the value to make sure you want to show the modal
-     
-    }
- 
-  
-        async function change()
-  {  
-    
-    
-    
-    ethereum.on('chainChanged', (_chainId) => window.location.reload());
-    document.getElementById('choose').innerHTML = numchain[chainIDs]
-    const accounts = await ethereum.request({ method: 'eth_accounts' });
-    var chainIDs = await ethereum.request({method: 'eth_chainId'});
-    var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'};
-  
-
-    
-    console.log(accounts.length)
-    if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
-
-    document.getElementById(numchain[chainIDs]).className += ' card-green'
-    document.getElementById("Wallet").innerHTML= "Connected";
-   
-    } else if(accounts.length > 0 && numchain[chainIDs] == undefined) {
-
-       
-       document.getElementById("Wallet").innerHTML= "Unsupported";
-       
-       document.getElementById("AWPass").innerHTML = "Change Chain";
-
-    }  else if(accounts.length < 0 && numchain[chainIDs] == undefined) {
-        
-          
-         
-          document.getElementById("AWPass").disabled = false;
-          document.getElementById("Wallet").innerHTML= "Connect Wallet";
-  
-      }
-  }
-   
-  
-
-async function connect() {
-
-  
-  ethereum
-    .request({ method: 'eth_requestAccounts' })
-    .then(change)
-    .catch((err) => {
-      if (err.code === 4001) {
-        // EIP-1193 userRejectedRequest error
-        // If this happens, the user rejected the connection request.
-        console.log('Please connect to MetaMask.');
-        document.getElementById("Wallet").innerHTML =  "Rejected Connection";
-        document.getElementById("Wallet").value =  "Rejected Connection";
-        console.log(ethereum.isConnected())
-        document.getElementById("Wallet").contentWindow.location.reload(true);
-        
-      } else {
-        console.error(err);
-        document.getElementById("Wallet").innerHTML =  "Connect";
-        document.getElementById("chainSwitch").innerHTML = "Choose Network";
-      }
-    })
-    .then((result) => { window.location.reload()});
-
- 
-    
-}
-
-
-
-
-
-
-
-
-
-
-  
-</script>
 </head>
 
 
@@ -181,7 +83,7 @@ async function connect() {
   
   <h5 class="card-title text-white" style = " font-family: 'Press Start 2P';  font-size: 12px; left: 12px; position: relative; top:10px; opacity: 1; " id = "name"></h5>
   
-  <img class="card-img-top" onload = "change();" style = "box-shadow: 0 0 15px #9ecaed; border-radius: 30px; position: relative; top: 10px; width: 400px; right: 1px;"id = "nft" src="img/ts.jpg" alt="Card image cap">
+  <img class="card-img-top" onload = "change(); callmepls();" style = "box-shadow: 0 0 15px #9ecaed; border-radius: 30px; position: relative; top: 10px; width: 400px; right: 1px;"id = "nft" src="img/ts.jpg" alt="Card image cap">
   
   <div class="card-body">   
   
@@ -193,7 +95,8 @@ async function connect() {
   <tr>
     
     <th><div class=" card-body text-center" style = "border-radius: 12px; width: 310px;position: relative;top: -20px;">
-    <p30 id = 'Scaler' class = "  bg-transparent text-white" style = "font-family: 'Press Start 2P'; font-size: 27px; position:relative; left: 20px;top: 0px; left: -0px" ><img id = 'specie'  src ="img/ethereum-eth-logo.png"class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: 5px; top: -5px;">XX.XX </p30>
+    <p30 id = 'Scalerx' class = "  bg-transparent text-white" style = "font-family: 'Press Start 2P'; font-size: 27px; position:relative; left: 20px;top: 0px; left: -0px" ><img id = 'specie'  src ="img/ethereum-eth-logo.png"class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: 5px; top: -5px;">XX.XX </p30>
+    <p29 id = 'pro' class = " bg-transparent text-white" style = "font-family: 'Press Start 2P'; font-size: 10px; position:relative; left: 20px;top: -10px; left: -5px">XX</p29>
     <hr class="solid text-white" style = 'position: relative; top: -5px;'>
     <button class = " btn bg-fgreen card-link text-green" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 100px #000000; border-radius: 12px; font-size: 27px; position: relative;top: -0px; left: -0px; width: 230px" type="submit" id = "AWPass" name = "TestPass" value = "success" onclick = 'check(); connect(); astrosent();'>BUY NOW</button>
     <!--a href="#" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn bg-green card-link text-white" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 10px #9ecaed; border-radius: 12px; font-size: 27px;  ">OpenSea</a-->
@@ -331,28 +234,7 @@ async function check() {
     var chainIDs = await ethereum.request({method: 'eth_chainId'});
     var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'};
     var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png'}
-    var Cross = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png'}
-    
-    const w3 = new Web3(new Web3.providers.HttpProvider("https://cloudflare-eth.com"))
-    var ethoracle = new w3.eth.Contract(ethabi, ethaddy);
-    var binoracle = new w3.eth.Contract(bscabi, bscaddy);
-    var polyoracle = new w3.eth.Contract(polyabi, polyaddy);
-    oracle.methods.latestAnswer().call({from: accounts[0]}, function(error, res) {
-                                  if (error != null) {
-                                                        console.log(error)
-                                                        return;
-                                } else {
-                                    var data = res;
-                                    console.log("Latest price was:" ,res)}
-                                    console.log(parseInt(data));
-        var pricex = (parseInt(data) / 100000000) *0.08 ;
-        var price = parseInt(pricex)  + (parseInt(pricex) * ((100 - parseInt(totalsupply)) / 100));
-        document.getElementById("Cross").value = " Current Price: $" + price;
-                                        });
-        
-        document.getElementById("Wallet").value= accounts[0].substring(0,12) + "...";
-        document.getElementById("liveornot").style = "font-size:8px;color:green";
-        
+      
     console.log(accounts.length)
     if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
       document.getElementById('specie').src = specie[numchain[chainIDs]]
@@ -377,6 +259,7 @@ async function check() {
       }
   }
    
+     
   
 
 async function connect() {
@@ -498,7 +381,76 @@ var layer = {"Polygon": "https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r
 
     
  
+async function callmepls() {
 
+  const accounts = await ethereum.request({method: 'eth_accounts' });
+  const web3 = new Web3(new Web3.providers.HttpProvider("https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG"))
+  var chainIDs = await ethereum.request({method: 'eth_chainId'});
+    
+  var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'};
+  
+  //var abichain = {'Ethereum': ethabi, 'Polygon': polyabi, 'Binance': bscabi}
+
+  var addychain = {'Ethereum': ethaddy, 'Polygon': polyaddy, 'Binance': bscaddress}
+
+  var capchain = {'Ethereum': 'ETH/USD', 'Polygon': 'MATIC/USD', 'Binance': 'BNB/USD'}
+  var choosechain = numchain[chainIDs]
+ 
+  var pricechain = {'Ethereum': 0.08, 'Polygon': 110, 'Binance': 1}
+
+  var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png'}
+
+  async function ringring() {
+
+    var AstroTestPass = web3.eth.abi.encodeFunctionSignature('latestAnswer()')
+
+    
+
+
+   
+  ethereum.request({
+    method: 'eth_call',
+    params: [{  
+               from: accounts[0],
+               to: addychain[choosechain], 
+               tag: 'latest', 
+               chainid: chainIDs,
+               data: AstroTestPass }]
+  })
+  .catch((err) => { if(err.code === 4001 ) 
+    {console.log(err.code) }
+                   }
+          ).then(result => { if(result === undefined) {("#DeniedModal").modal('show');} else{
+                        var data = result;                       
+                        console.log(parseInt(data));
+                        const pricex = (parseInt(data) / 100000000) * pricechain[choosechain] ;
+                        
+                        console.log("Latest " + capchain[choosechain] + " price was: " + pricex)
+                        document.getElementById("Scalerx").innerHTML = `<img id = "specie"  src = ${specie[choosechain]}class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: 5px; top: -5px;">` + pricechain[choosechain]
+                        document.getElementById("pro").innerHTML ='($'+pricex.toFixed(2)+')';
+                        document.getElementById('choose').innerHTML = numchain[chainIDs]
+  
+                                                                                      }
+                    }
+          );
+  
+                      };
+
+
+
+  ringring();
+
+
+                    };
+
+
+
+
+
+
+
+       
+     
 
 
  async function switchChain(chain) {
@@ -905,4 +857,7 @@ td, th {
 <script type="text/javascript" src="js-main/metaAcct.js"></script>
 <script type="text/javascript" src="js-main/astroworld.js"></script>
 <script type="text/javascript" src="js-main/AstroWorldPass.js"></script>
+<script type="text/javascript" src="js-main/ethereums.js"></script>
+<script type="text/javascript" src="js-main/binance.js"></script>
+<script type="text/javascript" src="js-main/polygon.js"></script>
 </html>
