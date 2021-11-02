@@ -7,15 +7,15 @@
     const accounts = await ethereum.request({ method: 'eth_accounts' });
     
     var chainIDs = await ethereum.request({method: 'eth_chainId'});
-    var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'};
-    var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png'}
-
-    
+    var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom'};
+    var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png', 'Fantom': 'img/fantom.png'}
+    var chainIDs = await ethereum.request({method: 'eth_chainId'});
+    console.log(chainIDs)
     console.log(accounts.length)
     if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
       document.getElementById('specie').src = specie[numchain[chainIDs]]
-    document.getElementById(numchain[chainIDs]).className += ' card-green'
-    document.getElementById("Wallet").innerHTML= "Connected";
+      document.getElementById(numchain[chainIDs]).className += ' card-green'
+      document.getElementById("Wallet").innerHTML= "Connected";
     
     
    
@@ -103,25 +103,32 @@ ethereum
 // }
 
 
-
-        
 async function callmepls() {
 
+  
+  const BSC = [{ chainId: '0x38' }]; // BSC
+  const POLY = [{ chainId: '0x89' }]; // MATIC
+  const ROP = [{ chainId: '0x3' }]; // Ropsten
+  const ETH = [{ chainId: '0x1' }];
+  const FTM = [{ chainId: '0xfa'}];
   const accounts = await ethereum.request({method: 'eth_accounts' });
   const web3 = new Web3(new Web3.providers.HttpProvider("https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG"))
   var chainIDs = await ethereum.request({method: 'eth_chainId'});
     
-  var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'};
   
+
+  var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom'}
+  var chains = { "Binance": BSC, "Polygon": POLY, "Ropsten": ROP, "Ethereum": ETH, "Fantom": FTM};
   //var abichain = {'Ethereum': ethabi, 'Polygon': polyabi, 'Binance': bscabi}
 
-  var addychain = {'Ethereum': ethaddy, 'Polygon': polyaddy, 'Binance': bscaddress}
+  var addychain = {'Ethereum': ethaddy, 'Polygon': polyaddy, 'Binance': bscaddress, 'Fantom': ftmaddy}
 
-  var capchain = {'Ethereum': 'ETH/USD', 'Polygon': 'MATIC/USD', 'Binance': 'BNB/USD'}
+  var capchain = {'Ethereum': 'ETH/USD', 'Polygon': 'MATIC/USD', 'Binance': 'BNB/USD', 'Fantom': 'FTM/USD'}
   var choosechain = numchain[chainIDs]
-  var specie = {'Ethereum': './img/ethereum-eth-logo.png', 'Polygon': './img/polygon-matic-logo.png', 'Binance': './img/binance-coin-bnb-logo.png'}
+ 
+  var pricechain = {'Ethereum': 0.8, 'Polygon': 1100, 'Binance': 6, 'Fantom': 1000}
 
-  var pricechain = {'Ethereum': 0.08, 'Polygon': 110, 'Binance': 1}
+  var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png', 'Fantom': 'img/fantom.png'}
 
   async function ringring() {
 
@@ -149,9 +156,10 @@ async function callmepls() {
                         const pricex = (parseInt(data) / 100000000) * pricechain[choosechain] ;
                         
                         console.log("Latest " + capchain[choosechain] + " price was: " + pricex)
-                        document.getElementById("Scalerx").innerHTML = `<img id = "specie"  src = ${specie[choosechain]} class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: 5px; top: -5px;">` + pricechain[choosechain]
-                        document.getElementById("pro").innerHTML ='($'+pricex.toFixed(2)+')';
+                        document.getElementById("Scalerx").innerHTML = `<img id = "specie"  src = ${specie[choosechain]} class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: 5px; top: -5px;">` + pricechain[choosechain];
+                        document.getElementById("pro").innerHTML =' ($'+pricex.toFixed(2)+')';
                         document.getElementById('choose').innerHTML = numchain[chainIDs]
+  
                                                                                       }
                     }
           );
@@ -173,3 +181,29 @@ async function callmepls() {
 
        
      
+
+
+ async function switchChain(chain) {
+
+   
+    const BSC = [{ chainId: '0x38' }]; // BSC
+    const POLY = [{ chainId: '0x89' }]; // MATIC
+    const ROP = [{ chainId: '0x3' }]; // Ropsten
+    const ETH = [{ chainId: '0x1' }];
+    const FTM = [{ chainId: '0xfa'}];
+
+    var chains = { "Binance": BSC, "Polygon": POLY, "Ropsten": ROP, "Ethereum": ETH, "Fantom": FTM};
+
+    await ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: chains[chain]
+    })
+
+ethereum.on('chainChanged', (_chainId) => window.location.reload());
+
+
+
+
+
+
+ }

@@ -478,3 +478,5 @@ bscabi = [
 ];
 
 bscaddress = '0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE';
+
+ftmaddy = '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc';
