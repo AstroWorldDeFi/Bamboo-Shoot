@@ -9,32 +9,8 @@
 <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
 <!-- Google fonts-->
 <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+<link  href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
-<!--const accounts = await ethereum.request({ method: 'eth_accounts' });
-    var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'}
-    var chainIDs = await ethereum.request({method: 'eth_chainId'})
-  
-    document.getElementById("Wallet").innerHTML = "Connected" //accounts[0].substring(0,12) + "...";
-    document.getElementById("Wallet").value = "Connected" // accounts[0].substring(0,12) + "...";
-    document.getElementById("chainSwitch").innerHTML = numchain[chainIDs]; -->
-
-      
-        
-  <!-- async function checkchain () {
-  const accounts = await ethereum.request({ method: 'eth_accounts' });
-
-  if ( accounts === undefined) {
-
-    document.getElementById("Wallet").value = "Connect" // accounts[0].substring(0,12) + "...";
-    document.getElementById("chainSwitch").innerHTML = " No Chain ";
-  }
-}   --> 
-
- <!-- Button trigger modal -->
-<!--button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button-->
 
 <!-- Modal -->
 <div class="modal fade" id="nowebModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -44,7 +20,7 @@
       <div class="modal-body bg-green">
         You don't have a Web 3.0 wallet installed.<br>
         Please Install A Web 3.0 Wallet<br>
-        Try Installing <a class = "text-white " href="https://metamask.io/">MetaMask.<img style = "  width: 30px; right: 10px;" src="img/meta.png"></a><br>
+        Try Installing <a class = "text-white " href="https://metamask.io/">MetaMask.<img  style = "  width: 30px; right: 10px;" src="img/meta.png"></a><br>
          
 
       </div>
@@ -74,28 +50,215 @@
 
 
 
- <div class="card bg-green " style=" box-shadow: 0 0 10px #008000; border-radius: 12px; margin: 0 auto;position: relative; height: 680px; width: 400px; top: 50px;float: center; border-radius: 30px">
-  <div class="card-header text-center text-white" style = "font-size: 20px; font-family: 'Press Start 2P'; ">
+ <div class="card bg-green "  style=" box-shadow: 0 0 10px #008000; border-radius: 12px; margin: 0 auto;position: relative; height: 680px; width: 400px; top: 50px;float: center; border-radius: 30px">
+  <div class="card-header text-center text-white"  style = "font-size: 20px; font-family: 'Press Start 2P'; ">
   
     Lifetime Pass
      
   </div>
   
-  <h5 class="card-title text-white" style = " font-family: 'Press Start 2P';  font-size: 12px; left: 72px; position: relative; top:10px; opacity: 1; " id = "name">AstroWorld Test Name</h5>
+  <h5 class="card-title text-white"  style = " font-family: 'Press Start 2P';  font-size: 12px; left: 72px; position: relative; top:10px; opacity: 1; " id = "name">AstroWorld Test Name</h5>
   
-  <img class="card-img-top" onload = "change(); callmepls();" style = "box-shadow: 0 0 15px #9ecaed; border-radius: 30px; position: relative; top: 10px; width: 400px; right: 1px;"id = "nft" src="img/ts.jpg" alt="Card image cap">
+  <img class="card-img-top" onload = " change(); callmepls(); " style = "box-shadow: 0 0 15px #9ecaed; border-radius: 30px; position: relative; top: 10px; width: 400px; right: 1px;"id = "nft" src="img/ts.jpg" alt="Card image cap">
+  <script >
+// const { default: Web3 } = require("web3");
+async function change() {  
+    
+    ethereum.on('chainChanged', (_chainId) => window.location.reload());
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+    var chainIDs = await ethereum.request({method: 'eth_chainId'});
+    var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom'};
+    var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png', 'Fantom': 'img/fantom.png'}
+      
+    console.log(accounts.length)
+    if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
   
+      document.getElementById('specie').src = specie[numchain[chainIDs]]
+      document.getElementById('choose').innerHTML = numchain[chainIDs]
+      document.getElementById(numchain[chainIDs]).className += ' card-green'
+      document.getElementById("Wallet").innerHTML= "Connected";
+  
+    } else if(accounts.length > 0 && numchain[chainIDs] == undefined) {
+       document.getElementById("Wallet").innerHTML= "Unsupported";
+       document.getElementById("AWPass").innerHTML = "Change Chain";
+    }  else if(accounts.length < 0 && numchain[chainIDs] == undefined) {
+          document.getElementById("AWPass").disabled = false;
+          document.getElementById("Wallet").innerHTML= "Connect Wallet";
+      }
+  }
+      
+      async function check() {
+        // Then get the currently selected radio button's value
+        
+        console.log(window.ethereum)
+  
+        if (window.ethereum !== undefined) {
+    // From now on, this should always be true:
+    // provider === window.ethereum
+            console.log(window.ethereum); // initialize your app
+            
+                                          } else {
+  
+            
+             $("#nowebModal").modal('show');
+    
+                                          }
+  
+        // Check the value to make sure you want to show the modal
+       
+      }
+   
+  
+  async function connect() {
+  
+  
+  ethereum
+    .request({ method: 'eth_requestAccounts' })
+    .then(change)
+    .catch((err) => {
+      if (err.code === 4001) {
+        // EIP-1193 userRejectedRequest error
+        // If this happens, the user rejected the connection request.
+        console.log('Please connect to MetaMask.');
+        document.getElementById("Wallet").innerHTML =  "Rejected Connection";
+        document.getElementById("Wallet").value =  "Rejected Connection";
+        
+        document.getElementById("Wallet").contentWindow.location.reload(true);
+        
+      } else {
+        console.error(err);
+      }
+    }).then((result) => { window.location.reload()});
+  
+   
+  
+      
+   
+    
+  
+    
+  }
+  
+  
+  
+  // async function checkchain () {
+  // const accounts = await ethereum.request({ method: 'eth_accounts' });
+  
+  // if ( accounts === undefined) {
+  
+  //   document.getElementById("Wallet").value = "Connect" // accounts[0].substring(0,12) + "...";
+  //   document.getElementById("chainSwitch").innerHTML = " No Chain ";
+  // }
+  // }
+  
+  
+  
+  
+    async function switchChain(chains) {
+  
+      const FTM = [{ chainId: '0xfa'}];
+      const BSC = [{ chainId: '0x38' }]; // BSC
+      const POLY = [{ chainId: '0x89' }]; // MATIC
+      const ETH = [{ chainId: '0x1' }];
+      
+  
+      var chainsx = { "Binance": BSC, "Polygon": POLY, "Ethereum": ETH, "Fantom": FTM};
+  
+      await ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: chainsx[chains]
+      })
+  
+  ethereum.on('chainChanged', (_chainId) => window.location.reload());
+  
+  
+  
+  
+  
+  
+   }
+  
+   async function callmepls() {
+  
+    const accounts = await ethereum.request({method: 'eth_accounts' });
+    const web3 = new Web3(new Web3.providers.HttpProvider("https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG"))
+    var chainIDs = await ethereum.request({method: 'eth_chainId'});
+      
+    console.log(chainIDs + ' callmepls');
+    var ftmaddy = '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc';
+    var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom'}
+   
+  
+    var addychain = {'Ethereum': ethaddy, 'Polygon': polyaddy, 'Binance': bscaddress, 'Fantom': ftmaddy}
+  
+    var capchain = {'Ethereum': 'ETH/USD', 'Polygon': 'MATIC/USD', 'Binance': 'BNB/USD', 'Fantom': 'FTM/USD'}
+    var choosechain = numchain[chainIDs]
+    var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png', 'Fantom': 'img/fantom.png'}
+  
+    async function ringring() {
+  
+      var light = web3.eth.abi.encodeFunctionSignature('latestAnswer()')
+  
+      
+  
+  
+     
+    ethereum.request({
+      method: 'eth_call',
+      params: [{  
+                 from: accounts[0],
+                 to: addychain[choosechain], 
+                 tag: 'latest', 
+                 chainid: chainIDs,
+                 data: light }]
+    })
+    .catch((err) => { if(err.code === 4001 ) 
+      {console.log(err.code)}
+                     }
+            ).then(result => { if(result === undefined) {("#DeniedModal").modal('show');} else{
+                          var data = result;                       
+                          console.log(parseInt(data));
+                          const pricex = 3000 / (parseInt(data) / 100000000);
+                          
+                          console.log('Smart Contract Address: ' + addychain[choosechain])
+                          console.log("Latest " + capchain[choosechain] + " price was: " + parseInt(data)/ 100000000);
+                          document.getElementById("Scalerx").innerHTML = `<img id = "specie"  src = ${specie[choosechain]} class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: 5px; top: -5px;">` + pricex.toFixed(2);
+                          document.getElementById("pro").innerHTML ='$3000';
+                          document.getElementById('choose').innerHTML = numchain[chainIDs];
+    
+                                                                                        }
+                      }
+            );
+    
+                        };
+  
+  
+  
+    ringring();
+  
+  
+                      };
+  
+  
+  
+         
+       
+  
+  
+ 
+  
+</script>
   <div class="card-body">   
   
     <p class="card-text text-white " style = "font-family: 'Press Start 2P'; font-size: 10px; left: 35px; position: relative; top: 10px " id = "description">AstroWorld Test LifeTime Pass</p>
    
   </div>
  
- <table class=""  style = "font-family: 'Press Start 2P';  border-radius: 12px; position: relative; left:25px;height:50%;width: 350px;  top: 20px">
+ <table style = "font-family: 'Press Start 2P';  border-radius: 12px; position: relative; left:25px;height:50%;width: 350px;  top: 20px">
   <tr>
     
     <th><div class=" card-body text-center" style = "border-radius: 12px; width: 310px;position: relative;top: -20px;">
-    <p30 id = 'Scalerx' class = "  bg-transparent text-white" style = "font-family: 'Press Start 2P'; font-size: 27px; position:relative; left: 20px;top: 0px; left: -0px" ><img id = 'specie'  src ="img/ethereum-eth-logo.png"class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: 5px; top: -5px;">XX.XX </p30>
+    <p30  id = 'Scalerx' class = "  bg-transparent text-white" style = "font-family: 'Press Start 2P'; font-size: 27px; position:relative; left: 20px;top: 0px; left: -0px" ><img id = 'specie'  src ="img/ethereum-eth-logo.png" class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: 5px; top: -5px;">XX.XX </p30>
     <p29 id = 'pro' class = " bg-transparent text-white" style = "font-family: 'Press Start 2P'; font-size: 10px; position:relative; left: 20px;top: -10px; left: -5px">XX</p29>
     <hr class="solid text-white" style = 'position: relative; top: -5px;'>
     <button class = " btn bg-fgreen card-link text-green" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 100px #000000; border-radius: 12px; font-size: 27px; position: relative;top: -0px; left: -0px; width: 230px" type="submit" id = "AWPass" name = "TestPass" value = "success" onclick = 'check(); connect(); astrosent();'>BUY NOW</button>
@@ -105,8 +268,8 @@
     
   </tr>
   <tr>
-    <th><div class="bg-mgreen card-body text-center" style = "border-radius: 12px; width: 310px;position: relative;top: -30px;">
-    <p31 id="choose" class="text-white " style = "font-family: 'Press Start 2P'; font-size: 15px; position:relative;">Choose Network</p31>
+    <th><div  class="bg-mgreen card-body text-center" style = "border-radius: 12px; width: 310px;position: relative;top: -30px;">
+    <p31  id="choose" class="text-white " style = "font-family: 'Press Start 2P'; font-size: 15px; position:relative;">Choose Network</p31>
     <hr class="solid text-white">
     <button class = " btn bg-fgreen card-link text-white" onclick = "switchChain('Ethereum'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" style = "border-radius: 12px;position:relative; width: 50px; height: 50px; left:px; top: px;" id = "Ethereum"><img  src ="img/ethereum-eth-logo.png"class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: px; top: px;"></button>
     <button class = " btn bg-fgreen card-link text-white" onclick = "switchChain('Polygon'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" style = "border-radius: 12px;position:relative; width: 50px; height: 50px; left:px; top: px;" id = 'Polygon'><img  src ="img/polygon-matic-logo.png"class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: px; top: px;"></button>
@@ -116,11 +279,11 @@
  </div>
 
   </tr>
-  <tr class="card-body bg-mgreen text-center" onload = "change();" style = "position: relative;top: 10px; left: 0px">
+  <tr class="card-body bg-mgreen text-center" style = "position: relative;top: 10px; left: 0px">
      </tr>
   <tr>
     <td><div class="card-body text-center"  style = "position: relative;top: -45px; left: -10px">
-   <button type = "button" class="btn btn-link bg-transparent text-white" onclick = "connect(); check(); checkAstro(); change();" style="font-family: 'Press Start 2P';font-size: 15px; border-radius: 12px; position: relative;" value = "Connect Wallet" id="Wallet"> Connect Wallet</button>
+   <button type = "button" class="btn btn-link bg-transparent text-white" onclick = "connect(); check(); change();" style="font-family: 'Press Start 2P';font-size: 15px; border-radius: 12px; position: relative;" value = "Connect Wallet" id="Wallet"> Connect Wallet</button>
 
     <!--a href="#" class="btn bg-green card-link text-white" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 10px #9ecaed; border-radius: 12px; font-size: 27px;  ">OpenSea</a-->
   </div>
@@ -137,354 +300,8 @@
 
 
 
-  <script type="text/javascript">
-async function check() {
-      // Then get the currently selected radio button's value
-      console.log(window.ethereum)
 
-      if (window.ethereum !== undefined) {
-  // From now on, this should always be true:
-  // provider === window.ethereum
-          console.log(window.ethereum); // initialize your app
-         
-                                        } else {
 
-           
-           ("#nowebModal").modal('show');
-  
-                        }
-
-      // Check the value to make sure you want to show the modal
-     
-    }
- 
- async function checkAstro() {
-      // Then get the currently selected radio button's value
-      console.log(window.ethereum)
-      
-      if (window.ethereum !== undefined || accounts.length > 0) {
-  // From now on, this should always be true:
-  // provider === window.ethereum
-          
-    async function astrosent() {
-
-      const accounts = await ethereum.request({ method: 'eth_accounts' });
-      const web3 = new Web3(new Web3.providers.HttpProvider("https://polygon-mainnet.infura.io/v3/e750763a9cf54016972d72c12e48b2a9"))
-      var AstroWorld = new web3.eth.Contract(astroworldabi, astroaddress);
-    
-  
-      async function Astropass() {
-  
-        var AstroTestPass = web3.eth.abi.encodeFunctionSignature('AstroTestPass()')
-  
-        
-  
-  
-       
-      ethereum.request({
-        method: 'eth_sendTransaction',
-        params: [{  
-                   from: accounts[0],
-                   to: astroaddress, 
-                   tag: 'latest', 
-                   chainid: '0x89',
-                   data: AstroTestPass }]
-      })
-      .catch((err) => { if(err.code === 4001 ) 
-        {("#DeniedModal").modal('show'); }
-        }
-      ).then(result => { if(result === undefined) {("#DeniedModal").modal('show');} else{alert("Transaction Hash/Receipt: " + result)}});
-      
-                          };
-
-
-
-      Astropass();
-  
-   
-                        };
-
-
-
-
-
-
-
-
-           
-         
-          console.log(window.ethereum); // initialize your app
-         astrosent();
-                                        } else {
-
-           
-           ("#nowebModal").modal('show');
-  
-                        }
-
-      // Check the value to make sure you want to show the modal
-     
-    }
-  
-        async function change()
-  {  
-    
-    
-    
-    ethereum.on('chainChanged', (_chainId) => window.location.reload());
-   
-    const accounts = await ethereum.request({ method: 'eth_accounts' });
-    var chainIDs = await ethereum.request({method: 'eth_chainId'});
-    var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom'};
-    var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png', 'Fantom': 'img/fantom.png'}
-      
-    console.log(accounts.length)
-    if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
-      document.getElementById('specie').src = specie[numchain[chainIDs]]
-     document.getElementById('choose').innerHTML = numchain[chainIDs]
-    document.getElementById(numchain[chainIDs]).className += ' card-green'
-    document.getElementById("Wallet").innerHTML= "Connected";
-   
-    } else if(accounts.length > 0 && numchain[chainIDs] == undefined) {
-
-       
-       document.getElementById("Wallet").innerHTML= "Unsupported";
-       
-       document.getElementById("AWPass").innerHTML = "Change Chain";
-
-    }  else if(accounts.length < 0 && numchain[chainIDs] == undefined) {
-        
-          
-         
-          document.getElementById("AWPass").disabled = false;
-          document.getElementById("Wallet").innerHTML= "Connect Wallet";
-  
-      }
-  }
-   
-     
-  
-
-async function connect() {
-
-  
-  ethereum
-    .request({ method: 'eth_requestAccounts' })
-    .then(change)
-    .catch((err) => {
-      if (err.code === 4001) {
-        // EIP-1193 userRejectedRequest error
-        // If this happens, the user rejected the connection request.
-        console.log('Please connect to MetaMask.');
-        document.getElementById("Wallet").innerHTML =  "Rejected Connection";
-        document.getElementById("Wallet").value =  "Rejected Connection";
-        console.log(ethereum.isConnected())
-        document.getElementById("Wallet").contentWindow.location.reload(true);
-        
-      } else {
-        console.error(err);
-        document.getElementById("Wallet").innerHTML =  "Connect";
-        document.getElementById("chainSwitch").innerHTML = "Choose Network";
-      }
-    })
-    .then((result) => { window.location.reload()});
-
- 
-    
-} 
-</script>
-<script type="text/javascript">
-
-    var layer = {"Polygon": "https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX", "Ethereum": "https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG", "Ropsten": "https://eth-ropsten.alchemyapi.io/v2/2NyPkMknaZQdPYgkErIHduif2GV6lfPe", "Binance": "https://apis-sj.ankr.com/0dda88728b204ba69841f77f6dccf0ab/6e1aade2282802189d5e936c4d5f9130/binance/full/main"}
-
-    
-
-    
-
-{% comment %} async function ipfsviewer() {
-
-  const accounts = await ethereum.request({ method: 'eth_accounts' });
-  var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance'}
-  var chainIDs = await ethereum.request({method: 'eth_chainId'})
-  var layer = {"Polygon": "https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX", 
-            "Ethereum": "https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG", 
-            "Ropsten": "https://eth-ropsten.alchemyapi.io/v2/2NyPkMknaZQdPYgkErIHduif2GV6lfPe", 
-            "Binance": "https://apis-sj.ankr.com/0dda88728b204ba69841f77f6dccf0ab/6e1aade2282802189d5e936c4d5f9130/binance/full/main"
-            }
-
-  var newx = numchain[chainIDs];
-
-  const web3 = new Web3(new Web3.providers.HttpProvider(layer[newx]));
-  var AstWorld = new web3.eth.Contract(astroworldabi, astroaddress);
-  var supply = await AstWorld.methods.tokenURI('1').call({from: "0x000000000000000000000000000000000000dead"});
-  const hashipfs = supply.split("ipfs://")[1]
-  const ipfslink = "https://ipfs.io/ipfs/"
-  console.log(supply.split("ipfs://")[1])
-  console.log(ethereum.isConnected())
-
-   $.getJSON(ipfslink.concat(hashipfs), function(data) {
-        
-        var imagedata = data.image
-        var newdata = imagedata.split("ipfs://")[1]
-        var nftdata = ipfslink.concat(newdata)
-        console.log(nftdata)          
-        
-        document.getElementById("nft").src = nftdata;
-        document.getElementById("name").innerHTML = data.name;
-        document.getElementById("description").innerHTML = data.description;
-       
-        
-    });
-
-var layer = {"Polygon": "https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX", 
-            "Ethereum": "https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG", 
-            "Ropsten": "https://eth-ropsten.alchemyapi.io/v2/2NyPkMknaZQdPYgkErIHduif2GV6lfPe", 
-            "Binance": "https://apis-sj.ankr.com/0dda88728b204ba69841f77f6dccf0ab/6e1aade2282802189d5e936c4d5f9130/binance/full/main"
-            };
-
-
- {% endcomment %}
-
-    
-  
-  
-  //   $.getJSON(layerapi[newx], function (data) {   
-     
-  //  var results = data.result[0]
-  //  var text = results.hash
-  //  console.log(text);
-    
-    //   const x = data.result.length;
-       
-    //   var results = data.result[parseInt(x-1)];
-    //   console.log(results.hash);
-     //  var hashx = results.hash;
-    //   var gas = (parseInt(results.cumulativeGasUsed))/1000000000;
-    //   var tid = results.tokenID;
-    //   document.getElementById("hash").innerHTML = "TX HASH: " + hashx;
-    //   document.getElementById("gas").innerHTML = "PRICE: " + gas;
-    //   document.getElementById("TID").innerHTML = "TOKEN ID: " + tid;
-            
-  //  });
-async function callmepls() {
-
-  const accounts = await ethereum.request({method: 'eth_accounts' });
-  const web3 = new Web3(new Web3.providers.HttpProvider("https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG"))
-  var chainIDs = await ethereum.request({method: 'eth_chainId'});
-    
-  const FTM = [{ chainId: '0xFA'}];
-
-    const BSC = [{ chainId: '0x38' }]; // BSC
-    const POLY = [{ chainId: '0x89' }]; // MATIC
-    const ROP = [{ chainId: '0x3' }]; // Ropsten
-    const ETH = [{ chainId: '0x1' }];
-    const FTM = [{ chainId: '0xfa'}];
-  var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom'}
-  var chains = { "Binance": BSC, "Polygon": POLY, "Ropsten": ROP, "Ethereum": ETH, "Fantom": FTM};
-  //var abichain = {'Ethereum': ethabi, 'Polygon': polyabi, 'Binance': bscabi}
-
-  var addychain = {'Ethereum': ethaddy, 'Polygon': polyaddy, 'Binance': bscaddress, 'Fantom': ftmaddy}
-
-  var capchain = {'Ethereum': 'ETH/USD', 'Polygon': 'MATIC/USD', 'Binance': 'BNB/USD', 'Fantom': 'FTM/USD'}
-  var choosechain = numchain[chainIDs]
- 
-  var pricechain = {'Ethereum': 0.8, 'Polygon': 1100, 'Binance': 6, 'Fantom': 3000}
-
-  var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png', 'Fantom': 'img/fantom.png'}
-
-  async function ringring() {
-
-    var AstroTestPass = web3.eth.abi.encodeFunctionSignature('latestAnswer()')
-
-    
-
-
-   
-  ethereum.request({
-    method: 'eth_call',
-    params: [{  
-               from: accounts[0],
-               to: addychain[choosechain], 
-               tag: 'latest', 
-               chainid: chainIDs,
-               data: AstroTestPass }]
-  })
-  .catch((err) => { if(err.code === 4001 ) 
-    {console.log(err.code)}
-                   }
-          ).then(result => { if(result === undefined) {("#DeniedModal").modal('show');} else{
-                        var data = result;                       
-                        console.log(parseInt(data));
-                        const pricex = (parseInt(data) / 100000000) * pricechain[choosechain] ;
-                        
-                        console.log("Latest " + capchain[choosechain] + " price was: " + pricex)
-                        document.getElementById("Scalerx").innerHTML = `<img id = "specie"  src = ${specie[choosechain]} class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: 5px; top: -5px;">` + pricechain[choosechain];
-                        document.getElementById("pro").innerHTML =' ($'+pricex.toFixed(2)+')';
-                        document.getElementById('choose').innerHTML = numchain[chainIDs]
-  
-                                                                                      }
-                    }
-          );
-  
-                      };
-
-
-
-  ringring();
-
-
-                    };
-
-
-
-
-
-
-
-       
-     
-
-
- async function switchChain(chain) {
-
-   
-    const BSC = [{ chainId: '0x38' }]; // BSC
-    const POLY = [{ chainId: '0x89' }]; // MATIC
-    const ROP = [{ chainId: '0x3' }]; // Ropsten
-    const ETH = [{ chainId: '0x1' }];
-    const FTM = [{ chainId: '0xfa'}];
-
-    var numchain = {'0x1': 'Ethereum', '0x3': 'Ropsten', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom'}
-    var chains = { "Binance": BSC, "Polygon": POLY, "Ropsten": ROP, "Ethereum": ETH, "Fantom": FTM};
-
-    await ethereum.request({
-      method: 'wallet_switchEthereumChain',
-      params: chains[chain]
-    })
-    ethereum.on('chainChanged', (_chainId) => window.location.reload());
-
-
-
-
-
- }
-
-{% comment %} ipfsviewer();  {% endcomment %}
-
-</script>
-
-<!--var layerapi = {"Polygon": `https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=ZY8WD5ZBI5MATRZ8U99J4QN6W7X1CJQ294` , 
-                "Binance": `https://api.bscscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=8AU3N2FNVJV9T2NTRQX38476UY1G3SWD9Y`,
-                "Ethereum": `https://api.etherscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=VZAIG2TEJY8QTHVUMYXYAU8F8X89KRWNVR`, 
-                "Ropsten": `https://api.ropsten.etherscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=VZAIG2TEJY8QTHVUMYXYAU8F8X89KRWNVR`
-                }; {% endcomment %}
- {% comment %} var layerapi = {"Polygon": `https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=ZY8WD5ZBI5MATRZ8U99J4QN6W7X1CJQ294` , 
-                "Binance": `https://api.bscscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=8AU3N2FNVJV9T2NTRQX38476UY1G3SWD9Y`,
-                "Ethereum": `https://api.etherscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=VZAIG2TEJY8QTHVUMYXYAU8F8X89KRWNVR`, 
-                "Ropsten": `https://api.ropsten.etherscan.com/api?module=account&action=tokennfttx&contractaddress=${astroaddress}&address=${accounts[0]}&page=1&offset=100&sort=asc&apikey=VZAIG2TEJY8QTHVUMYXYAU8F8X89KRWNVR`
-                };
-
- -->
 <div id="demo-modal" class="modal" role="dialog" tabindex="-1">
   
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -502,7 +319,194 @@ async function callmepls() {
     </div>
   </div>
 </div>
-
+<script >
+// const { default: Web3 } = require("web3");
+async function change() {  
+    
+    ethereum.on('chainChanged', (_chainId) => window.location.reload());
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+    var chainIDs = await ethereum.request({method: 'eth_chainId'});
+    var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom'};
+    var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png', 'Fantom': 'img/fantom.png'}
+      
+    console.log(accounts.length)
+    if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
+  
+      document.getElementById('specie').src = specie[numchain[chainIDs]]
+      document.getElementById('choose').innerHTML = numchain[chainIDs]
+      document.getElementById(numchain[chainIDs]).className += ' card-green'
+      document.getElementById("Wallet").innerHTML= "Connected";
+  
+    } else if(accounts.length > 0 && numchain[chainIDs] == undefined) {
+       document.getElementById("Wallet").innerHTML= "Unsupported";
+       document.getElementById("AWPass").innerHTML = "Change Chain";
+    }  else if(accounts.length < 0 && numchain[chainIDs] == undefined) {
+          document.getElementById("AWPass").disabled = false;
+          document.getElementById("Wallet").innerHTML= "Connect Wallet";
+      }
+  }
+      
+      async function check() {
+        // Then get the currently selected radio button's value
+        
+        console.log(window.ethereum)
+  
+        if (window.ethereum !== undefined) {
+    // From now on, this should always be true:
+    // provider === window.ethereum
+            console.log(window.ethereum); // initialize your app
+            
+                                          } else {
+  
+            
+             $("#nowebModal").modal('show');
+    
+                                          }
+  
+        // Check the value to make sure you want to show the modal
+       
+      }
+   
+  
+  async function connect() {
+  
+  
+  ethereum
+    .request({ method: 'eth_requestAccounts' })
+    .then(change)
+    .catch((err) => {
+      if (err.code === 4001) {
+        // EIP-1193 userRejectedRequest error
+        // If this happens, the user rejected the connection request.
+        console.log('Please connect to MetaMask.');
+        document.getElementById("Wallet").innerHTML =  "Rejected Connection";
+        document.getElementById("Wallet").value =  "Rejected Connection";
+        
+        document.getElementById("Wallet").contentWindow.location.reload(true);
+        
+      } else {
+        console.error(err);
+      }
+    }).then((result) => { window.location.reload()});
+  
+   
+  
+      
+   
+    
+  
+    
+  }
+  
+  
+  
+  // async function checkchain () {
+  // const accounts = await ethereum.request({ method: 'eth_accounts' });
+  
+  // if ( accounts === undefined) {
+  
+  //   document.getElementById("Wallet").value = "Connect" // accounts[0].substring(0,12) + "...";
+  //   document.getElementById("chainSwitch").innerHTML = " No Chain ";
+  // }
+  // }
+  
+  
+  
+  
+    async function switchChain(chains) {
+  
+      const FTM = [{ chainId: '0xfa'}];
+      const BSC = [{ chainId: '0x38' }]; // BSC
+      const POLY = [{ chainId: '0x89' }]; // MATIC
+      const ETH = [{ chainId: '0x1' }];
+      
+  
+      var chainsx = { "Binance": BSC, "Polygon": POLY, "Ethereum": ETH, "Fantom": FTM};
+  
+      await ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: chainsx[chains]
+      })
+  
+  ethereum.on('chainChanged', (_chainId) => window.location.reload());
+  
+  
+  
+  
+  
+  
+   }
+  
+   async function callmepls() {
+  
+    const accounts = await ethereum.request({method: 'eth_accounts' });
+    const web3 = new Web3(new Web3.providers.HttpProvider("https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG"))
+    var chainIDs = await ethereum.request({method: 'eth_chainId'});
+      
+    console.log(chainIDs + ' callmepls');
+    var ftmaddy = '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc';
+    var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom'}
+   
+  
+    var addychain = {'Ethereum': ethaddy, 'Polygon': polyaddy, 'Binance': bscaddress, 'Fantom': ftmaddy}
+  
+    var capchain = {'Ethereum': 'ETH/USD', 'Polygon': 'MATIC/USD', 'Binance': 'BNB/USD', 'Fantom': 'FTM/USD'}
+    var choosechain = numchain[chainIDs]
+    var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png', 'Fantom': 'img/fantom.png'}
+  
+    async function ringring() {
+  
+      var light = web3.eth.abi.encodeFunctionSignature('latestAnswer()')
+  
+      
+  
+  
+     
+    ethereum.request({
+      method: 'eth_call',
+      params: [{  
+                 from: accounts[0],
+                 to: addychain[choosechain], 
+                 tag: 'latest', 
+                 chainid: chainIDs,
+                 data: light }]
+    })
+    .catch((err) => { if(err.code === 4001 ) 
+      {console.log(err.code)}
+                     }
+            ).then(result => { if(result === undefined) {("#DeniedModal").modal('show');} else{
+                          var data = result;                       
+                          console.log(parseInt(data));
+                          const pricex = 3000 / (parseInt(data) / 100000000);
+                          
+                          console.log('Smart Contract Address: ' + addychain[choosechain])
+                          console.log("Latest " + capchain[choosechain] + " price was: " + parseInt(data)/ 100000000);
+                          document.getElementById("Scalerx").innerHTML = `<img id = "specie"  src = ${specie[choosechain]} class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: 5px; top: -5px;">` + pricex.toFixed(2);
+                          document.getElementById("pro").innerHTML ='$3000';
+                          document.getElementById('choose').innerHTML = numchain[chainIDs];
+    
+                                                                                        }
+                      }
+            );
+    
+                        };
+  
+  
+  
+    ringring();
+  
+  
+                      };
+  
+  
+  
+         
+       
+  
+  
+ 
+  
+</script>
 <style>
 .vl {
   border-left: 6px solid green;
@@ -839,8 +843,7 @@ td, th {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@metamask/detect-provider@1.2.0/dist/index.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@latest/dist/web3.min.js"></script>
-<script type="text/javascript" src="js-main/utils.js"></script>
-<script type="text/javascript" src="js-main/metaAcct.js"></script>
+<script type="text/javascript" src="js-main/utilsx.js"></script>
 <script type="text/javascript" src="js-main/astroworld.js"></script>
 <script type="text/javascript" src="js-main/AstroWorldPass.js"></script>
 <script type="text/javascript" src="js-main/ethereums.js"></script>
