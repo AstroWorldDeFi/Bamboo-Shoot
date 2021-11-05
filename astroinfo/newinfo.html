@@ -215,7 +215,7 @@ async function change() {
     .catch((err) => { if(err.code === 4001 ) 
       {console.log(err.code)}
                      }
-            ).then(result => { if(result === undefined) {("#DeniedModal").modal('show');} else{
+            ).then(result => { if(result === undefined) {console.log(result)} else{
                           var data = result;                       
                           console.log(parseInt(data));
                           const pricex = 3000 / (parseInt(data) / 100000000);
