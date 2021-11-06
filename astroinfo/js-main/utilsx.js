@@ -89,31 +89,63 @@ async function change() {
   // }
   
   
+  async function switchChain(chains) {
   
+    const FTM = [{ chainId: '0xfa'}];
+    const BSC = [{ chainId: '0x38' }]; // BSC
+    const POLY = [{ chainId: '0x89' }]; // MATIC
+    const ETH = [{ chainId: '0x1' }];
+    const FTMp = '0xfa';
+    const BSCp = '0x38' ; // BSC
+    const POLYp = '0x89' ; // MATIC
+    const ETHp = '0x1' ;
+
+    var chainsx = { "Binance" : BSC , "Polygon" : POLY , "Ethereum" : ETH , "Fantom" : FTM};
+    var chainx = { "Binance" : BSCp , "Polygon" : POLYp , "Ethereum" : ETHp , "Fantom" : FTMp};
+
+    var RPCchain = {'Binance' : 'https://bsc-dataseed.binance.org/' , 'Polygon' : 'https://rpc-mainnet.maticvigil.com/', 'Fantom' : 'https://rpc.ftm.tools/'}
+    var symChain = {'Binance' : 'BNB', 'Polygon' : 'MATIC', 'Fantom' : 'FTM'}
+    var expchain = {'Binance' : 'https://bscscan.com/', 'Polygon' : 'https://polygonscan.com/', 'Fantom' : 'https://ftmscan.com/'}
+
+    
+    await ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: chainsx[chains]
+        }).catch(async (switchError) => {
+                                  // This error code indicates that the chain has not been added to MetaMask.
+    if (switchError.code === 4902) {
+                await ethereum.request({
+                        method: 'wallet_addEthereumChain',
+                        params: [
+                                    { 
+                                      chainId: chainx[chains], 
+                                      chainName: chains, 
+                                      nativeCurrency: {
+                                                            name: chains,
+                                                            symbol: symChain[chains],
+                                                            decimals: 18
+                                    }, 
+                                      rpcUrls: [RPCchain[chains]], 
+                                      blockExplorerUrls: [expchain[chains]]
+                    }
+                    
+                    ]
+                  });
+  }
+// handle other "switch" errors
+})
+    
+ethereum.on('chainChanged', (_chainId) => window.location.reload());
+
+
+
+
+
+
+
+ }
   
-    async function switchChain(chains) {
-  
-      const FTM = [{ chainId: '0xfa'}];
-      const BSC = [{ chainId: '0x38' }]; // BSC
-      const POLY = [{ chainId: '0x89' }]; // MATIC
-      const ETH = [{ chainId: '0x1' }];
-      
-  
-      var chainsx = { "Binance": BSC, "Polygon": POLY, "Ethereum": ETH, "Fantom": FTM};
-  
-      await ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: chainsx[chains]
-      })
-  
-  ethereum.on('chainChanged', (_chainId) => window.location.reload());
-  
-  
-  
-  
-  
-  
-   }
+ 
   
    async function callmepls() {
   
@@ -122,11 +154,11 @@ async function change() {
     var chainIDs = await ethereum.request({method: 'eth_chainId'});
       
     console.log(chainIDs + ' callmepls');
-    var ftmaddy = '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc';
-    var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom'}
+    
+    var numchain = {'0x1' : 'Ethereum', '0x89' : 'Polygon', '0x38' : 'Binance', '0xfa' : 'Fantom'}
    
   
-    var addychain = {'Ethereum': ethaddy, 'Polygon': polyaddy, 'Binance': bscaddress, 'Fantom': ftmaddy}
+    var addychain = {'Ethereum' : ethaddy, 'Polygon' : polyaddy, 'Binance': bscaddress, 'Fantom': '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc'}
   
     var capchain = {'Ethereum': 'ETH/USD', 'Polygon': 'MATIC/USD', 'Binance': 'BNB/USD', 'Fantom': 'FTM/USD'}
     var choosechain = numchain[chainIDs]
