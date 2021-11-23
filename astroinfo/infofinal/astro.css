@@ -1,18 +1,17 @@
 @charset "UTF-8";
+/*!
+* Start Bootstrap - Grayscale v6.0.2 (https://startbootstrap.com/themes/grayscale)
+* Copyright 2013-2020 Start Bootstrap
+* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-grayscale/blob/master/LICENSE)
+*/
+/*!
+ * Bootstrap v4.5.0 (https://getbootstrap.com/)
+ * Copyright 2011-2020 The Bootstrap Authors
+ * Copyright 2011-2020 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
 
-
-body, html {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    background: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 0%, #000000 100%), url("img/astrowavesgreen.png");
- 
-
-  }
-  
-
-
-.hoverable
+ .hoverable
 {
     
     stroke: none; /* Replace with none if you like */
@@ -26,73 +25,6 @@ body, html {
   
   opacity: -1;  
 }
-
-.bar:hover {
-  
-  background: url("astroimg/DD4BE2FB.png") no-repeat;
-  opacity: 0;
-  filter: invert(white);
-}
-
-.bar {
-  filter: invert(white);
-  opacity: 1;
-}
- /*
-      Rollover Image
-     */
-     .figure {
-      position: relative;
-      width: 360px; /* can be omitted for a regular non-lazy image */
-      max-width: 100%;
-  }
-  .figure img.image-hover {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    object-fit: contain;
-    opacity: 0;
-    transition: opacity .2s;
-  }
-  .figure:hover img.image-hover {
-    opacity: 1;
-  }
-
-  .img-box{
-    width: 125px;
-    border: 4px solid #333;
-}
-.img-box img{
-    display: block;
-}
-@font-face {
-  font-family: uni0553-webfont;
-  src: url(uni0553-webfont.woff) format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-.p1 {
-  font-family: uni0553-webfont;
-}
-
- .head {
-  font-family: 'Press Start 2P';font-size: 22px;
-}
-
-/*!
-* Start Bootstrap - Grayscale v6.0.2 (https://startbootstrap.com/themes/grayscale)
-* Copyright 2013-2020 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-grayscale/blob/master/LICENSE)
-*/
-/*!
- * Bootstrap v4.5.0 (https://getbootstrap.com/)
- * Copyright 2011-2020 The Bootstrap Authors
- * Copyright 2011-2020 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -132,7 +64,7 @@ body, html {
 }
 
 html {
-  font-family: sans-serif;
+  font-family: 'Press Start 2P';font-size: 10px;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -142,16 +74,24 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
 
+
 body {
   margin: 0;
-  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: 'Press Start 2P';font-size: 10px;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+
+  background-color: rgb(0, 0, 0);
+  background: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 0%, #000000 100%), url("img/astrowavesgreen.png");
+ 
+
+  background-size: cover;
+ 
 }
+
 
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
@@ -2574,19 +2514,21 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: rgb(0, 0, 0);
-  background-color: #edf039;
-  border-color: #fffb14;
+  background-color: #ffffff;
+  
+  border-radius: 12px;
+  outline: none;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #edf039;
-  border-color: #fffb14;
+  background-color: #008000;
+  border-color: #008000;
   padding-left: 1rem;
 }
 .btn-primary:focus, .btn-primary.focus {
   color: #fff;
-  background-color: #fffb14;
-  border-color: #fffb14;
+  background-color: #008000;
+  border-color: #008000;
   box-shadow: 0 0 0 0.2rem rgba(123, 175, 172, 0.5);
 }
 .btn-primary.disabled, .btn-primary:disabled {
@@ -4062,11 +4004,13 @@ input[type=button].btn-block {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
+  font-family: 'Press Start 2P';font-size: 10px;
 }
 
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
+  font-family: 'Press Start 2P';font-size: 10px;
 }
 .nav-link:hover, .nav-link:focus {
   text-decoration: none;
@@ -4173,6 +4117,7 @@ input[type=button].btn-block {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
+  font-family: 'Press Start 2P';font-size: 10px;
 }
 .navbar-nav .nav-link {
   padding-right: 0;
@@ -4187,6 +4132,7 @@ input[type=button].btn-block {
   display: inline-block;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  font-family: 'Press Start 2P';font-size: 10px;
 }
 
 .navbar-collapse {
@@ -6376,6 +6322,16 @@ button.bg-dark:focus {
   background-color: #000000 !important;
 }
 
+.bg-green {
+  background-color: #2E8B57 !important;
+}
+
+.bg-fgreen {
+  background-color: #38ec86 !important;
+}
+.bg-mgreen {
+  background-color: #48A14D !important;
+}
 a.bg-black:hover, a.bg-black:focus,
 button.bg-black:hover,
 button.bg-black:focus {
@@ -10008,6 +9964,10 @@ button.bg-black:focus {
   color: #fff !important;
 }
 
+.text-green {
+  color: rgb(255, 255, 255) !important;
+}
+
 .text-primary {
   color: #64a19d !important;
 }
@@ -10463,15 +10423,3 @@ body {
   font-size: 18px;
 }
 
-.bg-picture {
-  position: relative;
-  width: 110%;
- 
-  min-height: 35rem;
-  padding: 15rem 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000000 100%), url("../astroimg/AstroworldUpdated.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-size: cover;
-}
