@@ -89,7 +89,7 @@ async function hoverbox() {
   const accounts = await ethereum.request({ method: 'eth_accounts' });
   var chainIDs = await ethereum.request({method: 'eth_chainId'});
   var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
-  var changenetworkimg = {'Ethereum': 'D76D827B2EC0E506.png', 'Polygon': 'D76D827B2EC0E562.png', 'Binance': 'D76D827B2EC0E51B.png', 'Fantom': 'A09AA111AB00D9D2.png'};
+  var changenetworkimg = {'Ethereum': 'D76D827B2EC0E506.png', 'Polygon': 'D76D827B2EC0E562.png', 'Binance': 'D76D827B2EC0E51B.png', 'Fantom': 'A09AA111AB00D9D2.png', 'undefined': '../tuninfo/A7FBAA4060B9E0F4.png'};
 
   
   var fanl = document.getElementById("fanlit");
@@ -185,7 +185,7 @@ async function change() {
      console.log(cotc.href.baseVal) 
   } else if(accounts.length > 0 && numchain[chainIDs] == undefined) {
       var bach = document.getElementById("xWallpaper");
-      bach.href.baseVal = 'background.png'; 
+      bach.href.baseVal = ''; 
       var chacho = document.getElementById("ChooseS");
       chacho.href.baseVal = '../tuninfo/A7FBAA4060B9E0F7.png';
      check();
@@ -363,7 +363,6 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
                           console.log("Latest " + capchain[choosechain] + " price was: " + parseInt(data)/ 100000000);
                           document.getElementById("xspecie").href.baseVal = specie[choosechain];
                           document.getElementById("Scalerx").innerHTML = pricex.toFixed(2);
-                          document.getElementById("pro").innerHTML ='($3000)';
                           
     
                                                                                         }
