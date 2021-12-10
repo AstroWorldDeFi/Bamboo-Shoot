@@ -482,7 +482,7 @@ contract AstroWorld is ERC721 {
     Counters.Counter private _tokenIds;
     
   
-    constructor() ERC721("AstroWorld Test", "ASTRO") public {
+    constructor() ERC721("Six Flags Season Pass", "SIX⛳️") public {
     }
 
     function AstroTestPass() public returns (uint256) {
@@ -490,7 +490,7 @@ contract AstroWorld is ERC721 {
         _tokenIds.increment();
         uint256 riderId = _tokenIds.current();
         _mint(msg.sender, riderId);
-        _setTokenURI(riderId, "ipfs://QmX2RGv5z6XgpJZ76P4dXiawq5ATsD4bJUmA1r4UPwQYtH");
+        _setTokenURI(riderId, "https://storage.cloud.google.com/astropass/astroworldpass.json");
         return riderId;
     }
 }

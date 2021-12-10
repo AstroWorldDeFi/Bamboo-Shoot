@@ -1,0 +1,8 @@
+{
+    "name": "World Pass",
+    "description": "NFT passes for Worlds",
+    "image": "https://miegqsyjcbofkxhttlkw.supabase.in/storage/v1/object/public/astropass/world.png",
+    "external_link": "https://ComingSoon.world",
+    "seller_fee_basis_points": 100, 
+    "fee_recipient": "0xAE9aDe1fb9D015E4fA94F6002f3B971aAC77B62c" 
+  }

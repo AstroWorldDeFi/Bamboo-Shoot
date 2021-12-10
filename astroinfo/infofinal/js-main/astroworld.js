@@ -143,6 +143,19 @@ astroworldabi = [
         "type": "function"
     },
     {
+        "inputs": [],
+        "name": "contractURI",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "internalType": "uint256",
@@ -417,4 +430,4 @@ astroworldabi = [
         "type": "function"
     }
 ]
-    astroaddress = "0xB00F7cdF31ba05549Fe88267A92Aa42216328C04";
+    astroaddress = "0x5f45709eca5c1716124572c08f00712ef978fde2";

@@ -481,16 +481,17 @@ contract AstroWorld is ERC721 {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     
-  
-    constructor() ERC721("AstroWorld Test", "ASTRO") public {
+  constructor() ERC721("World Pass", "WORLD🎫") public {
     }
-
+    function contractURI() public pure returns (string memory) {
+        return "https://miegqsyjcbofkxhttlkw.supabase.in/storage/v1/object/public/astropass/FrontPass.json";
+    }
     function AstroTestPass() public returns (uint256) {
         
         _tokenIds.increment();
         uint256 riderId = _tokenIds.current();
         _mint(msg.sender, riderId);
-        _setTokenURI(riderId, "ipfs://QmX2RGv5z6XgpJZ76P4dXiawq5ATsD4bJUmA1r4UPwQYtH");
+        _setTokenURI(riderId, "https://miegqsyjcbofkxhttlkw.supabase.in/storage/v1/object/public/astropass/astroworldpass.json");
         return riderId;
     }
 }

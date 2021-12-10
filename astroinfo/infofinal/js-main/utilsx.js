@@ -1,7 +1,7 @@
 async function exitme() {
   const accounts = await ethereum.request({ method: 'eth_accounts' });
   var chainIDs = await ethereum.request({method: 'eth_chainId'});
-  var changenetworkimg = {'Ethereum': 'D76D827B2EC0E4F7.png', 'Polygon': 'D76D827B2EC0E52B.png', 'Binance': 'D76D827B2EC0E5D8.png', 'Fantom': 'A09AA111AB00D9D2.png', 'undefined': '../tuninfo/A7FBAA4060B9E0F7.png' };
+  var changenetworkimg = {'Ethereum': 'D76D827B2EC0E4F7.png', 'Polygon': 'D76D827B2EC0E52B.png', 'Binance': 'D76D827B2EC0E5D8.png', 'Fantom': 'A09AA111AB00D9D2.png', 'undefined': 'A7FBAA4060B9E0F7.png' };
   var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
  
   
@@ -39,7 +39,7 @@ async function exitme() {
 async function exitxme() {
   const accounts = await ethereum.request({ method: 'eth_accounts' });
   var chainIDs = await ethereum.request({method: 'eth_chainId'});
-  var changenetworkimg = {'Ethereum': 'D76D827B2EC0E4F7.png', 'Polygon': 'D76D827B2EC0E52B.png', 'Binance': 'D76D827B2EC0E5D8.png', 'Fantom': 'A09AA111AB00D9D2.png', 'undefined': '../tuninfo/A7FBAA4060B9E0F7.png' };
+  var changenetworkimg = {'Ethereum': 'D76D827B2EC0E4F7.png', 'Polygon': 'D76D827B2EC0E52B.png', 'Binance': 'D76D827B2EC0E5D8.png', 'Fantom': 'A09AA111AB00D9D2.png', 'undefined': 'A7FBAA4060B9E0F7.png' };
   var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
 
   
@@ -67,7 +67,7 @@ async function exitxme() {
  
   var chool = document.getElementById("ChooseS");
   
-  var changenetworkimg = { 'Ethereum': 'D76D827B2EC0E506.png', 'Polygon': 'D76D827B2EC0E562.png', 'Binance': 'D76D827B2EC0E51B.png', 'Fantom': 'A09AA111AB00D9D3.png', 'undefined': '../tuninfo/A7FBAA4060B9E0F4.png' };
+  var changenetworkimg = { 'Ethereum': 'D76D827B2EC0E506.png', 'Polygon': 'D76D827B2EC0E562.png', 'Binance': 'D76D827B2EC0E51B.png', 'Fantom': 'A09AA111AB00D9D3.png', 'undefined': 'A7FBAA4060B9E0F4.png' };
 
   if (accounts.length > 0) {
     
@@ -89,7 +89,7 @@ async function hoverbox() {
   const accounts = await ethereum.request({ method: 'eth_accounts' });
   var chainIDs = await ethereum.request({method: 'eth_chainId'});
   var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
-  var changenetworkimg = {'Ethereum': 'D76D827B2EC0E506.png', 'Polygon': 'D76D827B2EC0E562.png', 'Binance': 'D76D827B2EC0E51B.png', 'Fantom': 'A09AA111AB00D9D2.png', 'undefined': '../tuninfo/A7FBAA4060B9E0F4.png'};
+  var changenetworkimg = {'Ethereum': 'D76D827B2EC0E506.png', 'Polygon': 'D76D827B2EC0E562.png', 'Binance': 'D76D827B2EC0E51B.png', 'Fantom': 'A09AA111AB00D9D2.png', 'undefined': 'A7FBAA4060B9E0F4.png'};
 
   
   var fanl = document.getElementById("fanlit");
@@ -152,7 +152,7 @@ async function hoverbox() {
   barlit.href.baseVal = 'A0923604F0F2858B.png';
   fanlit.href.baseVal = '3521CEB6D30D4CB8.png';
 
-  chool.href.baseVal = '../tuninfo/A7FBAA4060B9E0F4.png';
+  chool.href.baseVal = 'A7FBAA4060B9E0F4.png';
   }
  
 }
@@ -168,6 +168,8 @@ async function change() {
   var backchange = { 'Polygon': '286ABE565B35A551.png',
   'Binance': '286ABE565B35A553.png', 'Ethereum': '286ABE565B35A556.png', 'Fantom': 'A0923604F0F28582.png'}   
   console.log(changenetworkimg[numchain[chainIDs]])
+  var addybox = document.getElementById("addresstime");
+
   if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
     
    
@@ -177,17 +179,22 @@ async function change() {
           var cotx = document.getElementById("ConnectX");
           var coto = document.getElementById("ConnectO");
           var chacho = document.getElementById("ChooseS");
+
           cotc.href.baseVal = "286ABE565B35A55E.png";
           cotx.href.baseVal = "286ABE565B35A55E.png";
           coto.href.baseVal = "286ABE565B35A55F.png";
           chacho.href.baseVal = changenetworkimg[numchain[chainIDs]];
+          addybox.innerHTML = accounts[0].substring(0,4) + "..." + accounts[0].substring(36,40);
        
      console.log(cotc.href.baseVal) 
   } else if(accounts.length > 0 && numchain[chainIDs] == undefined) {
+      addybox.innerHTML = accounts;
       var bach = document.getElementById("xWallpaper");
       bach.href.baseVal = ''; 
       var chacho = document.getElementById("ChooseS");
-      chacho.href.baseVal = '../tuninfo/A7FBAA4060B9E0F7.png';
+      addybox.innerHTML = accounts[0].substring(0,4) + "..." + accounts[0].substring(36,40);
+      chacho.href.baseVal = 'A7FBAA4060B9E0F7.png';
+
      check();
   }  else if(accounts.length < 0 && numchain[chainIDs] == undefined) {
         check();
@@ -313,33 +320,28 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
 
 
 
- }
+};
   
  
   
    async function callmepls() {
   
-    const accounts = await ethereum.request({method: 'eth_accounts' });
-    const web3 = new Web3(new Web3.providers.HttpProvider("https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG"))
-    var chainIDs = await ethereum.request({method: 'eth_chainId'});
+    let accounts = await ethereum.request({method: 'eth_accounts' });
+    let chainIDs = await ethereum.request({method: 'eth_chainId'});
       
     console.log(chainIDs + ' callmepls');
-    
-    var numchain = {'0x1' : 'Ethereum', '0x89' : 'Polygon', '0x38' : 'Binance', '0xfa' : 'Fantom'}
+   
+    const numchain = {'0x1' : 'Ethereum', '0x89' : 'Polygon', '0x38' : 'Binance', '0xfa' : 'Fantom'}
    
   
-    var addychain = {'Ethereum' : ethaddy, 'Polygon' : polyaddy, 'Binance': bscaddress, 'Fantom': '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc'}
+    const addychain = {'Ethereum' : '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419', 'Polygon' : polyaddy, 'Binance': bscaddress, 'Fantom': '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc'};
   
-    var capchain = {'Ethereum': 'ETH/USD', 'Polygon': 'MATIC/USD', 'Binance': 'BNB/USD', 'Fantom': 'FTM/USD'}
-    var choosechain = numchain[chainIDs]
-    var specie = {'Ethereum': 'ethereum-eth-logo.png', 'Polygon': 'polygon-matic-logo.png', 'Binance': 'binance-coin-bnb-logo.png', 'Fantom': 'fantom.png'}
-  
-    async function ringring() {
-  
-      var light = web3.eth.abi.encodeFunctionSignature('latestAnswer()')
-  
-      
-  
+    const capchain = {'Ethereum' : 'ETH/USD', 'Polygon' : 'MATIC/USD', 'Binance' : 'BNB/USD', 'Fantom' : 'FTM/USD'};
+    let choosechain = numchain[chainIDs];
+    console.log(choosechain)
+    const specie = {'Ethereum': 'ethereum-eth-logo.png', 'Polygon': 'polygon-matic-logo.png', 'Binance': 'binance-coin-bnb-logo.png', 'Fantom': 'fantom.png'};
+    console.log(addychain[choosechain]);
+   
   
      
     ethereum.request({
@@ -349,10 +351,10 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
                  to: addychain[choosechain], 
                  tag: 'latest', 
                  chainid: chainIDs,
-                 data: light }]
+                 data: '0x50d25bcd'}]
     })
     .catch((err) => { if(err.code === 4001 ) 
-      {console.log(err.code)}
+      {console.log(err.code)} else if (err.code === -32000){console.log(err)}
                      }
             ).then(result => { if(result === undefined) {console.log(result)} else{
                           var data = result;                       
@@ -372,14 +374,48 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
                         };
   
   
-  
-    ringring();
-  
-  
-                      };
-  
-  
-  
+                    
+                      async function astrosent() {
+
+                        const accounts = await ethereum.request({ method: 'eth_accounts' });
+                        var web3http = {'Ethereum': " ", 'Polygon': 'https://polygon-mainnet.infura.io/v3/e750763a9cf54016972d72c12e48b2a9', 'Binance': 'https://apis-sj.ankr.com/0dda88728b204ba69841f77f6dccf0ab/6e1aade2282802189d5e936c4d5f9130/binance/full/main', 'Fantom': 'https://apis-sj.ankr.com/06f3fe61ad984b559d09ecb0abc5b22c/6e1aade2282802189d5e936c4d5f9130/fantom/full/main'}
+                        var chainIDs = await ethereum.request({method: 'eth_chainId'});
+                        var passaddy = {'Polygon': astroaddress, 'Binance': '0x4Bc35353C087F14e226b90bdA1afeE99B8AEDB23', 'Fantom': '0x7214FE7771aB7ac68B0BE853bEa2d5855294A562'}
+                        var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
+                      
+                        const web3 = new Web3(new Web3.providers.HttpProvider(web3http[numchain[chainIDs]]))
+                      
+                    
+                        async function Astropass() {
+                    
+                          var AstroTestPass = web3.eth.abi.encodeFunctionSignature('AstroTestPass()')
+                    
+                          
+                    
+                    
+                         
+                        ethereum.request({
+                          method: 'eth_sendTransaction',
+                          params: [{  
+                                     from: accounts[0],
+                                     to: passaddy[numchain[chainIDs]], 
+                                     tag: 'latest', 
+                                     chainid: chainIDs,
+                                     data: AstroTestPass }]
+                        })
+                        .catch((err) => { if(err.code === 4001) 
+                          {("#DeniedModal").modal('show'); }
+                          }
+                        ).then(result => { if(result === undefined) {("#DeniedModal").modal('show');} else{alert("Transaction Hash/Receipt: " + result)}});
+                        
+                                            };
+                  
+                  
+                  
+                        Astropass();
+                    
+                     
+                                          };
          
        
   
