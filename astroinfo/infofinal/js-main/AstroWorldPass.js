@@ -6,18 +6,14 @@
     async function astrosent() {
 
       const accounts = await ethereum.request({ method: 'eth_accounts' });
-      var web3http = {'Ethereum': " ", 'Polygon': 'https://polygon-mainnet.infura.io/v3/e750763a9cf54016972d72c12e48b2a9', 'Binance': 'https://apis-sj.ankr.com/0dda88728b204ba69841f77f6dccf0ab/6e1aade2282802189d5e936c4d5f9130/binance/full/main', 'Fantom': 'https://apis-sj.ankr.com/06f3fe61ad984b559d09ecb0abc5b22c/6e1aade2282802189d5e936c4d5f9130/fantom/full/main'}
       var chainIDs = await ethereum.request({method: 'eth_chainId'});
-      var passaddy = {'Polygon': astroaddress, 'Binance': '0x4Bc35353C087F14e226b90bdA1afeE99B8AEDB23', 'Fantom': '0x7214FE7771aB7ac68B0BE853bEa2d5855294A562'}
-      var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
+      var passxxaddy = {'Polygon': astroaddress, 'Binance': '0x4Bc35353C087F14e226b90bdA1afeE99B8AEDB23', 'Fantom': '0x7214FE7771aB7ac68B0BE853bEa2d5855294A562'}
+      var numxchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
     
-      const web3 = new Web3(new Web3.providers.HttpProvider(web3http[numchain[chainIDs]]))
-    
-  
       async function Astropass() {
   
-        var AstroTestPass = web3.eth.abi.encodeFunctionSignature('AstroTestPass()')
-  
+   
+
         
   
   
@@ -26,10 +22,10 @@
         method: 'eth_sendTransaction',
         params: [{  
                    from: accounts[0],
-                   to: passaddy[numchain[chainIDs]], 
+                   to: passxaddy[numcxhain[chainIDs]], 
                    tag: 'latest', 
                    chainid: chainIDs,
-                   data: AstroTestPass }]
+                   data: '0x3b80fb19' }]
       })
       .catch((err) => { if(err.code === 4001) 
         {("#DeniedModal").modal('show'); }
