@@ -353,5 +353,26 @@ spanx.onclick = function() {
 </head>
 
 </html>
-
+<script>// Import the functions you need from the SDKs you need
+  import { initializeApp } from "firebase/app";
+  import { getAnalytics } from "firebase/analytics";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+  
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBrTxhCgnLgsan7TnUX12aHyJgt3_vUP_s",
+    authDomain: "astroworld-2021.firebaseapp.com",
+    projectId: "astroworld-2021",
+    storageBucket: "astroworld-2021.appspot.com",
+    messagingSenderId: "277370970018",
+    appId: "1:277370970018:web:8cb3f5f47d222e36245cfb",
+    measurementId: "G-WHM2K6KS2Q"
+  };
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.1.1/svg.min.js" integrity="sha512-Aj0P6wguH3GVlCfbvTyMM90Zq886ePyMEYlZooRfx+3wcSYyUa6Uv4iAjoJ7yiWdKamqQzKp7yr/TkMQ8EEWbQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

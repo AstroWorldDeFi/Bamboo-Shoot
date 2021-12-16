@@ -5,6 +5,9 @@ body, html {
     height: 100%;
     width: 100%;
     margin: 0;
+    background: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 0%, #000000 100%), url("img/astrowavesgreen.png");
+ 
+
   }
   
 
