@@ -156,43 +156,7 @@ async function hoverbox() {
   }
  
 }
-async function blackout() {
-  const accounts = await ethereum.request({ method: 'eth_accounts' });
-
-  if (accounts[0] === undefined) {
-    var chool = document.getElementById("ChooseS");
-  
-    var cotc = document.getElementById("ConnectC");
-    var cotx = document.getElementById("ConnectX");
-    var coto = document.getElementById("ConnectO");
-    var addybox = document.getElementById("addresstime");
-    var lifx = document.getElementById("Lifetimex")
-    var lifo = document.getElementById("Lifetimeo")
-    var lifxo = document.getElementById("Lifetimexo")
-    var feax = document.getElementById("FeaturesTaskbarx")
-    var feao = document.getElementById("FeaturesTaskbaro")
-    var feaxo = document.getElementById("FeaturesTaskbarxo")
-
-    addybox.innerHTML = "";
-
-    chool.href.baseVal = 'D76D827B2EC0E5C3.png';
-    cotc.href.baseVal = "286ABE565B35A55D.png";
-    coto.href.baseVal = "286ABE565B35A552.png"
-    cotx.href.baseVal = "286ABE565B35A55D.png"
-    
-
-
-  } else {
-    var addybox = document.getElementById("addresstime");
-
-    addybox.innerHTML = accounts[0].substring(0,4) + "..." + accounts[0].substring(36,40);
-
-  }
-  
-
-} 
-
-
+   
 async function change() {  
     
   ethereum.on('chainChanged', (_chainId) => window.location.reload());
@@ -381,11 +345,11 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
     await ethereum.request({
       method: 'eth_call',
       params: [{  
-        from: accounts[0],        
+                 
         to: addychain[choosechain], 
                  chainid: chainIDs,
                  data: '0x50d25bcd'
-                 }, "latest"]
+                 }, "pending"]
     })
     .catch((err) => { if(err.code === 4001 ) 
       {console.log(err.code)} else if (err.code === -32000){console.log(err)}
