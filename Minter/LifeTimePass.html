@@ -440,85 +440,124 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 
 
   <script>
-      async function astrosent() {
+    
+    async function astrosent() {
 
 const accounts = await ethereum.request({ method: 'eth_accounts' });
 var chainIDs = await ethereum.request({method: 'eth_chainId'});
-var passaddy = {'Polygon': astroaddress, 'Binance': '0x4Bc35353C087F14e226b90bdA1afeE99B8AEDB23', 'Fantom': '0x7214FE7771aB7ac68B0BE853bEa2d5855294A562'}
+var passaddy = {'Polygon': '0x6521C66E884b986666Bf02aE12AA3b577aFbE67B', 'Binance': '0x6103377eb913067b3995d6bb265d885495dbcd54', 'Fantom': '0x52AD7aF1982a110Fa657D0e1c133d0a5E76292b5'}
 var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
+const addychain = {'Ethereum' : '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419', 'Polygon' : polyaddy, 'Binance': bscaddress, 'Fantom': '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc'};
+                        let choosechain = numchain[chainIDs];
+await ethereum.request({
+method: 'eth_call',
+params: [{  
+from: accounts[0],
+to: addychain[choosechain],  
+chainid: chainIDs,
+data: '0x50d25bcd'}, 'latest']
+})
+.catch((err) => { if(err.code === 4001 ) 
+{console.log(err.code)}
+}
+).then(result => { if(result === undefined) {console.log(result)} else{
+var data = result;                       
+console.log(parseInt(data));
+const pricex = (3000) / parseInt(data);
+                        var xrate = web3.utils.toWei(String(pricex), 'ether');
+                        var Rate = web3.utils.numberToHex(xrate);
 
-ethereum.request({
+                        console.log(xrate);
+async function workit () { 
+
+await ethereum.request({
   method: 'eth_sendTransaction',
   params: [{  
              from: accounts[0],
-             to: passaddy[numchain[chainIDs]], 
-             tag: 'latest', 
+             to: passaddy[numchain[chainIDs]],
              chainid: chainIDs,
-             data: '0x3b80fb19'}]
+             data: '0x3b80fb19',
+            value: Rate}, 'latest']
 })
 .catch((err) => { if(err.code === 4001) 
   {
     
     var successmod = document.getElementById("successexittoo");
     var youhave = document.getElementById("You_have");
+    var youhavex = document.getElementById("You_havex");
+
     var yournft = document.getElementById("yournft");
-    var trans = document.getElementById("transhash");
     var __Success = document.getElementById("__Success");
-    youhave.innerText = "Error!";
-    yournft.innerText = " ";
+    var trans = document.getElementById("transhash");
+    youhave.innerHTML = " ";
     trans.innerHTML = " ";
+
+    youhavex.innerHTML = "Error!";
+    yournft.innerHTML = " ";
     __Success.href.baseVal = " ";
     successmod.style.display = "block"; }
   }
 ).then(result => { 
-                          if(result === undefined) {
-                             // try again in 2 seconds
+  if(result === undefined) {
+     // try again in 2 seconds
 
-                             var successmod = document.getElementById("successexittoo");
-                             var youhave = document.getElementById("You_have");
-                             var youhavex = document.getElementById("You_havex");
- 
-                             var yournft = document.getElementById("yournft");
-                             var __Success = document.getElementById("__Success");
-                             var trans = document.getElementById("transhash");
-                             youhave.innerHTML = " ";
-                             trans.innerHTML = " ";
- 
-                             youhavex.innerHTML = "Error!";
-                             yournft.innerHTML = " ";
-                             __Success.href.baseVal = " ";
-                             successmod.style.display = "block";
-                        } else {
-
-                          
-var addhash = result;
-
-async function sucwin() {
- var readme = await ethereum.request({
-   method: 'eth_getTransactionReceipt',
-   params: [result]
-  })
- if (readme === null) {
-    sucwin() }
-    else {
-     var hashcontent = document.getElementById("hashcontent");
-     hashcontent.innerHTML = addhash.substring(0,28);
      var successmod = document.getElementById("successexittoo");
+     var youhave = document.getElementById("You_have");
+     var youhavex = document.getElementById("You_havex");
+
+     var yournft = document.getElementById("yournft");
+     var __Success = document.getElementById("__Success");
+     var trans = document.getElementById("transhash");
+     youhave.innerHTML = " ";
+     trans.innerHTML = " ";
+
+     youhavex.innerHTML = "Error!";
+     yournft.innerHTML = " ";
+     __Success.href.baseVal = " ";
      successmod.style.display = "block";
-    }
- 
- }
+} else {
+
+  
+   var addhash = result;
+
+   async function sucwin() {
+    var readme = await ethereum.request({
+      method: 'eth_getTransactionReceipt',
+      params: [result]
+     })
+     if (readme === null) {
+       sucwin() }
+       else {
+        var hashcontent = document.getElementById("hashcontent");
+        hashcontent.innerHTML = addhash.substring(0,28);
+        var successmod = document.getElementById("successexittoo");
+        successmod.style.display = "block";
+       }
+    
+                           }
+
+   
+
+    sucwin();
+
+            
+      }
+                        }
+  
+      )
+                             }
+                             workit();
+
+}
+}
+);
+};
 
 
 
- sucwin();
 
-         
-}}
-                      
 
-                  )};
-                       
+
    
    async function exitme() {
   const accounts = await ethereum.request({ method: 'eth_accounts' });
@@ -863,7 +902,7 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
           ).then(result => { if(result === undefined) {console.log(result)} else{
                         var data = result;                       
                         console.log(parseInt(data));
-                        const pricex = 3000 / (parseInt(data) / 100000000);
+                        const pricex = (3000) / (parseInt(data) / 100000000);
                         
                         console.log('Smart Contract Address: ' + addychain[choosechain])
                         console.log("Latest " + capchain[choosechain] + " price was: " + parseInt(data)/ 100000000);

