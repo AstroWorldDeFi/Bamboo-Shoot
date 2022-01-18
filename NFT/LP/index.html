@@ -62,7 +62,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- Generator: Adobe Illustrator 26.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve" onload = 'change(); callmepls();  '>
+	 viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve"  onload =" callmepls(); change();   setInterval(function(){ 
+    callmepls(); change();
+}, 1000);">
 
    <g id="Wallpapers_00000007417230958802217010000017190140839961634991_">
 	
@@ -285,7 +287,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 </g>
 
 <g class="animate__animated animate__bounce" id="Back_xA0_Image_00000065791631430179331730000007072429725853915056_">
-  <a href="/NFT/Passes.html">
+  <a href="/NFT/">
   <image class = 'hoverable' style="overflow:visible;" width="152" height="129" id="Back_xA0_Image" xlink:href="B030B0B6C6725ADE.png"  transform="matrix(1 0 0 1 64 56)">
 </image>
 <image class = 'hoverable' style="display:inline;overflow:visible;" width="152" height="129" id="Image_xA0_15_xA0_Image" xlink:href="B030B0B6C6725ADF.png"  transform="matrix(1 0 0 1 64 56)">
@@ -297,7 +299,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 <g  id="ChooseNetworkBoxes_00000051357041744243095860000008345225261506509224_">
 	<g class="animate__animated animate__fadeInDown" id="Choose_Network_xA0_Image_00000181809536092599274260000013907682080612022178_">
 		
-    <image onload ="callmepls(); change();" onmouseover = "exitme();" style="overflow:visible;" width="600" height="680" id="NFTMinter" xlink:href="2EB487F81A96916C.png"  transform="matrix(1 0 0 1 212 177)">
+    <image onload =" callmepls(); change();  setInterval(function(){ 
+      callmepls(); change();
+  }, 1000);"
+   onmouseover = "exitme();" style="overflow:visible;" width="600" height="680" id="NFTMinter" xlink:href="2EB487F81A96916C.png"  transform="matrix(1 0 0 1 212 177)">
     </image>
    
     <image style="overflow:visible;" width="486" height="279" id="LifetimePassCard_xA0_Image" xlink:href="B030B0B6C6725AC2.png"  transform="matrix(1 0 0 1 269 306)">
@@ -434,6 +439,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     var successmod = document.getElementById("successexittoo");
     successmod.style.display = "None";
   }
+
 </script>
 </g>
 </svg>
@@ -445,7 +451,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 
 const accounts = await ethereum.request({ method: 'eth_accounts' });
 var chainIDs = await ethereum.request({method: 'eth_chainId'});
-var passaddy = {'Polygon': '0x1cFFd3A9AC594dC5f0897a05aBea77E513734deb', 'Binance': '0xe7A074F0438FBE33158a09b8273Cf31ba3790590', 'Fantom': '0x176BB92DD354CBf36c694ade2A58264BAAE74186'}
+var passaddy = {'Polygon': '0xacaf038AB130D50Fc8d52FD6C9f8A05Dd8952f98', 'Binance': '0x6521C66E884b986666Bf02aE12AA3b577aFbE67B', 'Fantom': '0xdB991329C0482015Fd9f3170b85AEF634850599c'}
 var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
 const addychain = {'Ethereum' : '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419', 'Polygon' : polyaddy, 'Binance': bscaddress, 'Fantom': '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc'};
                         let choosechain = numchain[chainIDs];
@@ -466,7 +472,7 @@ console.log(parseInt(data));
 const pricex = (3000) / parseInt(data);
                         var xrate = web3.utils.toWei(String(pricex), 'ether');
                         var Rate = web3.utils.numberToHex(xrate);
-
+                        var gasli = web3.utils.numberToHex(483451)
                         console.log(xrate);
 async function workit () { 
 
@@ -476,7 +482,8 @@ await ethereum.request({
              from: accounts[0],
              to: passaddy[numchain[chainIDs]],
              chainid: chainIDs,
-             data: '0x3b80fb19',
+             data: '0xa27e5a7e',
+             gas: gasli,
             value: Rate}, 'latest']
 })
 .catch((err) => { if(err.code === 4001) 

