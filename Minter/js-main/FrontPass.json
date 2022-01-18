@@ -1,8 +1,0 @@
-{
-    "name": "MetaPasses",
-    "description": "NFT passes for Meta Worlds",
-    "image": "https://miegqsyjcbofkxhttlkw.supabase.in/storage/v1/object/public/astropass/world.png",
-    "external_link": "github.com/astroworlddefi",
-    "seller_fee_basis_points": 100, 
-    "fee_recipient": "0xAE9aDe1fb9D015E4fA94F6002f3B971aAC77B62c" 
-  }
