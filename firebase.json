@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "/Users/coreymayweather/Downloads/public",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
