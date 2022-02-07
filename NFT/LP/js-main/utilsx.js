@@ -255,7 +255,43 @@ async function change() {
        
       }
    
+      async function checkered() {
+        // Then get the currently selected radio button's value
+      
+          // Then get the currently selected radio button's value
+          
+    
+          if (window.ethereum !== undefined) {
+      // From now on, this should always be true:
+      // provider === window.ethereum
+      ethereum
+      .request({ method: 'eth_requestAccounts' })
+      .then(change())
+      .catch((err) => {
+        if (err.code === 4001) {
+          // EIP-1193 userRejectedRequest error
+          // If this happens, the user rejected the connection request.
+          console.log('Please connect to MetaMask.');
+          
+          
+        } else {
+          console.error(err);
+        }
+      }).then((result) => {change(); astrosent()});
   
+  
+                                            } else {
+    
+              
+               $("#nowebModal").modal('show');
+      
+                                            }
+    
+          // Check the value to make sure you want to show the modal
+         
+        
+      }
+
   async function connect() {
   
   
@@ -267,10 +303,7 @@ async function change() {
         // EIP-1193 userRejectedRequest error
         // If this happens, the user rejected the connection request.
         console.log('Please connect to MetaMask.');
-        document.getElementById("Wallet").innerHTML =  "Rejected Connection";
-        document.getElementById("Wallet").value =  "Rejected Connection";
         
-        document.getElementById("Wallet").contentWindow.location.reload(true);
         
       } else {
         console.error(err);
@@ -408,10 +441,11 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
 
                           const accounts = await ethereum.request({ method: 'eth_accounts' });
                           var chainIDs = await ethereum.request({method: 'eth_chainId'});
-                          var passaddy = {'Polygon': '0x1ac993Adf829b39c334228b920e07dA8243B5C79', 'Binance': '0x9571D474F9d4076E97655939fce6Ed383909A7f2', 'Fantom': '0x6Ba656e7153f2d41bd3C645C03E9d56e0DFF930F'}
+                          var passaddy = {'Ethereum': '0x4F1144fed48dC1eF6c98E05Ab96ad045dfbA2Ee0','Polygon': '0x72943230DcD2feC709a04a59C8e117B8a0Ed348D', 'Binance': '0x9571D474F9d4076E97655939fce6Ed383909A7f2', 'Fantom': '0x6Ba656e7153f2d41bd3C645C03E9d56e0DFF930F'}
                           var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
                           const addychain = {'Ethereum' : '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419', 'Polygon' : polyaddy, 'Binance': bscaddress, 'Fantom': '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc'};
-                          var scanchain = {'0x1': 'https://etherscan.io/tx/', '0x89': 'https://polygonscan.com/tx/', '0x38': 'https://bscscan.com/tx/', '0xfa': 'https://ftmscan.com/tx/'};
+                          const scanchain = {'0x1': 'https://etherscan.io/tx/', '0x89': 'https://polygonscan.com/tx/', '0x38': 'https://bscscan.com/tx/', '0xfa': 'https://ftmscan.com/tx/'};
+                          const logochain = {'0x1': 'successmodal/703CD45E15803EF7.png', '0x89': 'successmodal/703CD45E15803EF4.png', '0x38': 'successmodal/703CD45E15803EF5.png', '0xfa': 'successmodal/703CD45E15803EFE.png'};
                           let choosechain = numchain[chainIDs];
                           await ethereum.request({
                           method: 'eth_call',
@@ -432,108 +466,177 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
                           const pricex = (3000) / (parseInt(data) / 100000000);
                           var xrate = web3.utils.toWei(String(pricex), 'ether');
                           var Rate = web3.utils.numberToHex(xrate);
-                          var gasli = web3.utils.numberToHex(700000)
-                          
-                          
+                          var tip = web3.utils.toWei("1", 'gwei');
+                          var gasup = web3.utils.numberToHex(700000);
+                          var gasxup = web3.utils.numberToHex(270987);
+                          var tipup = web3.utils.numberToHex(1500000000);
                           console.log(xrate);
                           async function workitx () { 
-                          
-                          await ethereum.request({
-                            method: 'eth_sendTransaction',
-                            params: [{  
-                                       from: accounts[0],
-                                       to: passaddy[numchain[chainIDs]],
-                                       chainid: chainIDs,
-                                       gas: gasli,
-                                       data: '0x7fc83d0b',
-                                      value: Rate}, 'latest']
-                          })
-                          .catch((err) => { if(err.code === 4001 ) 
-                            {
-                              
-                              var errmod = document.getElementById("errormodal");
-                              
-                              errmod.style.display = "block";
-                             }
-                          
-                             if(err.code === -32603) 
-                            {
-                              
-                              var errmod = document.getElementById("errormodal");
-                              
-                              errmod.style.display = "block";
-                             }
-                          
-                             if(err.code === -32602) 
-                            {
-                              
-                              var errmod = document.getElementById("errormodal");
-                              
-                              errmod.style.display = "block";
-                             }
-                             if(err.code === -32000) 
-                            {
-                              
-                              var errmod = document.getElementById("errormodal");
-                              
-                              errmod.style.display = "block";
-                             }
-                            }
-                          ).then(result => { 
-                            if(result === undefined) {
-                               // try again in 2 seconds
-                          
-                               var errmod = document.getElementById("errormodal");
-                              
-                               errmod.style.display = "block";
-                          } else {
-                          
+                            console.log(chainIDs)
+                  if (chainIDs === "0x1") {
+                        
+                              await ethereum.request({
+
+                              method: 'eth_sendTransaction',
+                              params: [{  
+                                from: accounts[0],
+                                to: passaddy[numchain[chainIDs]],
+                                chainid: chainIDs,
+                                maxPriorityFeePerGas: tipup,
+                                gas: gasxup,
+                                data: '0x7fc83d0b',
+                               value: Rate}, 'latest']
+                            })
+                            .catch((err) => { 
+                               if(err.code === -32603) 
+                              {
+                                
+                                var errmod = document.getElementById("errormodal");
+                                
+                                errmod.style.display = "block";
+                               }
                             
-                             var addhash = result;
-                          
-                             async function sucwin() {
-                              var readme = await ethereum.request({
-                                method: 'eth_getTransactionReceipt',
-                                params: [result]
-                               })
-                               if (readme === null) {
-                                 sucwin() }
-                                 else  {
-                                  console.log(readme['status']);
-                                  if(readme['status'] === '0x1') {
-                                    var linkchain = document.getElementById("popxlink");
-                                  linkchain.href.baseVal = scanchain[chainIDs] + addhash;
-                                  var imagelink = document.getElementById("imagexchain");
-                                  imagelink.href.baseVal = logochain[chainIDs];
-                                  var successmod = document.getElementById("successexittoo");
-                                  successmod.style.display = "block";
-                                } else {
-                                  
-                               var errmod = document.getElementById("errormodal");
                               
-                               errmod.style.display = "block";
-                                }
-                                  
-                                 }
-                              
+                               if(err.code === -32000) 
+                              {
+                                
+                                var errmod = document.getElementById("errormodal");
+                                
+                                errmod.style.display = "block";
+                               }
                               }
-                          
-                             
-                          
-                              sucwin();
-                          
-                                      
+                            ).then(result => { 
+                              if(result === undefined) {
+                                 // try again in 2 seconds
+                            
+                                 
+                            } else {
+                            
+                              
+                               var addhash = result;
+                            
+                               async function sucwin() {
+                                var readme = await ethereum.request({
+                                  method: 'eth_getTransactionReceipt',
+                                  params: [result]
+                                 })
+                                 if (readme === null) {
+                                   sucwin() }
+                                   else  {
+                                    console.log(readme['status']);
+                                    if(readme['status'] === '0x1') {
+                                      var linkchain = document.getElementById("popxlink");
+                                    linkchain.href.baseVal = scanchain[chainIDs] + addhash;
+                                    var imagelink = document.getElementById("imagexchain");
+                                    imagelink.href.baseVal = logochain[chainIDs];
+                                    var successmod = document.getElementById("successexittoo");
+                                    successmod.style.display = "block";
+                                  } else {
+                                    
+                                 var errmod = document.getElementById("errormodal");
+                                
+                                 errmod.style.display = "block";
+                                  }
+                                    
+                                   }
+                                
+                                }
+                            
+                               
+                            
+                                sucwin();
+                            
+                                        
+                              }
                             }
-                          }
+                            
+                            )
+                           
                           
-                          )
-                                                                                        }
-                          workitx();
-                                      
+                          } else if (chainIDs !== "0x1" ) {
+                            await  ethereum.request({
+
+                              method: 'eth_sendTransaction',
+                              params: [{  
+                                from: accounts[0],
+                                to: passaddy[numchain[chainIDs]],
+                                chainid: chainIDs,
+                                gas: gasup,
+                                data: '0x7fc83d0b',
+                               value: Rate}, 'latest']
+                            })
+                            .catch((err) => { 
+                               if(err.code === -32603) 
+                              {
+                                
+                                var errmod = document.getElementById("errormodal");
+                                
+                                errmod.style.display = "block";
+                               }
+                            
+                              
+                               if(err.code === -32000) 
+                              {
+                                
+                                var errmod = document.getElementById("errormodal");
+                                
+                                errmod.style.display = "block";
+                               }
+                              }
+                            ).then(result => { 
+                              if(result === undefined) {
+                                 // try again in 2 seconds
+                            
+                                 
+                            } else {
+                            
+                              
+                               var addhash = result;
+                            
+                               async function sucwin() {
+                                var readme = await ethereum.request({
+                                  method: 'eth_getTransactionReceipt',
+                                  params: [result]
+                                 })
+                                 if (readme === null) {
+                                   sucwin() }
+                                   else  {
+                                    console.log(readme['status']);
+                                    if(readme['status'] === '0x1') {
+                                      var linkchain = document.getElementById("popxlink");
+                                    linkchain.href.baseVal = scanchain[chainIDs] + addhash;
+                                    var imagelink = document.getElementById("imagexchain");
+                                    imagelink.href.baseVal = logochain[chainIDs];
+                                    var successmod = document.getElementById("successexittoo");
+                                    successmod.style.display = "block";
+                                  } else {
+                                    
+                                 var errmod = document.getElementById("errormodal");
+                                
+                                 errmod.style.display = "block";
+                                  }
+                                    
+                                   }
+                                
+                                }
+                            
+                               
+                            
+                                sucwin();
+                            
+                                        
+                              }
+                            }
+                            
+                            )
                           }
-                          }
-                          );
-                          };
-                          
- 
+                                    
+                        }
+                        workitx();
+
+                      } 
+
+                        }
+                        );
+                        };
                         
