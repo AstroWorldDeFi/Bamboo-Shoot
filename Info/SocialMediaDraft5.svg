@@ -40,12 +40,16 @@
 </g>
 <g id="Discord_xA0_Image_00000141453303012856557780000005410578672441639060_">
 	
+				<a href = "" onclick = "window.open('https://discord.gg/astroworld')" class= "btn">
+
 		<image class = 'hoverable' style="overflow:visible;" width="1420" height="230" id="Discord_xA0_Image" xlink:href="4FA53F25.png"  transform="matrix(1 0 0 1 250 303)">
 	</image>
 	<image class = 'hoverable' style="display:inline;overflow:visible;" width="1420" height="230" id="Image_xA0_6_xA0_Image" xlink:href="4FA53F26.png"  transform="matrix(1 0 0 1 250 303)">
 	</image>
 	<image class = 'hoverable' style="overflow:visible;" width="1420" height="230" id="Discord_xA0_Image" xlink:href="4FA53F25.png"  transform="matrix(1 0 0 1 250 303)">
 	</image>
+
+	</a>
 </g>
 <g id="Image_xA0_6_xA0_Image_00000170995310943649553050000005411596829986671784_" style="display:none;">
 	
