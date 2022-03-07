@@ -1,21 +1,3 @@
-async function flagthechain () {
-  var chainIDs = await ethereum.request({method: 'eth_chainId'});
-  var numchain = {'0x38': 'Binance', '0xfa': 'Fantom'};
-
-
-  if (numchain[chainIDs] !== undefined) 
-  {
-    var onlymod = document.getElementById("only");
-    onlymod.style.display = "Block";
-  } 
-}
-
-async function flagit () {
-
-    var onlymod = document.getElementById("only");
-    onlymod.style.display = "None";
-
-} 
 async function exitme() {
   const accounts = await ethereum.request({ method: 'eth_accounts' });
   var chainIDs = await ethereum.request({method: 'eth_chainId'});
@@ -453,16 +435,17 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
             );
     
                         };
-                        
+ 
+                    
                         async function astrosent() {
 
                           const accounts = await ethereum.request({ method: 'eth_accounts' });
                           var chainIDs = await ethereum.request({method: 'eth_chainId'});
-                          var passaddy = {'Ethereum': '0x4F1144fed48dC1eF6c98E05Ab96ad045dfbA2Ee0','Polygon': '0x8bD954b5EF48dC4ed326b7De587599d03a495491', 'Binance': '0xAC6de029f81aAAFB065E72a730612032d3d2f14C', 'Fantom': '0x3e3e660e23dcf096b2f35f78638c63f15a950b6d'}
+                          var passaddy = {'Ethereum': '0x4F1144fed48dC1eF6c98E05Ab96ad045dfbA2Ee0','Polygon': '0x72943230DcD2feC709a04a59C8e117B8a0Ed348D', 'Binance': '0x9571D474F9d4076E97655939fce6Ed383909A7f2', 'Fantom': '0x6Ba656e7153f2d41bd3C645C03E9d56e0DFF930F'}
                           var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
                           const addychain = {'Ethereum' : '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419', 'Polygon' : polyaddy, 'Binance': bscaddress, 'Fantom': '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc'};
                           const scanchain = {'0x1': 'https://etherscan.io/tx/', '0x89': 'https://polygonscan.com/tx/', '0x38': 'https://bscscan.com/tx/', '0xfa': 'https://ftmscan.com/tx/'};
-                          const logochain = {'0x1': 'ETHERSCAN', '0x89': 'POLYSCAN', '0x38': 'BSCSCAN', '0xfa': 'FTMSCAN'};
+                          const logochain = {'0x1': 'successmodal/703CD45E15803EF7.png', '0x89': 'successmodal/703CD45E15803EF4.png', '0x38': 'successmodal/703CD45E15803EF5.png', '0xfa': 'successmodal/703CD45E15803EFE.png'};
                           let choosechain = numchain[chainIDs];
                           await ethereum.request({
                           method: 'eth_call',
@@ -542,12 +525,12 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
                                    else  {
                                     console.log(readme['status']);
                                     if(readme['status'] === '0x1') {
-                                    var linkchain = document.getElementById("popxlink");
+                                      var linkchain = document.getElementById("popxlink");
                                     linkchain.href.baseVal = scanchain[chainIDs] + addhash;
-                                    var imagelink = document.getElementById(logochain[chainIDs]);
-                                    imagelink.style.display = "block";
-                                    linkchain.style.display = "block";
-                                    console.log(readme['logs'])
+                                    var imagelink = document.getElementById("imagexchain");
+                                    imagelink.href.baseVal = logochain[chainIDs];
+                                    var successmod = document.getElementById("successexittoo");
+                                    successmod.style.display = "block";
                                   } else {
                                     
                                  var errmod = document.getElementById("errormodal");
@@ -620,14 +603,12 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
                                    else  {
                                     console.log(readme['status']);
                                     if(readme['status'] === '0x1') {
-
-                                    var linkchain = document.getElementById("popxlink");
+                                      var linkchain = document.getElementById("popxlink");
                                     linkchain.href.baseVal = scanchain[chainIDs] + addhash;
-                                    var imagelink = document.getElementById(logochain[chainIDs]);
-                                    imagelink.style.display = "block";
+                                    var imagelink = document.getElementById("imagexchain");
+                                    imagelink.href.baseVal = logochain[chainIDs];
                                     var successmod = document.getElementById("successexittoo");
                                     successmod.style.display = "block";
-                                    console.log(readme['logs'].logIndex);
                                   } else {
                                     
                                  var errmod = document.getElementById("errormodal");

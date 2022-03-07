@@ -6,8 +6,8 @@
   <title>Lifetime Pass - Astroworld  
   </title>
   <link rel="icon" type="image/x-icon" href="https://miegqsyjcbofkxhttlkw.supabase.in/storage/v1/object/public/astropass/globe_favicon_64.png">
-<link rel="shortcut icon" href="https://miegqsyjcbofkxhttlkw.supabase.in/storage/v1/object/public/astropass/globe_favicon_64.png" />
-
+  <link rel="shortcut icon" href="https://miegqsyjcbofkxhttlkw.supabase.in/storage/v1/object/public/astropass/globe_favicon_64.png" />
+  
 <link rel="stylesheet" href="astroworld.css">
 <link rel="stylesheet" href="astro.css">
 <link href='https://fonts.googleapis.com/css?family=Press Start 2P' rel='stylesheet'>
@@ -199,7 +199,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 		
 			<image style="display:inline;overflow:visible;" width="256" height="64" id="Image_xA0_8_xA0_Image" xlink:href="286ABE565B35A55D.png"  transform="matrix(1 0 0 1 48 960)">
 		</image>
-
 	</g>
 	
 	<g id="LifetimeTaskbar_x5F_Closed_xA0_Image_00000088109826635600274080000000628470785906242728_">
@@ -216,7 +215,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 		
 			<image style="display:inline;overflow:visible;" width="338" height="64" id="Image_xA0_12_xA0_Image" xlink:href="D76D827B2EC0E4CA.png"  transform="matrix(1 0 0 1 591 960)">
 		</image>
-
 	</g>
 	<g id="FeaturesTaskbar_x5F_Closed_xA0_Image_00000049921440674614022960000007372175694232546185_">
 		
@@ -268,20 +266,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 
 <g class="animate__animated animate__bounce" id="Polygon_xA0_Image_00000007429699141946843820000018035081628528377245_">
 
-
   <a type = "button" onclick = "switchChain('Polygon'); connect(); change(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" >
- 
 
-    <image class = 'hoverable' style="overflow:visible;" width="192" height="168" id="Polygon_xA0_Image" xlink:href="1299883C4A8D7815.png"  transform="matrix(1 0 0 1 48 384)">
+  <image class = 'hoverable' style="overflow:visible;" width="192" height="168" id="Polygon_xA0_Image" xlink:href="1299883C4A8D7815.png"  transform="matrix(1 0 0 1 48 384)">
 </image>
 <image class = 'hoverable' style="display:inline;overflow:visible;" width="192" height="168" id="Image_xA0_9_xA0_Image" xlink:href="1299883C4A8D7816.png"  transform="matrix(1 0 0 1 48 384)">
 </image>
 <image class = 'hoverable' style="overflow:visible;" width="192" height="168" id="Polygon_xA0_Image" xlink:href="1299883C4A8D7815.png"  transform="matrix(1 0 0 1 48 384)">
 </image>
-
-
 </a>
-
 </g>
 
 
@@ -299,7 +292,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 </g>
 
 <g class="animate__animated animate__bounce" id="Back_xA0_Image_00000065791631430179331730000007072429725853915056_">
-  <a href="../">
+  <a href="/NFT/">
   <image class = 'hoverable' style="overflow:visible;" width="152" height="129" id="Back_xA0_Image" xlink:href="B030B0B6C6725ADE.png"  transform="matrix(1 0 0 1 64 56)">
 </image>
 <image class = 'hoverable' style="display:inline;overflow:visible;" width="152" height="129" id="Image_xA0_15_xA0_Image" xlink:href="B030B0B6C6725ADF.png"  transform="matrix(1 0 0 1 64 56)">
@@ -400,213 +393,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
          
         
       }
-
-       
-      async function astrosent() {
-
-        const accounts = await ethereum.request({ method: 'eth_accounts' });
-        var chainIDs = await ethereum.request({method: 'eth_chainId'});
-        var passaddy = {'Ethereum': '0x4F1144fed48dC1eF6c98E05Ab96ad045dfbA2Ee0','Polygon': '0x8bD954b5EF48dC4ed326b7De587599d03a495491', 'Binance': '0xAC6de029f81aAAFB065E72a730612032d3d2f14C', 'Fantom': '0x3e3e660e23dcf096b2f35f78638c63f15a950b6d'}
-        var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
-        const addychain = {'Ethereum' : '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419', 'Polygon' : polyaddy, 'Binance': bscaddress, 'Fantom': '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc'};
-        const scanchain = {'0x1': 'https://etherscan.io/tx/', '0x89': 'https://polygonscan.com/tx/', '0x38': 'https://bscscan.com/tx/', '0xfa': 'https://ftmscan.com/tx/'};
-        const logochain = {'0x1': 'ETHERSCAN', '0x89': 'POLYSCAN', '0x38': 'BSCSCAN', '0xfa': 'FTMSCAN'};
-        let choosechain = numchain[chainIDs];
-        await ethereum.request({
-        method: 'eth_call',
-        params: [{  
-        from: accounts[0],
-        to: addychain[choosechain],  
-        chainid: chainIDs,
-        data: '0x50d25bcd'}, 'latest']
-        })
-        .catch((err) => { if(err.code === 4001 ) 
-        {console.log(err.code)}
-        }
-        ).then(result => { if(result === undefined) {console.log(result)} else{
-        const web3 = new Web3(new Web3.providers.HttpProvider("https://cloudflare-eth.com"))
-        
-        var data = result;                       
-        console.log(parseInt(data));
-        const pricex = (3000) / (parseInt(data) / 100000000);
-        var xrate = web3.utils.toWei(String(pricex), 'ether');
-        var Rate = web3.utils.numberToHex(xrate);
-        var tip = web3.utils.toWei("1", 'gwei');
-        var gasup = web3.utils.numberToHex(700000);
-        var gasxup = web3.utils.numberToHex(270987);
-        var tipup = web3.utils.numberToHex(1500000000);
-        console.log(xrate);
-        async function workitx () { 
-          console.log(chainIDs)
-if (chainIDs === "0x1") {
-      
-            await ethereum.request({
-
-            method: 'eth_sendTransaction',
-            params: [{  
-              from: accounts[0],
-              to: passaddy[numchain[chainIDs]],
-              chainid: chainIDs,
-              maxPriorityFeePerGas: tipup,
-              gas: gasxup,
-              data: '0x7fc83d0b',
-             value: Rate}, 'latest']
-          })
-          .catch((err) => { 
-             if(err.code === -32603) 
-            {
-              
-              var errmod = document.getElementById("errormodal");
-              
-              errmod.style.display = "block";
-             }
-          
-            
-             if(err.code === -32000) 
-            {
-              
-              var errmod = document.getElementById("errormodal");
-              
-              errmod.style.display = "block";
-             }
-            }
-          ).then(result => { 
-            if(result === undefined) {
-               // try again in 2 seconds
-          
-               
-          } else {
-          
-            
-             var addhash = result;
-          
-             async function sucwin() {
-              var readme = await ethereum.request({
-                method: 'eth_getTransactionReceipt',
-                params: [result]
-               })
-               if (readme === null) {
-                 sucwin() }
-                 else  {
-                  console.log(readme['status']);
-                  if(readme['status'] === '0x1') {
-                  var linkchain = document.getElementById("popxlink");
-                  linkchain.href.baseVal = scanchain[chainIDs] + addhash;
-                  var imagelink = document.getElementById(logochain[chainIDs]);
-                  imagelink.style.display = "block";
-                  linkchain.style.display = "block";
-                  console.log(readme['logs'])
-                } else {
-                  
-               var errmod = document.getElementById("errormodal");
-              
-               errmod.style.display = "block";
-                }
-                  
-                 }
-              
-              }
-          
-             
-          
-              sucwin();
-          
-                      
-            }
-          }
-          
-          )
-         
-        
-        } else if (chainIDs !== "0x1" ) {
-          await  ethereum.request({
-
-            method: 'eth_sendTransaction',
-            params: [{  
-              from: accounts[0],
-              to: passaddy[numchain[chainIDs]],
-              chainid: chainIDs,
-              gas: gasup,
-              data: '0x7fc83d0b',
-             value: Rate}, 'latest']
-          })
-          .catch((err) => { 
-             if(err.code === -32603) 
-            {
-              
-              var errmod = document.getElementById("errormodal");
-              
-              errmod.style.display = "block";
-             }
-          
-            
-             if(err.code === -32000) 
-            {
-              
-              var errmod = document.getElementById("errormodal");
-              
-              errmod.style.display = "block";
-             }
-            }
-          ).then(result => { 
-            if(result === undefined) {
-               // try again in 2 seconds
-          
-               
-          } else {
-          
-            
-             var addhash = result;
-          
-             async function sucwin() {
-              var readme = await ethereum.request({
-                method: 'eth_getTransactionReceipt',
-                params: [result]
-               })
-               if (readme === null) {
-                 sucwin() }
-                 else  {
-                  console.log(readme['status']);
-                  if(readme['status'] === '0x1') {
-
-                  var linkchain = document.getElementById("popxlink");
-                  linkchain.href.baseVal = scanchain[chainIDs] + addhash;
-                  var imagelink = document.getElementById(logochain[chainIDs]);
-                  imagelink.style.display = "block";
-                  var successmod = document.getElementById("successexittoo");
-                  successmod.style.display = "block";
-                  console.log(readme['logs'].logIndex);
-                } else {
-                  
-               var errmod = document.getElementById("errormodal");
-              
-               errmod.style.display = "block";
-                }
-                  
-                 }
-              
-              }
-          
-             
-          
-              sucwin();
-          
-                      
-            }
-          }
-          
-          )
-        }
-                  
-      }
-      workitx();
-
-    } 
-
-      }
-      );
-      };
-      
       
       async function blackout() {
         const accounts = await ethereum.request({ method: 'eth_accounts' });
@@ -658,148 +444,13 @@ if (chainIDs === "0x1") {
     
 	</g>
 	
+  
+
   <g class="animate__animated animate__fadeInDown" style="display: none" id="successexittoo">
-	
-		<image style="overflow:visible;" width="605" height="310" id="modalblueground_xA0_Image" xlink:href="SUCCESSV2/E2D72AA34F5A78DB.png"  transform="matrix(1 0 0 1 655 335)">
-	</image>
-<g id="PINKUNDERBUTTON">
-	
-		<image style="overflow:visible;" width="486" height="71" id="Layer_1_xA0_Image" xlink:href="SUCCESSV2/E2D72AA34F5A78D9.png"  transform="matrix(1 0 0 1 715 406)">
-	</image>
-</g>
-<g id="SUCCESSpill">
-	
-		<image style="overflow:visible;" width="511" height="82" id="SUCCESSpill_xA0_Image" xlink:href="SUCCESSV2/E2D72AA34F5A78DF.png"  transform="matrix(1 0 0 1 702 387)">
-	</image>
-</g>
-<g id="ASTROLOGO">
-	
-		<image style="overflow:visible;" width="42" height="40" id="ASTROLOGO_xA0_Image" xlink:href="SUCCESSV2/E2D72AA34F5A78D8.png"  transform="matrix(1 0 0 1 983 417)">
-	</image>
-</g>
-<g id="Receipt">
-  <a id="popxlink" href="https://etherscan.io/tx/" target="_blank">
-
-		<image class = "hoverable" style="overflow:visible;" width="486" height="72" id="Receipt_xA0_Image" xlink:href="SUCCESSV2/E2D72AA34F5A78D6.png"  transform="matrix(1 0 0 1 717 516)">
-	</image>
-  <image class = "hoverable" style="overflow:visible;" width="484" height="70" id="Image_xA0_5_xA0_Image" xlink:href="SUCCESSV2/E2D72AA34F5A78D7.png"  transform="matrix(1 0 0 1 717 516)">
-	</image>
-  <image class = "hoverable" style="overflow:visible;" width="486" height="72" id="Receipt_xA0_Image" xlink:href="SUCCESSV2/E2D72AA34F5A78D6.png"  transform="matrix(1 0 0 1 717 516)">
-	</image>
-  
-</a>
-
-</g>
-<g id="PURPLELITBUTTON" >
-	
-		
-</g>
-<g id="BLUEBUTTONFOR">
-	
-		<image style="overflow:visible;" width="225" height="50" id="Layer_2_xA0_Image" xlink:href="SUCCESSV2/E2D72AA34F5A78E7.png"  transform="matrix(1 0 0 1 735 527)">
-	</image>
-</g>
-
-
-
-
-<g id="OPENSEA">
-	
-  <a href = "https://opensea.io/collection/dave-and-busters-power-card-v2" target="_blank">
-		<image style="overflow:visible;" onmouseover = "flagthechain()" onmouseout = "flagit()" width="45" height="42" id="Layer_4_xA0_Image" xlink:href="SUCCESSV2/E2D72AA34F5A78E9.png"  transform="matrix(1 0 0 1 1059 417)">
-	</image>
-  <script>
-    async function openseaus () {
-      var chainIDs = await ethereum.request({method: 'eth_chainId'});
-      var seachain = {'0x1': 'Ethereum', '0x89': 'Polygon'};
-
-      if (seachain[chainIDs] !== undefined) {
-        if (seachain[chainIDs] === "Ethereum"){
-          window.open
-        } else {
-
-        }
-      } else {
-        
-      }
-    }
-    async function flagthechain () {
-      var chainIDs = await ethereum.request({method: 'eth_chainId'});
-      var numchain = {'0x38': 'Binance', '0xfa': 'Fantom'};
-
-
-      if (numchain[chainIDs] !== undefined) 
-      {
-        var onlymod = document.getElementById("only");
-        onlymod.style.display = "Block";
-      } 
-    }
-
-    async function flagit () {
-    
-        var onlymod = document.getElementById("only");
-        onlymod.style.display = "None";
-
-    }  
-  </script>
-
-  <image style="display: none" width="125" height="80" id="only" xlink:href="SUCCESSV2/C919299A781377B8.png"  transform="matrix(1 0 0 1 1017 317)">
-	</image>
-</a>
-</g>
-<a href = "https://twitter.com/intent/tweet?text=🎉I%20just%20bought%20my%20first%20@AstrworldDeFi%20NFT🎉" target = "_blank">
-<g id="Twitter_xA0_Image_00000052809457606802707960000015625788308229106345_">
-	
-		<image style="overflow:visible;" width="35" height="36" id="Twitter_xA0_Image" xlink:href="SUCCESSV2/E2D72AA34F5A78EB.png"  transform="matrix(1 0 0 1 1139 420)">
-	</image>
-</g>
-</a>
-<g id="ETHERSCAN" style="display:none;">
-	
-		<image style="display:inline;overflow:visible;" width="41" height="43" id="Image_xA0_10_xA0_Image" xlink:href="SUCCESSV2/C919299A781377BF.png"  transform="matrix(1 0 0 1 824 530)">
-	</image>
-</g>
-<g id="FTMSCAN" style="display:none;">
-	
-		<image style="display:inline;overflow:visible;" width="28" height="30" id="Image_xA0_11_xA0_Image" xlink:href="SUCCESSV2/C919299A781377B9.png"  transform="matrix(1 0 0 1 830 538)">
-	</image>
-</g>
-<g id="POLYSCAN" style="display:none;">
-	
-		<image style="display:inline;overflow:visible;" width="44" height="40" id="Image_xA0_12_xA0_Image" xlink:href="SUCCESSV2/C919299A781377BB.png"  transform="matrix(1 0 0 1 822 532)">
-	</image>
-</g>
-<g id="bscscan" style="display:none;">
-	
-		<image style="overflow:visible;" width="44" height="48" id="Binance_xA0_Image" xlink:href="SUCCESSV2/C919299A781377A6.png"  transform="matrix(1 0 0 1 825 528)">
-	</image>
-
-</g>
-<g id="_x31_ONE">
-	
-		<image style="overflow:visible;" width="11" height="18" id="_x31__xA0_Image" xlink:href="SUCCESSV2/C919299A781377A7.png"  transform="matrix(1 0 0 1 996 429)">
-	</image>
-
-</g>
-<g id="xBUTTON" >
-	
-  <image class="hoverable" onclick="successclose()" style="overflow:visible;opacity:0.0784;" width="27" height="20" id="x_xA0_Image" xlink:href="SUCCESSV2/C919299A781377A8.png"  transform="matrix(1 0 0 1 1212 355)">
-	</image>
-  <image class="hoverable" onclick="successclose()" style="overflow:visible;" width="27" height="20" id="Image_xA0_16_xA0_Image" xlink:href="SUCCESSV2/C919299A781377AB.png"  transform="matrix(1 0 0 1 1212 355)">
-	</image>
-  
-  
-  
-</g>
-
-
-</g>
-
-
-  <g style="display: none">
 	
     <image style="overflow:visible;" width="664" height="364" id="exit_xA0_Image" xlink:href="successmodal/703CD45E15803EF2.png" transform="matrix(1 0 0 1 628 358)">
   </image>
+  <a id="popxlink" href="https://etherscan.io/tx/" target="_blank">
   
   <image class="hoverable" style="overflow:visible;" width="533" height="69" id="transrec_xA0_Image" xlink:href="successmodal/703CD45E15803EF6.png" transform="matrix(1 0 0 1 690 577)">
   </image>
@@ -809,9 +460,10 @@ if (chainIDs === "0x1") {
   </image>
   <image style="overflow:visible;" width="52" height="52" id="imagexchain" xlink:href="successmodal/703CD45E15803EF4.png" transform="matrix(1 0 0 1 791 588)">
   </image>
+  </a>
   
   
-  <image class="hoverable" style="overflow:visible;"  width="56" height="56" id="Image_xA0_3_xA0_Image" xlink:href="successmodal/703CD45E15803EF3.png" transform="matrix(1 0 0 1 1212 374)">
+  <image class="hoverable" style="overflow:visible;" onclick="successclose()" width="56" height="56" id="Image_xA0_3_xA0_Image" xlink:href="successmodal/703CD45E15803EF3.png" transform="matrix(1 0 0 1 1212 374)">
   </image>
   <image class="hoverable" style="overflow:visible;" onclick="successclose()" width="56" height="56" id="Image_xA0_4_xA0_Image" xlink:href="successmodal/703CD45E15803EF0.png" transform="matrix(1 0 0 1 1212 374)">
   </image>
@@ -823,37 +475,228 @@ if (chainIDs === "0x1") {
 
 
   <g id="errormodal" class="animate__animated animate__fadeInDown" style="display: none;">
-	
-    <image  style="overflow:visible;" width="605" height="310" id="modalblueground_xA0_Image" xlink:href="ERRORV2/1492AC0450104735.png"  transform="matrix(1 0 0 1 655 335)">
+
+    <image style="overflow:visible;" width="664" height="236" id="Failed_xA0_Image" xlink:href="errormodal/1FF3854F8C3E7652.png" transform="matrix(1 0 0 1 628 422)">
   </image>
-  
-  <image class = "hoverable" onclick="errorclose()" style="opacity:0.0784;overflow:visible;" width="27" height="20" id="x_xA0_Image" xlink:href="ERRORV2/1492AC0450104737.png"  transform="matrix(1 0 0 1 1212 355)">
+    <image class="hoverable" style="overflow:visible;" onclick="errorclose()" width="56" height="56" id="exitcut_xA0_Image" xlink:href="errormodal/1FF3854F8C3E7656.png" transform="matrix(1 0 0 1 1212 438)">
   </image>
-    <image class = "hoverable" onclick="errorclose()" style="display:inline;overflow:visible;" width="27" height="20" id="Image_xA0_2_xA0_Image" xlink:href="ERRORV2/1492AC0450104732.png"  transform="matrix(1 0 0 1 1212 355)">
-    </image>
-  
+    <image class="hoverable" style="overflow:visible;" onclick="errorclose()" width="56" height="56" id="Image_xA0_2_xA0_Image" xlink:href="errormodal/1FF3854F8C3E7651.png" transform="matrix(1 0 0 1 1212 438)">
+  </image>
+  <image class="hoverable" style="overflow:visible;" onclick="errorclose()" width="56" height="56" id="exitcut_xA0_Image" xlink:href="errormodal/1FF3854F8C3E7656.png" transform="matrix(1 0 0 1 1212 438)">
+  </image>
   
   </g>
-
-  
-
 
 <script>
 
   async function successclose () {
-
     var successmod = document.getElementById("successexittoo");
     successmod.style.display = "None";
-
   }
 
   async function errorclose () {
-
     var successmod = document.getElementById("errormodal");
     successmod.style.display = "None";
-    
   }
-  
+  async function astrosent() {
+
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+    var chainIDs = await ethereum.request({method: 'eth_chainId'});
+    var passaddy = {'Ethereum': '0x4F1144fed48dC1eF6c98E05Ab96ad045dfbA2Ee0','Polygon': '0x72943230DcD2feC709a04a59C8e117B8a0Ed348D', 'Binance': '0x9571D474F9d4076E97655939fce6Ed383909A7f2', 'Fantom': '0x6Ba656e7153f2d41bd3C645C03E9d56e0DFF930F'}
+    var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
+    const addychain = {'Ethereum' : '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419', 'Polygon' : polyaddy, 'Binance': bscaddress, 'Fantom': '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc'};
+    const scanchain = {'0x1': 'https://etherscan.io/tx/', '0x89': 'https://polygonscan.com/tx/', '0x38': 'https://bscscan.com/tx/', '0xfa': 'https://ftmscan.com/tx/'};
+    const logochain = {'0x1': 'successmodal/703CD45E15803EF7.png', '0x89': 'successmodal/703CD45E15803EF4.png', '0x38': 'successmodal/703CD45E15803EF5.png', '0xfa': 'successmodal/703CD45E15803EFE.png'};
+    let choosechain = numchain[chainIDs];
+    await ethereum.request({
+    method: 'eth_call',
+    params: [{  
+    from: accounts[0],
+    to: addychain[choosechain],  
+    chainid: chainIDs,
+    data: '0x50d25bcd'}, 'latest']
+    })
+    .catch((err) => { if(err.code === 4001 ) 
+    {console.log(err.code)}
+    }
+    ).then(result => { if(result === undefined) {console.log(result)} else{
+    const web3 = new Web3(new Web3.providers.HttpProvider("https://cloudflare-eth.com"))
+    
+    var data = result;                       
+    console.log(parseInt(data));
+    const pricex = (3000) / (parseInt(data) / 100000000);
+    var xrate = web3.utils.toWei(String(pricex), 'ether');
+    var Rate = web3.utils.numberToHex(xrate);
+    var tip = web3.utils.toWei("1", 'gwei');
+    var gasup = web3.utils.numberToHex(700000);
+    var gasxup = web3.utils.numberToHex(270987);
+    var tipup = web3.utils.numberToHex(1500000000);
+    console.log(xrate);
+    async function workitx () { 
+    if (chainIDs === "0x1") {
+        await  ethereum.request({
+
+        method: 'eth_sendTransaction',
+        params: [{  
+          from: accounts[0],
+          to: passaddy[numchain[chainIDs]],
+          chainid: chainIDs,
+          maxPriorityFeePerGas: tipup,
+          gas: gasxup,
+          data: '0x7fc83d0b',
+         value: Rate}, 'latest']
+      })
+      .catch((err) => { 
+         if(err.code === -32603) 
+        {
+          
+          var errmod = document.getElementById("errormodal");
+          
+          errmod.style.display = "block";
+         }
+      
+        
+         if(err.code === -32000) 
+        {
+          
+          var errmod = document.getElementById("errormodal");
+          
+          errmod.style.display = "block";
+         }
+        }
+      ).then(result => { 
+        if(result === undefined) {
+           // try again in 2 seconds
+      
+           
+      } else {
+      
+        
+         var addhash = result;
+      
+         async function sucwin() {
+          var readme = await ethereum.request({
+            method: 'eth_getTransactionReceipt',
+            params: [result]
+           })
+           if (readme === null) {
+             sucwin() }
+             else  {
+              console.log(readme['status']);
+              if(readme['status'] === '0x1') {
+                var linkchain = document.getElementById("popxlink");
+              linkchain.href.baseVal = scanchain[chainIDs] + addhash;
+              var imagelink = document.getElementById("imagexchain");
+              imagelink.href.baseVal = logochain[chainIDs];
+              var successmod = document.getElementById("successexittoo");
+              successmod.style.display = "block";
+            } else {
+              
+           var errmod = document.getElementById("errormodal");
+          
+           errmod.style.display = "block";
+            }
+              
+             }
+          
+          }
+      
+         
+      
+          sucwin();
+      
+                  
+        }
+      }
+      
+      )
+     
+    
+    } else {
+      await  ethereum.request({
+
+        method: 'eth_sendTransaction',
+        params: [{  
+          from: accounts[0],
+          to: passaddy[numchain[chainIDs]],
+          chainid: chainIDs,
+          gas: gasup,
+          data: '0x7fc83d0b',
+         value: Rate}, 'latest']
+      })
+      .catch((err) => { 
+         if(err.code === -32603) 
+        {
+          
+          var errmod = document.getElementById("errormodal");
+          
+          errmod.style.display = "block";
+         }
+      
+        
+         if(err.code === -32000) 
+        {
+          
+          var errmod = document.getElementById("errormodal");
+          
+          errmod.style.display = "block";
+         }
+        }
+      ).then(result => { 
+        if(result === undefined) {
+           // try again in 2 seconds
+      
+           
+      } else {
+      
+        
+         var addhash = result;
+      
+         async function sucwin() {
+          var readme = await ethereum.request({
+            method: 'eth_getTransactionReceipt',
+            params: [result]
+           })
+           if (readme === null) {
+             sucwin() }
+             else  {
+              console.log(readme['status']);
+              if(readme['status'] === '0x1') {
+                var linkchain = document.getElementById("popxlink");
+              linkchain.href.baseVal = scanchain[chainIDs] + addhash;
+              var imagelink = document.getElementById("imagexchain");
+              imagelink.href.baseVal = logochain[chainIDs];
+              var successmod = document.getElementById("successexittoo");
+              successmod.style.display = "block";
+            } else {
+              
+           var errmod = document.getElementById("errormodal");
+          
+           errmod.style.display = "block";
+            }
+              
+             }
+          
+          }
+      
+         
+      
+          sucwin();
+      
+                  
+        }
+      }
+      
+      )
+    }
+                }
+                workitx();
+
+} 
+
+  }
+  );
+  };
                                                                
 
    
