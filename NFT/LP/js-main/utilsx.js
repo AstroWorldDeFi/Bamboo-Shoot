@@ -462,7 +462,7 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
                           var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom', '0x': 'undefined', 'null': 'undefined', 'undefined': 'undefined'};
                           const addychain = {'Ethereum' : '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419', 'Polygon' : polyaddy, 'Binance': bscaddress, 'Fantom': '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc'};
                           const scanchain = {'0x1': 'https://etherscan.io/tx/', '0x89': 'https://polygonscan.com/tx/', '0x38': 'https://bscscan.com/tx/', '0xfa': 'https://ftmscan.com/tx/'};
-                          const logochain = {'0x1': 'ETHERSCAN', '0x89': 'POLYSCAN', '0x38': 'BSCSCAN', '0xfa': 'FTMSCAN'};
+                          const logochain = {'0x1': 'successmodal/703CD45E15803EF7.png', '0x89': 'successmodal/703CD45E15803EF4.png', '0x38': 'successmodal/703CD45E15803EF5.png', '0xfa': 'successmodal/703CD45E15803EFE.png'};
                           let choosechain = numchain[chainIDs];
                           await ethereum.request({
                           method: 'eth_call',
@@ -621,13 +621,12 @@ ethereum.on('chainChanged', (_chainId) => window.location.reload());
                                     console.log(readme['status']);
                                     if(readme['status'] === '0x1') {
 
-                                    var linkchain = document.getElementById("popxlink");
-                                    linkchain.href.baseVal = scanchain[chainIDs] + addhash;
-                                    var imagelink = document.getElementById(logochain[chainIDs]);
-                                    imagelink.style.display = "block";
-                                    var successmod = document.getElementById("successexittoo");
-                                    successmod.style.display = "block";
-                                    console.log(readme['logs'].logIndex);
+                                      var linkchain = document.getElementById("popxlink");
+                                      linkchain.href.baseVal = scanchain[chainIDs] + addhash;
+                                      var imagelink = document.getElementById("imagexchain");
+                                      imagelink.href.baseVal = logochain[chainIDs];
+                                      var successmod = document.getElementById("successexittoo");
+                                      successmod.style.display = "block";
                                   } else {
                                     
                                  var errmod = document.getElementById("errormodal");
