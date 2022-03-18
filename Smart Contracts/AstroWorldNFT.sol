@@ -1,3 +1,4 @@
+
 pragma solidity >=0.5.0 <0.8.0;
 
 import "./context.sol";
@@ -15,14 +16,15 @@ import "./Strings.sol";
 import "./Counters.sol";
 import "./AggregatorV3Interface.sol";
 
+
+
+
 contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable {
     using SafeMath for uint256;
     using Address for address;
     using EnumerableSet for EnumerableSet.UintSet;
     using EnumerableMap for EnumerableMap.UintToAddressMap;
-    using Strings for uint256;    
-    AggregatorV3Interface internal priceFeed;
-
+    using Strings for uint256;
 
     // Equals to `bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"))`
     // which can be also obtained as `IERC721Receiver(0).onERC721Received.selector`
@@ -97,8 +99,6 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
         _registerInterface(_INTERFACE_ID_ERC721);
         _registerInterface(_INTERFACE_ID_ERC721_METADATA);
         _registerInterface(_INTERFACE_ID_ERC721_ENUMERABLE);
-        priceFeed = AggregatorV3Interface(0xf4766552D15AE4d256Ad41B6cf2933482B0680dc);
-
     }
 
     /**
@@ -386,15 +386,14 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
      * Emits a {Transfer} event.
      */
     function _transfer(address from, address to, uint256 tokenId) internal virtual {
-
         require(ownerOf(tokenId) == from, "ERC721: transfer of token that is not own");
         require(to != address(0), "ERC721: transfer to the zero address");
- 
-     
+
         _beforeTokenTransfer(from, to, tokenId);
 
         // Clear approvals from the previous owner
         _approve(address(0), tokenId);
+
         _holderTokens[from].remove(tokenId);
         _holderTokens[to].add(tokenId);
 
@@ -473,61 +472,50 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
      * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
      */
     function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal virtual { }
+    
+  
+   
+    
 }
 
 
-contract AstroWorldFTM is ERC721 {
+
+contract Testpass is ERC721{
     using Counters for Counters.Counter;
     using SafeMath for uint256;
     using SafeMath for int256;
     using SafeMath for uint;
     using SafeMath for int;
-    using EnumerableSet for EnumerableSet.UintSet;
-    using EnumerableMap for EnumerableMap.UintToAddressMap;
-    using Strings for uint256;
 
 
-    // Equals to `bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"))`
-    // which can be also obtained as `IERC721Receiver(0).onERC721Received.selector`
-    bytes4 private constant _ERC721_RECEIVED = 0x150b7a02;
 
-    // Mapping from holder address to their (enumerable) set of owned tokens
-    mapping (address => EnumerableSet.UintSet) private _holderTokens;
-
-    // Enumerable mapping from token ids to their owners
-    EnumerableMap.UintToAddressMap private _tokenOwners;
-
-    // Mapping from token ID to approved address
-    mapping (uint256 => address) private _tokenApprovals;
-
-    // Mapping from owner to operator approvals
-    mapping (address => mapping (address => bool)) private _operatorApprovals;
-
-    /// @dev Sets token royalties
-    /// @param tokenId the token id fir which we register the royalties
-    /// @param recipient recipient of the royalties
-    /// @param value percentage (using 2 decimals - 10000 = 100, 0 = 0)
     
     Counters.Counter private _tokenIds;
+    AggregatorV3Interface internal priceFeed;
   
-    constructor() ERC721("Lifetime Pass", "LP") public {
+    constructor() ERC721("Test Pass FTM", "PASS") public {
         priceFeed = AggregatorV3Interface(0xf4766552D15AE4d256Ad41B6cf2933482B0680dc);
     }
-
-    receive() external payable {
+  receive() external payable {
+            
         uint balmsg = msg.sender.balance;
         balmsg = msg.sender.balance.add(msg.value);
             
         }
     
-    function contractURI() public pure returns (string memory) {
-        return "https://gateway.pinata.cloud/ipfs/QmQNWCbw2SDPt21qs4gENSAhbxMYDrmf8ur6pxKz8Ra1MZ";
+  
+ function contractURI() public pure returns (string memory) {
+        return "https://miegqsyjcbofkxhttlkw.supabase.in/storage/v1/object/public/astropass/worldpass.json";
     }
 
-    function TokenRoyaltyInfo() public view returns (string memory, uint256, string memory, uint256) {
+
+    function PassValue() public view returns (uint256, uint256, uint256) {
+
         uint256 pricex;
 
+        
         (
+
 
             uint80 roundID, 
             int price,
@@ -535,78 +523,51 @@ contract AstroWorldFTM is ERC721 {
             uint timeStamp,
             uint80 answeredInRound
 
+
         ) = priceFeed.latestRoundData();
         
         
-        pricex = uint256(price);
+        pricex = uint256(price); 
         pricex = pricex * 0.00000001 ether;
         
-        uint256 TokenRoyalty = (30000000000000000000000000000 / (uint256(price) * 0.000000000000000001 ether));
 
-        return("Value Of Test Pass: ", (300000000000000000000000000000 / (uint256(price) * 0.000000000000000001 ether)),"Current Token Royalty Fee: ", TokenRoyalty);
+        return((300000000000000000000000000000 / (uint256(price) * 0.000000000000000001 ether)), uint256(msg.sender.balance), pricex);
+
+
     }
 
-    function transferOwner(address from, address to, uint256 tokenId) internal virtual {
-        address payable ownert = 0xE92F33bC3939bC7320D6ac866C426D0810B03832;
-
-        require(ownerOf(tokenId) == from, "ERC721: transfer of token that is not own");
-        require(to != address(0), "ERC721: transfer to the zero address");
+ function TestPass() public payable returns (uint256) {
+     
+             
+       
+        address payable ownert = 0x2c9bE6e47F3D64ba468632AADC6E1F3f31394aDc;
+       
+        
         
         (
+
+
             uint80 roundID, 
             int price,
             uint startedAt,
             uint timeStamp,
             uint80 answeredInRound
 
+
         ) = priceFeed.latestRoundData();
         
-        _beforeTokenTransfer(from, to, tokenId);
-
-        // Clear approvals from the previous owner
-        approve(address(0), tokenId);
-        uint256 TokenRoyalty = (30000000000000000000000000000 / (uint256(price) * 0.000000000000000001 ether));
-        (bool success, ) = ownert.call{value: TokenRoyalty}("");
-        require(success, "Transfer failed.");
-        _holderTokens[from].remove(tokenId);
-        _holderTokens[to].add(tokenId);
-
-        _tokenOwners.set(tokenId, to);
-
-        emit Transfer(from, to, tokenId);
-    }
-    function transfer(address from, address to, uint256 tokenId) public payable {
-        transferOwner(from, to, tokenId);
-    }
-
-    function send(address from, address to, uint256 tokenId) public payable {
-        _transfer(from, to, tokenId);
-    }
-
-    function TEST_PASS() public payable returns (uint256) {
-        address payable ownert = 0xE92F33bC3939bC7320D6ac866C426D0810B03832;
-        (
-            uint80 roundID, 
-            int price,
-            uint startedAt,
-            uint timeStamp,
-            uint80 answeredInRound
-
-        ) = priceFeed.latestRoundData();
-                                           
+      
+        uint uintbalance = uint(msg.sender.balance);
+        require((uint256(price) * 0.000000000000000001 ether)<= uintbalance, "You're balance is lower than Transfer Amount");
+        uintbalance = 0;  
+        (bool success, ) = ownert.call{value: (300000000000000000000000000000 / (uint256(price) * 0.000000000000000001 ether))}(""); 
+                                                                 
+        require(success, "Transfer failed.");  
         _tokenIds.increment();
-                          
-        uint256 uintbalance = uint256(msg.sender.balance);
-        
-        require((uint256(price) * 0.000000000000000001 ether) <= uintbalance, "You're balance is lower than Transfer Amount");
-        uintbalance = 0;
-        (bool success, ) = ownert.call{value: 300000000000000000000000000000 / (uint256(price) * 0.000000000000000001 ether)}("");
-        
-        require(success, "Transfer failed.");
-        uint256 riderId = _tokenIds.current();
-        _mint(msg.sender, riderId);
-        _setTokenURI(riderId, "https://gateway.pinata.cloud/ipfs/QmQNWCbw2SDPt21qs4gENSAhbxMYDrmf8ur6pxKz8Ra1MZ");
-
+        uint256 riderId = _tokenIds.current();     
+        _mint(msg.sender, riderId); 
+        _setTokenURI(riderId, "https://miegqsyjcbofkxhttlkw.supabase.in/storage/v1/object/public/astropass/worldpasstoken.json");
         return (riderId);
+
     }
 }

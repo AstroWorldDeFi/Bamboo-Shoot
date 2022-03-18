@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html class = "text-white">
+<head class = "text-white">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" >
+<meta name="viewport"content="height=device-height, initial-scale=1, shrink-tofit=yes">
+<link rel="stylesheet" href="astro.css">
+<link href='https://fonts.googleapis.com/css?family=Press Start 2P' rel='stylesheet'>
+<!-- Font Awesome icons (free version)-->
+<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+<link  href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<script src="https://cdn.jsdelivr.net/npm/@alch/alchemy-web3@latest/dist/alchemyWeb3.min.js"></script>
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>
+
+<!-- Modal -->
+<div class="modal fade" id="nowebModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered " style = "position: relative; right: 8px;">
+    <div class="modal-content bg-green">
+     
+      <div class="modal-body bg-green">
+        You don't have a Web 3.0 wallet installed.<br>
+        Please Install A Web 3.0 Wallet<br>
+        Try Installing <a class = "text-white " href="https://metamask.io/">MetaMask.<img  style = "  width: 30px; right: 10px;" src="img/meta.png"></a><br>
+         
+
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="errorwebModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered " style = "position: relative; right: 8px;">
+    <div class="modal-content bg-green">
+     
+      <div class="modal-body bg-green">
+      Error
+
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="nowebModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered " style = "position: relative; right: 8px;">
+    <div class="modal-content bg-green">
+     
+      <div class="modal-body bg-green">
+        You don't have a AstroWorld NFT<br>
+       <br>
+         <a class = "text-white " href="../NFT/LP"> Please Purchase one </a><br>
+         
+
+      </div>
+    
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="DeniedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered ">
+    
+      <div class="modal-body bg-green">
+       Denied
+
+      </div>
+    
+   
+  </div>
+</div>
+<script>
+  // Add this in to target the button and bind to the click event
+  
+
+</script>
+
+</head>
+
+
+
+ <div class="card bg-green animate__animated animate__fadeInDown"  style=" box-shadow: 0 0 10px #008000; border-radius: 12px; margin: 0 auto;position: relative; height: 550px; width: 400px; top: 50px;float: center; border-radius: 30px">
+  <div class="card-header text-center text-white"  style = "font-size: 40px; font-family: 'Press Start 2P'; ">
+    Entrance
+  </div>
+  
+  <h5 class="card-title text-white"  style = " font-family: 'Press Start 2P';  font-size: 40px; left: 40px; position: relative; top:20px; opacity: 1; " id = "name"> </h5>
+  
+  <img class="card-img-top" onload = " changeup(); " style = "border-radius: 30px; position: relative; top: 15px; width: 400px; right: 1px;"id = "nft" src="https://miegqsyjcbofkxhttlkw.supabase.in/storage/v1/object/public/astropass/B030B0B6C6725AC2.png" alt="Card image cap">
+  <script >
+// const { default: Web3 } = require("web3");
+async function changeup() {  
+    
+    ethereum.on('chainChanged', (_chainId) => window.location.reload());
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+    var chainIDs = await ethereum.request({method: 'eth_chainId'});
+    var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom'};
+    var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png', 'Fantom': 'img/fantom.png'}
+      
+    console.log(accounts.length)
+    if (accounts.length > 0 && numchain[chainIDs] != undefined ) {
+  
+      document.getElementById('choose').innerHTML = numchain[chainIDs]
+      document.getElementById(numchain[chainIDs]).className += ' card-green'
+  
+    } else if(accounts.length > 0 && numchain[chainIDs] == undefined) {
+       document.getElementById("AWPass").innerHTML = "Change Chain";
+    }  else if(accounts.length < 0 && numchain[chainIDs] == undefined) {
+          document.getElementById("AWPass").disabled = false;
+      }
+  }
+      
+      async function checkup() {
+        // Then get the currently selected radio button's value
+        
+        console.log(window.ethereum)
+  
+        if (window.ethereum !== undefined) {
+    // From now on, this should always be true:
+    // provider === window.ethereum
+            console.log(window.ethereum); // initialize your app
+            
+                                          } else {
+  
+            
+             $("#nowebModal").modal('show');
+    
+                                          }
+  
+        // Check the value to make sure you want to show the modal
+       
+      }
+   
+  
+  async function connect() {
+  
+  
+  ethereum
+    .request({ method: 'eth_requestAccounts' })
+    .then(change)
+    .catch((err) => {
+      if (err.code === 4001) {
+        // EIP-1193 userRejectedRequest error
+        // If this happens, the user rejected the connection request.
+        console.log('Please connect to MetaMask.');
+        document.getElementById("Wallet").innerHTML =  "Rejected Connection";
+        document.getElementById("Wallet").value =  "Rejected Connection";
+        
+        document.getElementById("Wallet").contentWindow.location.reload(true);
+        
+      } else {
+        console.error(err);
+      }
+    }).then((result) => { window.location.reload()});
+  
+   
+  
+      
+   
+    
+  
+    
+  }
+  
+  
+  
+  // async function checkchain () {
+  // const accounts = await ethereum.request({ method: 'eth_accounts' });
+  
+  // if ( accounts === undefined) {
+  
+  //   document.getElementById("Wallet").value = "Connect" // accounts[0].substring(0,12) + "...";
+  //   document.getElementById("chainSwitch").innerHTML = " No Chain ";
+  // }
+  // }
+  
+  
+  
+  
+    async function switchChain(chains) {
+  
+      const FTM = [{ chainId: '0xfa'}];
+      const BSC = [{ chainId: '0x38' }]; // BSC
+      const POLY = [{ chainId: '0x89' }]; // MATIC
+      const ETH = [{ chainId: '0x1' }];
+      
+  
+      var chainsx = { "Binance": BSC, "Polygon": POLY, "Ethereum": ETH, "Fantom": FTM};
+  
+      await ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: chainsx[chains]
+      })
+  
+  ethereum.on('chainChanged', (_chainId) => window.location.reload());
+  
+  
+  
+  
+  
+  
+   }
+  
+   async function callmepls() {
+  
+    const accounts = await ethereum.request({method: 'eth_accounts' });
+    const web3 = new Web3(new Web3.providers.HttpProvider("https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG"))
+    var chainIDs = await ethereum.request({method: 'eth_chainId'});
+      
+    console.log(chainIDs + ' call ');
+    
+    var numchain = {'0x1' : 'Ethereum' , '0x89' : 'Polygon' , '0x38' : 'Binance' , '0xfa': 'Fantom' }
+   
+  
+    var addychain = {'Ethereum': ethaddy, 'Polygon': polyaddy, 'Binance': bscaddress, 'Fantom': '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc'}
+  
+    var capchain = {'Ethereum': 'ETH/USD', 'Polygon': 'MATIC/USD', 'Binance': 'BNB/USD', 'Fantom': 'FTM/USD'}
+    var choosechain = numchain[chainIDs]
+    var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png', 'Fantom': 'img/fantom.png'}
+  
+    async function ringring() {
+  
+      var light = web3.eth.abi.encodeFunctionSignature('latestAnswer()')
+      console.log(light)
+      
+  
+  
+     
+    ethereum.request({
+      method: 'eth_call',
+      params: [{  
+                 from: accounts[0],
+                 to: addychain[choosechain], 
+                 tag: 'latest', 
+                 chainid: chainIDs,
+                 data: light }]
+    })
+    .catch((err) => { if(err.code === 4001 ) 
+      {console.log(err.code)}
+                     }
+            ).then(result => { if(result === undefined) {console.log(result)} else{
+                          var data = result;                       
+                          console.log(parseInt(data));
+                          const pricex = 3000 / (parseInt(data) / 100000000);
+                          
+                          console.log('Smart Contract Address: ' + addychain[choosechain])
+                          console.log("Latest " + capchain[choosechain] + " price was: " + parseInt(data)/ 100000000);
+                          document.getElementById("Scalerx").innerHTML = `<img id = "specie"  src = ${specie[choosechain]} class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: 5px; top: -5px;">` + pricex.toFixed(2);
+                          document.getElementById("pro").innerHTML ='$3000';
+                          document.getElementById('choose').innerHTML = numchain[chainIDs];
+    
+                                                                                        }
+                      }
+            );
+    
+                        };
+  
+  
+  
+    ringring();
+  
+  
+                      };
+  
+  
+  
+         
+       
+  
+  
+ 
+  
+</script>
+
+
+<script>
+   
+       async function xlogin () {
+
+                        var chainIDs = await ethereum.request({method: 'eth_chainId'});
+                        const accounts = await ethereum.request({ method: 'eth_accounts' });
+                        const numchain = {'0x1' : 'Ethereum', '0x89' : 'Polygon', '0x38' : 'Binance', '0xfa' : 'Fantom'}
+                        var passaddy = {'Ethereum': '0x97fB6806AcbA833c5Ca80135D7d75BF3794b9df7','Polygon': '0x97fB6806AcbA833c5Ca80135D7d75BF3794b9df7', 'Binance': '0x97fB6806AcbA833c5Ca80135D7d75BF3794b9df7', 'Fantom': '0x97fB6806AcbA833c5Ca80135D7d75BF3794b9df7'}
+                        var RPCchain = {'Ethereum': 'https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG', 'Binance' : 'https://bsc-dataseed1.ninicoin.io/' , 'Polygon' : 'https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX', 'Fantom' : 'https://rpc.ftm.tools/'}
+                        const createAlchemyWeb3 = AlchemyWeb3.createAlchemyWeb3;
+                        const web3 = createAlchemyWeb3(RPCchain[numchain[chainIDs]],);
+                        const messageHash = web3.utils.fromUtf8('Verifying your entrance into AstroWorld!');
+
+sig = await ethereum.request({
+ method: 'personal_sign',
+ params: [      
+   accounts[0],
+   messageHash
+           ]
+})
+var enco = "0x70a08231" + "000000000000000000000000" + accounts[0].substring(2);
+
+var NFT = await ethereum.request({
+
+ method: 'eth_call',
+ params: [{  
+   to: passaddy[numchain[chainIDs]],
+   chainid: chainIDs,
+   data: enco,
+  }, 'latest']
+})
+.catch((err) => { 
+  if(err.code === -32603) 
+ {
+   
+   $("#errorwebModal").modal('show');
+
+  }
+
+ 
+  if(err.code === -32000) 
+ {
+   
+   $("#errorwebModal").modal('show');
+
+  }
+ }
+)
+console.log(enco);
+
+if (NFT >= 1) {
+
+ window.location.replace("../Enter");
+
+} else {
+
+ $("#nowebModal2").modal('show');
+
+};
+
+}
+  
+                   
+   </script>
+  <div class="card-body">   
+  
+    <p class="card-text text-white " style = "font-family: 'Press Start 2P'; font-size: 10px; left: 35px; position: relative; top: 10px " id = "description"></p>
+   
+  </div>
+ 
+ <table style = "font-family: 'Press Start 2P';  border-radius: 12px; position: relative; left:25px;height:50%;width: 350px;  top: 10px">
+  <tr>
+    
+    <th><div class=" card-body text-center" style = "border-radius: 12px; width: 310px;position: relative;top: -115px;">
+    <hr class="solid text-white" style = 'position: relative; top: 90px;'>
+    <button class = " btn bg-fgreen card-link text-green" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 100px #000000; border-radius: 12px; font-size: 27px; position: relative;top: 95px; left: -0px; width: 230px" type="submit" id = "AWPass" name = "TestPass" value = "success" onclick = 'checkeredx();'>Login</button>
+    <script>
+    
+                                             
+async function alogin () {
+
+var chainIDs = await ethereum.request({method: 'eth_chainId'});
+const accounts = await ethereum.request({ method: 'eth_accounts' });
+const numchain = {'0x1' : 'Ethereum', '0x89' : 'Polygon', '0x38' : 'Binance', '0xfa' : 'Fantom'}
+var passaddy = {'Ethereum': '0x4F1144fed48dC1eF6c98E05Ab96ad045dfbA2Ee0','Polygon': '0xF3A1A04e1b7CeE5Ca51b02d378562FaDaecFd279', 'Binance': '0xAC6de029f81aAAFB065E72a730612032d3d2f14C', 'Fantom': '0x3e3e660E23DCf096b2f35f78638c63F15a950b6D'}
+var verifypass = {'Ethereum': '0x4F1144fed48dC1eF6c98E05Ab96ad045dfbA2Ee0','Polygon': '0xF3A1A04e1b7CeE5Ca51b02d378562FaDaecFd279', 'Binance': '0xAC6de029f81aAAFB065E72a730612032d3d2f14C', 'Fantom': '0x5613d52C04eb778B6414D6aD07183f9E7443985A'}
+const web3 = new Web3(window['ethereum']);
+const VERIFY_CONTRACT = new web3.eth.Contract(onchain_did, FTM_DID_ADDRESS);
+ 
+
+var enco = "0x70a08231" + "000000000000000000000000" + accounts[0].substring(2);
+
+var NFT = await ethereum.request({
+  method: 'eth_call',
+  params: [{  
+    to: passaddy[numchain[chainIDs]],
+    chainid: chainIDs,
+    data: enco,
+   }, 'latest']
+  })
+  .catch((err) => { 
+   if(err.code === -32603) 
+  {
+    
+    $("#errorwebModal").modal('show');
+  
+   }
+  
+  
+   if(err.code === -32000) 
+  {
+    
+    $("#errorwebModal").modal('show');
+  
+   }
+  }
+  );        
+
+
+  const domain = [
+  { name: "chainId", type: "uint256" },
+  { name: "name", type: "string" },   
+  { name: "verifyingContract", type: "address" },
+  { name: "version", type: "string" },
+  ];
+  
+  const authentication = [
+    {name:"VERIFY_ONCHAIN", type:"uint256"},
+    {name: "TOKEN_ADDRESS", type: "address"},
+    {name: "CHAIN_ID", type: "uint256"},
+    {name: "VERSION", type: "string"},
+    {name: "MESSAGE", type: "string"},
+    {name: "WALLET", type: "address"} 
+    ];
+    
+    
+    
+    const typedData = JSON.stringify({
+      types: {
+          EIP712Domain: [
+              { name: 'name', type: 'string' },
+              { name: 'version', type: 'string' },
+              { name: 'chainId', type: 'uint256' },
+              { name: 'verifyingContract', type: 'address' },
+          ],
+          authentication: [
+              {name:"VERIFY_ONCHAIN", type:"uint256"},
+              {name: "TOKEN_ADDRESS", type: "address"},
+              {name: "CHAIN_ID", type: "uint256"},
+              {name: "VERSION", type: "string"},
+              {name: "MESSAGE", type: "string"},
+              {name: "WALLET", type: "address"} 
+              ]
+      },
+      primaryType: 'authentication',
+      domain: {
+          name: "https://astroworld.io/Authentication",
+          // Just let's you know the latest version. Definitely make sure the field name is correct.
+          version: "GREASED_LIGHTNING" ,
+          // Defining the chain aka Rinkeby testnet or Ethereum Main Net
+          chainId: web3.utils.hexToNumber(chainIDs),
+          // If name isn't enough add verifying contract to make sure you are establishing contracts with the proper entity
+          verifyingContract: passaddy[numchain[chainIDs]],
+  
+      },
+      message: {
+          /*
+           - Anything you want. Just a JSON Blob that encodes the data you want to send
+           - No required fields
+           - This is DApp Specific
+           - Be as explicit as possible when building out the message schema.
+          */
+      VERIFY_ONCHAIN: web3.utils.hexToNumber(NFT), 
+      TOKEN_ADDRESS: passaddy[numchain[chainIDs]],
+      CHAIN_ID: web3.utils.hexToNumber(chainIDs),
+      VERSION: "GREASED_LIGHTNING",
+      MESSAGE: 'Verifying your entrance into AstroWorld!',
+      WALLET: accounts[0] 
+      }});
+  
+       
+    
+
+
+  var signaturex = await ethereum.request({
+                        method: 'eth_signTypedData',
+                        params: [  
+                        accounts[0],
+                        typedData
+                                  ]
+                        
+  }).catch((err) => { 
+   if(err.code === -32603) 
+  {
+    
+    $("#errorwebModal").modal('show');
+  
+   }
+  
+  
+   if(err.code === -32000) 
+  {
+    
+    $("#errorwebModal").modal('show');
+  
+   }
+  }
+  )
+  
+  
+  console.log(web3.utils.hexToNumber(NFT));
+  console.log(passaddy[numchain[chainIDs]]);
+  console.log(web3.utils.hexToNumber(chainIDs));
+  console.log(accounts[0]);
+
+  const params = [
+    web3.utils.hexToNumber(NFT), 
+      passaddy[numchain[chainIDs]],
+      web3.utils.hexToNumber(chainIDs),
+      "GREASED_LIGHTNING",
+      'Verifying your entrance into AstroWorld!',
+      accounts[0]   
+  ];
+
+  const signature = signaturex.substring(2);
+  const V_PARSE = parseInt(signature.substring(128, 130), 16)
+  const R_SIG = "0x" + signature.substring(0, 64);
+  const S_SIG = "0x" + signature.substring(64, 128);
+
+  console.log(V_PARSE);
+  console.log(R_SIG);
+  console.log(S_SIG);
+
+
+
+
+
+
+
+
+  await VERIFY_CONTRACT.methods.verify(params, V_PARSE, R_SIG, S_SIG, accounts[0]).call({from: accounts[0]}).catch((err) => { 
+  if(err.code === -32603) 
+  {
+    
+    $("#errorwebModal").modal('sho‹w');
+  
+   }
+  
+  
+   if(err.code === -32000) 
+  {
+    
+    $("#errorwebModal").modal('show');
+  
+   }
+  }
+  ).then((result) => async function() {
+    console.log(result)
+    
+
+    const signer = await web3.eth.personal.ecRecover([params, V_PARSE,R_PARSE,S_PARSE], signature);
+    console.log(signer);
+  if (signer ===  accounts[0]) {
+    window.location.replace("../Enter")
+  } else {
+    $("#nowebModal2").modal('show');
+  
+  };
+  })}
+  
+  
+
+
+
+                    
+            
+
+                    
+    </script>
+
+<script>
+  console.log(`
+
+ 
+                                                            
+_____ _____ _____ _____ _____ _ _ _ _____ _____ __    ____  
+|  _  |   __|_   _| __  |     | | | |     | __  |  |  |    \ 
+|     |__   | | | |    -|  |  | | | |  |  |    -|  |__|  |  |
+|__|__|_____| |_| |__|__|_____|_____|_____|__|__|_____|____/ 
+                                                           
+                                                                                                                           
+`)     
+       async function alogin () {
+
+var chainIDs = await ethereum.request({method: 'eth_chainId'});
+const accounts = await ethereum.request({ method: 'eth_accounts' });
+const numchain = {'0x1' : 'Ethereum', '0x89' : 'Polygon', '0x38' : 'Binance', '0xfa' : 'Fantom'}
+var passaddy = {'Ethereum': '0x4F1144fed48dC1eF6c98E05Ab96ad045dfbA2Ee0','Polygon': '0x4F1144fed48dC1eF6c98E05Ab96ad045dfbA2Ee0', 'Binance': '0xEf6D4c03723a75bA8214D72aa5CDeC3399eb5DFC', 'Fantom': '0xEf6D4c03723a75bA8214D72aa5CDeC3399eb5DFC'}
+var RPCchain = {'Ethereum': 'https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG', 'Binance' : 'https://bsc-dataseed1.ninicoin.io/' , 'Polygon' : 'https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX', 'Fantom' : 'https://rpc.ftm.tools/'}
+
+const createAlchemyWeb3 = AlchemyWeb3.createAlchemyWeb3;
+
+                       const web3 = createAlchemyWeb3(
+                         RPCchain[numchain[chainIDs]],
+                       );
+                       const messageHash = web3.utils.fromUtf8('Verifying your entrance into AstroWorld!');
+
+signature = await ethereum.request({
+ method: 'personal_sign',
+ params: [      
+   accounts[0],
+   messageHash
+           ]
+})
+var enco = "0x70a08231" + "000000000000000000000000" + accounts[0].substring(2);
+
+var NFT = await ethereum.request({
+
+ method: 'eth_call',
+ params: [{  
+   to: passaddy[numchain[chainIDs]],
+   chainid: chainIDs,
+   data: enco,
+  }, 'latest']
+})
+.catch((err) => { 
+  if(err.code === -32603) 
+ {
+   
+   $("#errorwebModal").modal('show');
+
+  }
+
+ 
+  if(err.code === -32000) 
+ {
+   
+   $("#errorwebModal").modal('show');
+
+  }
+ }
+)
+console.log(enco);
+if (NFT >= 1) {
+ window.location.replace("../Enter")
+} else {
+ $("#nowebModal2").modal('show');
+
+};
+}
+  
+                   
+   </script>
+    <!--a href="#" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn bg-green card-link text-white" style = "font-family: 'Press Start 2P'; box-shadow: 0 0 10px #9ecaed; border-radius: 12px; font-size: 27px;  ">OpenSea</a-->
+   
+  </div></th>
+    
+  </tr>
+  <tr>
+    <th><div  class="bg-mgreen card-body text-center" style = "border-radius: 12px; width: 310px;position: relative;top: -30px;">
+    <p31  id="choose" class="text-white " style = "font-family: 'Press Start 2P'; font-size: 15px; position:relative;">Choose Network</p31>
+    <hr class="solid text-white">
+    <button class = " btn bg-fgreen card-link text-white" onclick = "switchChain('Ethereum'); connect(); changeup(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" style = "border-radius: 12px;position:relative; width: 50px; height: 50px; left:px; top: px;" id = "Ethereum"><img  src ="img/ethereum-eth-logo.png"class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: px; top: px;"></button>
+    <button class = " btn bg-fgreen card-link text-white" onclick = "switchChain('Polygon'); connect(); changeup(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" style = "border-radius: 12px;position:relative; width: 50px; height: 50px; left:px; top: px;" id = 'Polygon'><img  src ="img/polygon-matic-logo.png"class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: px; top: px;"></button>
+    <button class = " btn bg-fgreen card-link text-white" onclick = "switchChain('Binance'); connect(); changeup(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" style = "border-radius: 12px;position:relative; width: 50px; height: 50px; left:px; top: px;" id = 'Binance'><img  src ="img/binance-coin-bnb-logo.png"class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: px; top: px;"></button>
+    <button class = " btn bg-fgreen card-link text-white" onclick = "switchChain('Fantom'); connect(); changeup(); check(); ethereum.on('chainChanged', (_chainId) => window.location.reload());" style = "border-radius: 12px;position:relative; width: 50px; height: 50px; left:px; top: px;" id = 'Fantom'><img  src ="img/fantom.png"class=" bg-transparent " style = "position:relative; width: 55px; height: 55px; right: 11px; top: -8px;"></button>
+
+ </div>
+
+  </tr>
+  <tr class="card-body bg-mgreen text-center" style = "position: relative;top: 10px; left: 0px">
+     </tr>
+  <tr>
+    <td>
+</div></td>
+  </tr>
+</table>
+  
+
+  
+
+
+
+
+
+
+
+
+
+<div id="demo-modal" class="modal" role="dialog" tabindex="-1">
+  
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+  
+    <div class="modal-content">
+      
+      <div class=" bg-green modal-body" style = "position:relative; left:20px; top:5px;">
+        Coming Soon...
+		<button type="button" style = "position:relative; right: 10px; top:-10px" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<script >
+// const { default: Web3 } = require("web3");
+  
+      async function check() {
+        // Then get the currently selected radio button's value
+        
+        console.log(window.ethereum)
+  
+        if (window.ethereum !== undefined) {
+    // From now on, this should always be true:
+    // provider === window.ethereum
+            console.log(window.ethereum); // initialize your app
+            
+                                          } else {
+  
+            
+             $("#nowebModal").modal('show');
+    
+                                          }
+  
+        // Check the value to make sure you want to show the modal
+       
+      }
+      async function checkeredx() {
+        // Then get the currently selected radio button's value
+      
+          // Then get the currently selected radio button's value
+          
+    
+          if (window.ethereum !== undefined) {
+      // From now on, this should always be true:
+      // provider === window.ethereum
+      ethereum
+      .request({ method: 'eth_requestAccounts' })
+      .then(changeup())
+      .catch((err) => {
+        if (err.code === 4001) {
+          // EIP-1193 userRejectedRequest error
+          // If this happens, the user rejected the connection request.
+          console.log('Please connect to MetaMask.');
+          
+          
+        } else {
+          console.error(err);
+        }
+      }).then((result) => {xlogin();
+        
+        });
+  
+  
+                                            } else {
+    
+              
+               $("#nowebModal").modal('show');
+      
+                                            }
+    
+          // Check the value to make sure you want to show the modal
+         
+        
+      }    
+  async function connect() {
+  
+  
+  ethereum
+    .request({ method: 'eth_requestAccounts' })
+    .then(changeup)
+    .catch((err) => {
+      if (err.code === 4001) {
+        // EIP-1193 userRejectedRequest error
+        // If this happens, the user rejected the connection request.
+        console.log('Please connect to MetaMask.');
+       
+      } else {
+        console.error(err);
+      }
+    }).then((result) => { window.location.reload()});
+  
+   
+  
+      
+   
+    
+  
+    
+  }
+  
+  
+  
+  // async function checkchain () {
+  // const accounts = await ethereum.request({ method: 'eth_accounts' });
+  
+  // if ( accounts === undefined) {
+  
+  //   document.getElementById("Wallet").value = "Connect" // accounts[0].substring(0,12) + "...";
+  //   document.getElementById("chainSwitch").innerHTML = " No Chain ";
+  // }
+  // }
+  
+  
+  
+  
+ async function switchChain(chains) {
+  
+    const FTM = [{ chainId: '0xfa'}];
+    const BSC = [{ chainId: '0x38' }]; // BSC
+    const POLY = [{ chainId: '0x89' }]; // MATIC
+    const ETH = [{ chainId: '0x1' }];
+    const FTMp = '0xfa';
+    const BSCp = '0x38' ; // BSC
+    const POLYp = '0x89' ; // MATIC
+    const ETHp = '0x1';
+
+    var chainsx = { "Binance" : BSC , "Polygon" : POLY , "Ethereum" : ETH , "Fantom" : FTM};
+    var chainx = { "Binance" : BSCp , "Polygon" : POLYp , "Ethereum" : ETHp , "Fantom" : FTMp};
+    var RPCchain = {'Binance' : 'https://bsc-dataseed1.ninicoin.io/' , 'Polygon' : 'https://polygon-rpc.com/', 'Fantom' : 'https://rpc.ftm.tools/'}
+    var symChain = {'Binance' : 'BNB', 'Polygon' : 'MATIC', 'Fantom' : 'FTM'}
+    var expchain = {'Binance' : 'https://bscscan.com/', 'Polygon' : 'https://polygonscan.com/', 'Fantom' : 'https://ftmscan.com/'}
+
+    
+    await ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: chainsx[chains]
+        }).catch(async (switchError) => {
+                                  // This error code indicates that the chain has not been added to MetaMask.
+    if (switchError.code === 4902) {
+                await ethereum.request({
+                        method: 'wallet_addEthereumChain',
+                        params: [
+                                    { 
+                                      chainId: chainx[chains], 
+                                      chainName: chains, 
+                                      nativeCurrency: {
+                                                            name: chains,
+                                                            symbol: symChain[chains],
+                                                            decimals: 18
+                                    }, 
+                                      rpcUrls: [RPCchain[chains]], 
+                                      blockExplorerUrls: [expchain[chains]]
+                    }
+                    
+                    ]
+                  });
+  }
+// handle other "switch" errors
+})
+    
+ethereum.on('chainChanged', (_chainId) => window.location.reload());
+
+
+
+
+
+
+
+ }
+  
+   async function callmepls() {
+  
+    const accounts = await ethereum.request({method: 'eth_accounts' });
+    const web3 = new Web3(new Web3.providers.HttpProvider("https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG"))
+    var chainIDs = await ethereum.request({method: 'eth_chainId'});
+      
+    console.log(chainIDs + ' callmepls');
+    var ftmaddy = '0xf4766552D15AE4d256Ad41B6cf2933482B0680dc';
+    var numchain = {'0x1': 'Ethereum', '0x89': 'Polygon', '0x38': 'Binance', '0xfa': 'Fantom'}
+   
+  
+    var addychain = {'Ethereum': ethaddy, 'Polygon': polyaddy, 'Binance': bscaddress, 'Fantom': ftmaddy}
+  
+    var capchain = {'Ethereum': 'ETH/USD', 'Polygon': 'MATIC/USD', 'Binance': 'BNB/USD', 'Fantom': 'FTM/USD'}
+    var choosechain = numchain[chainIDs]
+    var specie = {'Ethereum': 'img/ethereum-eth-logo.png', 'Polygon': 'img/polygon-matic-logo.png', 'Binance': 'img/binance-coin-bnb-logo.png', 'Fantom': 'img/fantom.png'}
+  
+    async function ringring() {
+  
+      var light = web3.eth.abi.encodeFunctionSignature('latestAnswer()')
+  
+      
+  
+  
+     
+    ethereum.request({
+      method: 'eth_call',
+      params: [{  
+                 from: accounts[0],
+                 to: addychain[choosechain], 
+                 tag: 'latest', 
+                 chainid: chainIDs,
+                 data: light }]
+    })
+    .catch((err) => { if(err.code === 4001 ) 
+      {console.log(err.code)}
+                     }
+            ).then(result => { if(result === undefined) {("#DeniedModal").modal('show');} else{
+                          var data = result;                       
+                          console.log(parseInt(data));
+                          const pricex = 3000 / (parseInt(data) / 100000000);
+                          
+                          console.log('Smart Contract Address: ' + addychain[choosechain])
+                          console.log("Latest " + capchain[choosechain] + " price was: " + parseInt(data)/ 100000000);
+                          document.getElementById("Scalerx").innerHTML = `<img id = "specie"  src = ${specie[choosechain]} class=" bg-transparent " style = "position:relative; width: 30px; height: 30px; right: 5px; top: -5px;">` + pricex.toFixed(2);
+                          document.getElementById("pro").innerHTML ='$3000';
+                          document.getElementById('choose').innerHTML = numchain[chainIDs];
+    
+                                                                                        }
+                      }
+            );
+    
+                        };
+  
+  
+  
+    ringring();
+  
+  
+                      };
+  
+  
+  
+         
+       
+
+  
+ 
+  
+</script>
+<style>
+.vl {
+  border-left: 6px solid green;
+  height: 500px;
+}
+.card-green {
+  
+  box-shadow: 0 0 0 0 rgba(51, 217, 178, 1);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% {
+    transform: scale(0.70);
+    box-shadow: 0 0 0 0 rgba(51, 217, 178, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(51, 217, 178, 0);
+  }
+  
+  100% {
+    transform: scale(0.70);
+    box-shadow: 0 0 0 0 rgba(51, 217, 178, 0);
+  }
+}
+
+
+
+
+/* Modal Content */
+.modal-content {
+
+  
+  background-color: rgb(61,111,67);
+  
+  border: 0px solid #888;
+
+  font-family: 'Press Start 2P';font-size: 10px; color: white; text-align: center; position: center;
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  
+   
+  font-size: 28px;
+  font-weight: bold;
+  
+  
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+.bg-black {
+  background-color: #000000 !important;
+}
+
+a.bg-black:hover, a.bg-black:focus,
+button.bg-black:hover,
+button.bg-black:focus {
+  background-color: black !important;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+
+.masthead {
+  position: relative;
+  width: 110%;
+  min-height: 35rem;
+  padding: 15rem 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000000 100%), url("../astroimg/AstroworldUpdated.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+@media only screen and (max-width : 900px) {
+
+
+#div1 {
+  position: relative;
+   margin: 0 auto;
+  top: 10%;
+  right: 0px;
+  width: 400px;
+  height: 500px;
+  
+  box-shadow: 0 0 10px #9ecaed;
+  border-radius: 12px;
+  padding:10px;
+}
+
+#div2 {
+  position: relative;
+   margin: 0 auto;
+  top: 50px;
+  right: 40px;
+  width: 400px;
+  height: 400px;
+  
+  box-shadow: 0 0 10px ;
+  border-radius: 12px;
+  padding:10px;
+  float: right
+}
+
+#div3 {
+  position: relative;
+   margin: 0 auto;
+  top: 700px;
+  right: 100px;
+  width: 400px;
+  height: 200px;
+  
+  box-shadow: 0 0 10px ;
+  border-radius: 12px;
+  padding:10px;
+  
+  text-align: center;
+  left: 0px;
+  padding: 0px;
+}
+
+#div4 {
+  position: relative;
+   margin: 0 auto;
+  top: 800px;
+  right: 0px;
+  width: 400px;
+  height: 200px;
+  
+  box-shadow: 0 0 10px ;
+  border-radius: 12px;
+  padding:10px;
+  
+  text-align: center;
+  left: 0px;
+  padding: 0px;
+}
+
+canvas {
+  
+  position:absolute;
+  top: 17%;
+  left: 0px;
+  width: 380px;
+  height: 1000px;
+  
+  padding:10px;
+}
+
+a {
+    left: 90px;
+    top: 0px;   
+    position: relative;
+}
+
+table {
+  font-family: 'Press Start 2P';font-size: 5px;
+  border-collapse: collapse;
+  
+}
+
+#nft {
+
+  height: 250px;
+  width: 250px;
+  position: relative;
+  text-align: center;
+  left: 40px;
+
+  padding: 8px;
+
+}
+
+#AWPass {
+
+  
+  right: 800px;
+
+ 
+
+}
+
+td, th {
+  position: relative;
+  text-align: center;
+  left: 0px;
+  padding: 8px;
+  font-size: 10px;
+  word-break: break-all;
+}
+
+}
+
+
+@media only screen and (min-width : 901px) {
+#card-deck {
+  position: relative;
+   margin: 0 auto;
+  top: 10%;
+  left: 100px;
+  width: 600px;
+  height: 600px;
+ 
+  box-shadow: 0 0 10px #9ecaed;
+  border-radius: 12px;
+  padding:10px;
+  float: left
+}
+#nav1 {
+  position:relative;
+  
+  left:40px;
+}
+
+#div2 {
+  position: relative;
+   margin: 0 auto;
+  top: 10%;
+  
+  width: 500px;
+  height: 400px;
+  
+  box-shadow: 0 0 10px ;
+  border-radius: 12px;
+  padding:10px;
+  float: center;
+}
+
+#div3 {
+  position: relative;
+   margin: 0 auto;
+  top: 100px;
+  right: 0px;
+  width: 1150px;
+  height: 200px;
+  
+  box-shadow: 0 0 10px ;
+  border-radius: 12px;
+  padding:10px;
+  
+  text-align: center;
+  float:center;
+  padding: 8px;
+}
+
+#div4 {
+  position: relative;
+   margin: 0 auto;
+  top: 200px;
+  right: 0px;
+  width: 1150px;
+  height: 200px;
+  
+  box-shadow: 0 0 10px ;
+  border-radius: 12px;
+  padding:10px;
+  
+  text-align: center;
+  float: center;
+  padding: 8px;
+}
+
+
+canvas {
+  position: relative;
+   margin: 0 auto;
+  top: 10%;
+  right: 0px;
+  width: 580px;
+  height: 700px;
+  border-radius: 10px;
+  padding:10px;
+}
+
+h1 {
+    left: 800px;
+    top: 0px;
+    position: relative;
+}
+
+}
+
+
+
+body {
+    font-family: 'Press Start 2P';font-size: 10px;
+}
+
+
+table {
+  font-family: 'Press Start 2P';font-size: 10px;
+  border-collapse: collapse;
+  
+}
+
+td, th {
+  position: relative;
+  text-align: center;
+  left: 10px;
+  padding: 8px;
+  word-break: break-all;
+}
+
+
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@metamask/onboarding@1.0.0/dist/metamask-onboarding.bundle.js" type="application/javascript"></script>
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@metamask/detect-provider@1.2.0/dist/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@latest/dist/web3.min.js"></script>
+<script type="text/javascript" src="js-main/utilsx.js"></script>
+<script type="text/javascript" src="js-main/astroworld.js"></script>
+<script type="text/javascript" src="js-main/AstroWorldPass.js"></script>
+<script type="text/javascript" src="js-main/ethereums.js"></script>
+<script type="text/javascript" src="js-main/binance.js"></script>
+<script type="text/javascript" src="js-main/polygon.js"></script>
+<script type="text/javascript" src="js-main/ONCHAIN_DID.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/@alch/alchemy-web3@latest/dist/alchemyWeb3.min.js"></script>3
+</html>

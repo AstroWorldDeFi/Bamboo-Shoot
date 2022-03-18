@@ -1,31 +1,74 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
+  <head onload ="waitfun()">
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Pre-Entrance - Astroworld </title>
-    <link rel="icon" type="image/x-icon" href="https://miegqsyjcbofkxhttlkw.supabase.in/storage/v1/object/public/astropass/globe_favicon_64.png">
+    <link rel="icon" type="image/x-icon" href="https://miegqsyjcbofkxhttlkw.supabase.in/storage/v1/object/public/astropass/astroOrb.png">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body class="dark" >
-    <div id="unity-container" class="unity-desktop">
+    <div id="unity-container" class="unity-desktop" onload ="">
       <canvas id="unity-canvas"></canvas>
     </div>
-    <div id="loading-cover" style = "background-image: url(TemplateData/astroworlds.png); background-repeat: no-repeat; background-size: cover; background-position: center; display:none;">
-      <div id="unity-loading-bar">
+    <div id="loading-cover" onload ="" style = "background-image: url(TemplateData/astroworlds.png); background-repeat: no-repeat; background-size: cover; background-position: center; display:none;">
+      <div id="unity-loading-bar" >
        
-        <div id="unity-progress-bar-empty" style="display: none;">
-          <div id="unity-progress-bar-full"></div>
+        <div id="unity-progress-bar-empty"  style="display: none;">
+          <div id="unity-progress-bar-full"  ></div>
         </div>
         <div class="spinner"></div>
       </div>
     </div>
     <div id="unity-fullscreen-button" style="display: none;"></div>
     <script>
-      const hideFullScreenButton = "";
+     
+async function waitfun () {
+var chainIDs = await ethereum.request({method: 'eth_chainId'});
+const accounts = await ethereum.request({ method: 'eth_accounts' });
+const numchain = {'0x1' : 'Ethereum', '0x89' : 'Polygon', '0x38' : 'Binance', '0xfa' : 'Fantom'}
+var passaddy = {'Ethereum': '0x97fB6806AcbA833c5Ca80135D7d75BF3794b9df7','Polygon': '0x97fB6806AcbA833c5Ca80135D7d75BF3794b9df7', 'Binance': '0x97fB6806AcbA833c5Ca80135D7d75BF3794b9df7', 'Fantom': '0x97fB6806AcbA833c5Ca80135D7d75BF3794b9df7'}
+var RPCchain = {'Ethereum': 'https://eth-mainnet.alchemyapi.io/v2/UScvEF7bZREkyUNB1x1oUk_FcHQZA9RG', 'Binance' : 'https://bsc-dataseed1.ninicoin.io/' , 'Polygon' : 'https://polygon-mainnet.g.alchemy.com/v2/HUk91ebxvzED1r4s37A1bRJNqawQSUfX', 'Fantom' : 'https://rpc.ftm.tools/'}
+const createAlchemyWeb3 = AlchemyWeb3.createAlchemyWeb3;
+
+const web3 = createAlchemyWeb3(
+  RPCchain[numchain[chainIDs]],
+);
+
+var enco = "0x70a08231" + "000000000000000000000000" + accounts[0].substring(2);
+
+var NFT = await ethereum.request({
+
+  method: 'eth_call',
+  params: [{  
+    to: passaddy[numchain[chainIDs]],
+    chainid: chainIDs,
+    data: enco,
+   }, 'latest']
+})
+.catch((err) => { 
+   if(err.code === -32603) 
+  {
+    
+    $("#errorwebModal").modal('show');
+
+   }
+
+  
+   if(err.code === -32000) 
+  {
+    
+    $("#errorwebModal").modal('show');
+
+   }
+  }
+)
+console.log(enco);
+if (NFT >= 1) {
+  const hideFullScreenButton = "";
       const buildUrl = "Build";
       const loaderUrl = buildUrl + "/Webgame.loader.js";
       const config = {
@@ -89,7 +132,19 @@
         });
       };
       document.body.appendChild(script);
+} else {
+  window.location.replace('../Authentication')
+
+};
+
+}
+
+waitfun();
+
+      
     </script>
   </body>
 </html>
 
+<script src="https://cdn.jsdelivr.net/npm/@alch/alchemy-web3@latest/dist/alchemyWeb3.min.js"></script>3
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@latest/dist/web3.min.js"></script>
